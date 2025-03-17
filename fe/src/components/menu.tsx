@@ -54,7 +54,7 @@ export default function Menu_component() {
             activeMenu === item?.catalog
               ? "bg-black text-gray-100"
               : "bg-[#e5e7eb90] hover:bg-gray-300"
-          } border-transparent whitespace-nowrap rounded p-1 opacity-85 duration-200 cursor-pointer`}
+          } border-transparent whitespace-nowrap rounded py-1 px-2.5 opacity-85 duration-200 cursor-pointer`}
           onClick={() => dispath(updateValueActiveMenu(item?.catalog))}
         >
           {item?.name}

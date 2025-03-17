@@ -106,47 +106,50 @@ export const copyrights = [
   },
 ];
 
-
 // link menu demo
 export const link_menu = [
   {
-    name : 'Tất cả',
-    catalog : 'all'
+    name: "Tất cả",
+    catalog: "all",
   },
   {
-    name : 'Thể thao',
-    catalog : ''
+    name: "Thể thao",
+    catalog: "sport",
   },
   {
-    name : 'Trò chơi',
-    catalog : ''
+    name: "Trò chơi",
+    catalog: "gaming",
   },
   {
-    name : 'iOS',
-    catalog : ''
+    name: "iOS",
+    catalog: "ios",
   },
   {
-    name : 'Android',
-    catalog : ''
+    name: "Android",
+    catalog: "android",
   },
   {
-    name : 'ReactJs',
-    catalog : ''
+    name: "ReactJs",
+    catalog: "reactjs",
   },
   {
-    name : 'NextJs',
-    catalog : ''
+    name: "NextJs",
+    catalog: "nextjs",
   },
   {
-    name : 'Javascript',
-    catalog : ''
+    name: "Javascript",
+    catalog: "javascript",
   },
   {
-    name : 'NodeJs',
-    catalog : ''
+    name: "NodeJs",
+    catalog: "nodejs",
   },
   {
-    name : 'Typescript',
-    catalog : ''
+    name: "Typescript",
+    catalog: "typescript",
   },
-]
+  {
+    name: "Playlists",
+    catalog: "playlists",
+  },
+];

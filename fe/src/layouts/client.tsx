@@ -6,11 +6,11 @@ export default function Layout_client() {
   return (
     <div className="w-[95vw] mx-auto">
       <Header_component />
-      <main className="flex">
+      <main className="flex mt-5">
         <aside className="max-w-[200px]">
           <SideBar_component />
         </aside>
-        <div className="overflow-y-auto border w-full">
+        <div className="overflow-y-auto w-full mt-0.5">
           <Outlet />
         </div>
       </main>

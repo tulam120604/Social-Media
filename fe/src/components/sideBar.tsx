@@ -6,7 +6,7 @@ import { useAppSelector } from "../hooks/redux";
 export default function SideBar_component() {
   const { status } = useAppSelector((status) => status?.toggleStore);
   return (
-    <section className=" pr-4 sticky top-15 h-[calc(100vh-60px)] scroll-hover">
+    <section className="pr-4 sticky top-20 h-[calc(100vh-80px)] scroll-hover">
       {/* 1 */}
       {urls_sidebar?.map((uri: iType_uri_sideBar, i: number) => (
         <NavLink
