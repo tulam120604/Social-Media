@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import toggleSlice from "../slices/toggleSlice";
+import { toggleReducer } from "../slices/toggleSlice";
 import activeMenuSlice from "../slices/menuSlice";
 
 export const store = configureStore({
   reducer: {
-    toggleStore: toggleSlice,
+    toggleStore: toggleReducer,
     activeMenuStore: activeMenuSlice,
   },
 });

@@ -18,4 +18,4 @@ const toggleSlice = createSlice({
 });
 
 export const { updateStatus } = toggleSlice.actions;
-export default toggleSlice.reducer;
+export const toggleReducer = toggleSlice.reducer;

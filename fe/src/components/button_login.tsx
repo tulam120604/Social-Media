@@ -11,11 +11,11 @@ export default function Login_button() {
             whitespace-nowrap hidden group-hover:block">Cài đặt</span>
         </button>
       <Link
-        to={""}
+        to={"/sign-in"}
         className="flex gap-x-1 items-center rounded-full border border-gray-600 px-2 py-1.5"
       >
         <CircleUserRound strokeWidth={1.5} />
-        <span>Đăng nhập</span>
+        <span>Sign in</span>
       </Link>
     </div>
   );

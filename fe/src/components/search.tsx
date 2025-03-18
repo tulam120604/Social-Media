@@ -14,7 +14,6 @@ export default function Search_component() {
           placeholder="Search"
         />
         <Search
-          color="#333333"
           className="absolute right-0 h-full w-14 p-2 
             bg-gray-50 cursor-pointer z-[-1] border-l border-gray-600"
         />

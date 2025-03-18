@@ -12,7 +12,7 @@ import {
 
 export const urls_sidebar = [
   {
-    name: "Trang chủ",
+    name: "Home",
     path: "/",
     icon: <House strokeWidth={1.7} />,
   },
@@ -22,17 +22,17 @@ export const urls_sidebar = [
     icon: <TvMinimalPlay strokeWidth={1.7} />,
   },
   {
-    name: "Đăng ký",
+    name: "Subscribe",
     path: "/subscribe",
     icon: <MonitorCheck strokeWidth={1.7} />,
   },
   {
-    name: "Tôi",
+    name: "You",
     path: "/you",
     icon: <CircleUser strokeWidth={1.7} />,
   },
   {
-    name: "Lịch sử",
+    name: "History",
     path: "/history",
     icon: <History strokeWidth={1.7} />,
   },
@@ -41,22 +41,22 @@ export const urls_sidebar = [
 // uri kham pha
 export const urls_explore = [
   {
-    name: "Xu hướng",
+    name: "Trending",
     path: "/trending",
     icon: <Flame strokeWidth={1.7} />,
   },
   {
-    name: "Âm nhạc",
+    name: "Music",
     path: "/music",
     icon: <Music strokeWidth={1.7} />,
   },
   {
-    name: "Trò chơi",
+    name: "Gaming",
     path: "/gaming",
     icon: <Gamepad2 strokeWidth={1.7} />,
   },
   {
-    name: "Thể thao",
+    name: "Sports",
     path: "/sport",
     icon: <Trophy strokeWidth={1.7} />,
   },

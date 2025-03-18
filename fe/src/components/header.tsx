@@ -1,13 +1,19 @@
 import { Menu } from "lucide-react";
 import Search_component from "./search";
-import Login_button from "./action_login";
+import Login_button from "./button_login";
 import { useAppDispath } from "../hooks/redux";
 import { updateStatus } from "../redux/slices/toggleSlice";
+import useDarkMode from "../utils/getTheme";
 
 export default function Header_component() {
   const disPath = useAppDispath();
+  const isDarkMode = useDarkMode();
   return (
-    <header className="w-full py-2 sticky top-0 bg-white z-[10]">
+    <header
+      className={`${
+        isDarkMode ? "bg-white" : "bg-black"
+      } w-full py-2 sticky top-0 z-[10]`}
+    >
       <div className="flex items-center justify-between">
         {/* logo */}
         <div className="flex items-center gap-x-2 cursor-pointer">
