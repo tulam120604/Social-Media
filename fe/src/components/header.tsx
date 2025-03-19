@@ -4,6 +4,7 @@ import Login_button from "./button_login";
 import { useAppDispath } from "../hooks/redux";
 import { updateStatus } from "../redux/slices/toggleSlice";
 import useDarkMode from "../utils/getTheme";
+import { Link } from "react-router-dom";
 
 export default function Header_component() {
   const disPath = useAppDispath();
@@ -22,7 +23,7 @@ export default function Header_component() {
           active:border-gray-400 "
             onClick={() => disPath(updateStatus())}
           />
-          <span className="opacity-85 font-bold text-xl">Utube</span>
+          <Link to={'/'} className="opacity-85 font-bold text-xl">Utube</Link>
         </div>
 
         {/* search */}

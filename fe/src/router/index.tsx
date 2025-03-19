@@ -1,16 +1,22 @@
 import { Route, Routes } from "react-router-dom";
-import Layout_client from "../layouts/client";
+import { Layout_client, Layout_client_with_sidebar } from "../layouts/client";
 import Layout_admin from "../layouts/admin";
 import Home_page from "../pages/client/home/page";
 import Signin_page from "../pages/auth/signin";
 import Signup_page from "../pages/auth/signup";
+import Watch_video_page from "../pages/client/watch-video/page";
 
 export default function Routes_page() {
   return (
     <Routes>
       {/* client */}
       <Route path="/" element={<Layout_client />}>
-        <Route index element={<Home_page />} />
+        <Route path="/" element={<Layout_client_with_sidebar />}>
+          <Route index element={<Home_page />} />
+        </Route>
+        <Route path="/watch" element={<Watch_video_page />} />
+
+        {/* profile */}
         <Route path="/sign-in" element={<Signin_page />} />
         <Route path="/sign-up" element={<Signup_page />} />
       </Route>

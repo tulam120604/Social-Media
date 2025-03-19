@@ -34,7 +34,7 @@ const schema_video = new mongoose.Schema(
       type: String,
       maxlength: 2000,
     },
-    titleVideo: {
+    hastagVideo: {
       type: String,
       maxlength: 1000,
     },

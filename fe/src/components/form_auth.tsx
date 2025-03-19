@@ -18,7 +18,9 @@ export default function Form_auth_component({ type }: { type: string }) {
   return (
     <div className="text-center">
       <div className="mb-10 relative">
-        <span className="font-semibold lg:text-lg">Sign in</span>
+        <span className="font-semibold lg:text-lg">
+          {type === "signup" ? "Sign up" : "Sign in"}
+        </span>
         <button
           onClick={() => (type === "signin" ? navigate(-1) : navigate("/"))}
           className="absolute -right-2 -top-2 cursor-pointer rounded-full p-0.5 border border-transparent 
@@ -52,7 +54,7 @@ export default function Form_auth_component({ type }: { type: string }) {
           {/* pass */}
           <FormField
             control={form.control}
-            name="userName"
+            name="password"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
@@ -70,7 +72,7 @@ export default function Form_auth_component({ type }: { type: string }) {
           {type === "signup" && (
             <FormField
               control={form.control}
-              name="userName"
+              name="email"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
@@ -91,12 +93,22 @@ export default function Form_auth_component({ type }: { type: string }) {
           >
             Sign in
           </Button>
-          <div className="text-sm opacity-80">
-            Not a member?{" "}
-            <Link to={"/sign-up"} className="text-[#533AAF]">
-              Signup now
-            </Link>
-          </div>
+          {type === "signin" && (
+            <div className="text-sm opacity-80">
+              Don't have account?{" "}
+              <Link to={"/sign-up"} className="text-[#533AAF]">
+                Signup
+              </Link>
+            </div>
+          )}
+          {type === "signup" && (
+            <div className="text-sm opacity-80">
+              Already have account?{" "}
+              <Link to={"/sign-in"} className="text-[#533AAF]">
+                Signin
+              </Link>
+            </div>
+          )}
         </form>
       </Form>
     </div>
