@@ -1,45 +1,20 @@
 import {
   CircleUser,
+  Factory,
   Flame,
   Gamepad2,
+  Guitar,
   History,
   House,
-  MonitorCheck,
-  Music,
   Trophy,
-  TvMinimalPlay,
 } from "lucide-react";
 
 export const urls_sidebar = [
   {
     name: "Home",
     path: "/",
-    icon: <House strokeWidth={1.7} />,
+    icon: <House strokeWidth={1.7} size={20} />,
   },
-  {
-    name: "Shorts",
-    path: "/shorts",
-    icon: <TvMinimalPlay strokeWidth={1.7} />,
-  },
-  {
-    name: "Subscribe",
-    path: "/subscribe",
-    icon: <MonitorCheck strokeWidth={1.7} />,
-  },
-  {
-    name: "You",
-    path: "/you",
-    icon: <CircleUser strokeWidth={1.7} />,
-  },
-  {
-    name: "History",
-    path: "/history",
-    icon: <History strokeWidth={1.7} />,
-  },
-];
-
-// uri kham pha
-export const urls_explore = [
   {
     name: "Trending",
     path: "/trending",
@@ -48,7 +23,7 @@ export const urls_explore = [
   {
     name: "Music",
     path: "/music",
-    icon: <Music strokeWidth={1.7} />,
+    icon: <Guitar strokeWidth={1.7} />,
   },
   {
     name: "Gaming",
@@ -60,7 +35,23 @@ export const urls_explore = [
     path: "/sport",
     icon: <Trophy strokeWidth={1.7} />,
   },
+  {
+    name: "News",
+    path: "/news",
+    icon: <Factory strokeWidth={1.7} size={20} />,
+  },
+  {
+    name: "You",
+    path: "/you",
+    icon: <CircleUser strokeWidth={1.7} size={20} />,
+  },
+  {
+    name: "History",
+    path: "/history",
+    icon: <History strokeWidth={1.7} size={20} />,
+  },
 ];
+
 
 // copyright
 export const copyrights = [

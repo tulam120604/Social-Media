@@ -15,7 +15,7 @@ export function Layout_client() {
 export function Layout_client_with_sidebar() {
   return (
     <div className="flex mt-5 gap-x-4">
-      <aside className="max-w-[200px]">
+      <aside className="hidden lg:block max-w-[200px]">
         <SideBar_component />
       </aside>
       <div className="overflow-y-auto w-full mt-0.5">

@@ -54,15 +54,15 @@ export function Box_row_video_component({ props }: any) {
   return (
     <Link
       to={`/watch?v=${props}`}
-      className="w-full grid grid-cols-[1.2fr_1.8fr] gap-x-2 cursor-pointer overflow-hidden"
+      className="w-full cursor-pointer overflow-hidden"
     >
       {/* video */}
       <LazyLoadImage
         src={"https://picsum.photos/320/180"}
-        height={100}
+        height='full'
         width="full"
         effect="opacity"
-        className="w-full h-[100px] rounded-md"
+        className="w-full h-full rounded-md"
       />
       {/* /description video */}
       <div className="h-full flex flex-col">

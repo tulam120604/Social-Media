@@ -23,11 +23,11 @@ export default function Search_component() {
       <div className="lg:hidden">
         <Search
           color="#333333"
-          className="translate-x-[100%] h-full cursor-pointer"
+          className="translate-x-[150%] h-full cursor-pointer"
           onClick={() => setStatus_search(!status_search)}
         />
         {status_search && (
-          <div className="bg-white fixed w-screen h-screen left-0 top-0 z-[2]">
+          <div className="bg-white fixed w-screen h-screen left-0 top-0 z-[2] px-4">
             <form
               className="grid grid-cols-[50px_auto] py-2 
            px-4 mx-auto items-center overflow-hidden"

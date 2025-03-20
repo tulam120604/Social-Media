@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import { urls_sidebar, urls_explore, copyrights } from "../config/links";
+import { urls_sidebar, copyrights } from "../config/links";
 import { iType_uri_sideBar } from "../config/types";
 import { useAppSelector } from "../hooks/redux";
 
@@ -26,21 +26,23 @@ export default function SideBar_component() {
 
       {/* 2 */}
       <div className="border-t border-gray-400 mt-4 py-4">
-        {urls_explore?.map((uri: iType_uri_sideBar, i: number) => (
-          <NavLink
-            key={i}
-            className={({ isActive }) =>
-              isActive
-                ? "flex items-center gap-x-2 whitespace-nowrap opacity-85 p-2 bg-gray-200 duration-150 rounded mb-1"
-                : "flex items-center gap-x-2 whitespace-nowrap opacity-85 p-2 hover:bg-gray-200 duration-150 rounded mb-1"
-            }
-            to={uri?.path}
-          >
-            {uri?.icon &&
-              (typeof uri.icon === "function" ? <uri.icon /> : uri.icon)}
-            {status && <span>{uri?.name}</span>}
-          </NavLink>
-        ))}
+        <strong className="text-sm opacity-80 font-medium">Subscribe</strong>
+        <div className="mt-2">
+          {urls_sidebar?.map((uri: iType_uri_sideBar, i: number) => (
+            <NavLink
+              key={i}
+              className={({ isActive }) =>
+                isActive
+                  ? "flex items-center gap-x-2 whitespace-nowrap opacity-85 p-2 bg-gray-200 duration-150 rounded mb-1"
+                  : "flex items-center gap-x-2 whitespace-nowrap opacity-85 p-2 hover:bg-gray-200 duration-150 rounded mb-1"
+              }
+              to={uri?.path}
+            >
+              <img className="rounded-full w-6 h-6" src="https://picsum.photos/320/180" alt="" />
+              {status && <span>{uri?.name}</span>}
+            </NavLink>
+          ))}
+        </div>
       </div>
 
       {/* 3 */}
