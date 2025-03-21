@@ -5,17 +5,19 @@ import { useAppSelector } from "../hooks/redux";
 
 export default function SideBar_component() {
   const { status } = useAppSelector((status) => status?.toggleStore);
+  const styleActive = `grid ${
+    status ? "grid-cols-[50px_auto]" : "place-content-center"
+  } items-center whitespace-nowrap opacity-85 p-2 bg-gray-200 duration-150 rounded-md mb-1`;
+  const styleNoActive = `grid ${
+    status ? "grid-cols-[50px_auto]" : "place-content-center"
+  } items-center whitespace-nowrap opacity-85 p-2 hover:bg-gray-200 duration-150 rounded-md mb-1`;
   return (
     <section className="pr-4 sticky top-20 h-[calc(100vh-80px)] scroll-hover">
       {/* 1 */}
       {urls_sidebar?.map((uri: iType_uri_sideBar, i: number) => (
         <NavLink
           key={i}
-          className={({ isActive }) =>
-            isActive
-              ? "flex items-center gap-x-2 whitespace-nowrap opacity-85 p-2 bg-gray-200 duration-150 rounded-md mb-1"
-              : "flex items-center gap-x-2 whitespace-nowrap opacity-85 p-2 hover:bg-gray-200 duration-150 rounded-md mb-1"
-          }
+          className={({ isActive }) => (isActive ? styleActive : styleNoActive)}
           to={uri?.path}
         >
           {uri?.icon &&
@@ -26,19 +28,23 @@ export default function SideBar_component() {
 
       {/* 2 */}
       <div className="border-t border-gray-400 mt-4 py-4">
-        <strong className="text-sm opacity-80 font-medium">Subscribe</strong>
+        {status && (
+          <strong className="text-sm opacity-80 font-medium">Subscribe</strong>
+        )}
         <div className="mt-2">
           {urls_sidebar?.map((uri: iType_uri_sideBar, i: number) => (
             <NavLink
               key={i}
               className={({ isActive }) =>
-                isActive
-                  ? "flex items-center gap-x-2 whitespace-nowrap opacity-85 p-2 bg-gray-200 duration-150 rounded mb-1"
-                  : "flex items-center gap-x-2 whitespace-nowrap opacity-85 p-2 hover:bg-gray-200 duration-150 rounded mb-1"
+                isActive ? styleActive : styleNoActive
               }
               to={uri?.path}
             >
-              <img className="rounded-full w-6 h-6" src="https://picsum.photos/320/180" alt="" />
+              <img
+                className="rounded-full w-6 h-6"
+                src="https://picsum.photos/320/180"
+                alt=""
+              />
               {status && <span>{uri?.name}</span>}
             </NavLink>
           ))}
