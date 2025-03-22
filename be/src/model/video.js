@@ -42,3 +42,5 @@ const schema_video = new mongoose.Schema(
   },
   { timestamps: true, versionKey: false }
 );
+
+export default mongoose.model('vieo', schema_video)

@@ -29,4 +29,4 @@ const schema_account = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("Account", schema_account);
+export default mongoose.model("account", schema_account);
