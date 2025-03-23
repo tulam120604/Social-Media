@@ -1,54 +1,30 @@
 import {
-  CircleUser,
-  Factory,
-  Flame,
-  Gamepad2,
-  Guitar,
-  History,
-  House,
-  Trophy,
+  BookMarked,
+  ImageUp,
+  SquareSquare,
+  Users,
 } from "lucide-react";
 
 export const urls_sidebar = [
   {
-    name: "Home",
-    path: "/",
-    icon: <House strokeWidth={1.7} size={20} />,
+    name: "My Posts",
+    path: "/profile/my-posts",
+    icon: <ImageUp strokeWidth={1.7} size={20} />,
   },
   {
-    name: "Trending",
-    path: "/trending",
-    icon: <Flame strokeWidth={1.7} />,
+    name: "Friends",
+    path: "/friends",
+    icon: <Users strokeWidth={1.9} size={20}/>,
   },
   {
-    name: "Music",
+    name: "Explore",
     path: "/music",
-    icon: <Guitar strokeWidth={1.7} />,
+    icon: <SquareSquare strokeWidth={1.7} size={20}/>,
   },
   {
-    name: "Gaming",
-    path: "/gaming",
-    icon: <Gamepad2 strokeWidth={1.7} />,
-  },
-  {
-    name: "Sports",
-    path: "/sport",
-    icon: <Trophy strokeWidth={1.7} />,
-  },
-  {
-    name: "News",
-    path: "/news",
-    icon: <Factory strokeWidth={1.7} size={20} />,
-  },
-  {
-    name: "You",
-    path: "/you",
-    icon: <CircleUser strokeWidth={1.7} size={20} />,
-  },
-  {
-    name: "History",
-    path: "/history",
-    icon: <History strokeWidth={1.7} size={20} />,
+    name: "Save",
+    path: "/profile/my-save",
+    icon: <BookMarked strokeWidth={1.7} size={20}/>,
   },
 ];
 
@@ -94,53 +70,5 @@ export const copyrights = [
   {
     name: "Policy $ Safery",
     path: "/",
-  },
-];
-
-// link menu demo
-export const link_menu = [
-  {
-    name: "Tất cả",
-    catalog: "all",
-  },
-  {
-    name: "Thể thao",
-    catalog: "sport",
-  },
-  {
-    name: "Trò chơi",
-    catalog: "gaming",
-  },
-  {
-    name: "iOS",
-    catalog: "ios",
-  },
-  {
-    name: "Android",
-    catalog: "android",
-  },
-  {
-    name: "ReactJs",
-    catalog: "reactjs",
-  },
-  {
-    name: "NextJs",
-    catalog: "nextjs",
-  },
-  {
-    name: "Javascript",
-    catalog: "javascript",
-  },
-  {
-    name: "NodeJs",
-    catalog: "nodejs",
-  },
-  {
-    name: "Typescript",
-    catalog: "typescript",
-  },
-  {
-    name: "Playlists",
-    catalog: "playlists",
   },
 ];

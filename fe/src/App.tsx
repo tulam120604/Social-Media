@@ -7,7 +7,7 @@ export default function App() {
   return (
     <div
       className={`${
-        isDarkMode ? "bg-white text-gray-900" : "bg-black text-gray-100"
+        isDarkMode ? "bg-[#F1F5F9] text-gray-900" : "bg-black text-gray-100"
       } w-full h-full`}
     >
       <style>

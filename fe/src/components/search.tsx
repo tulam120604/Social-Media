@@ -6,17 +6,16 @@ export default function Search_component() {
   return (
     <div className="flex items-center">
       {/* desktop */}
-      <form className="hidden lg:flex relative items-center rounded-full overflow-hidden">
+      <form className="hidden lg:flex relative items-center rounded overflow-hidden">
         <input
           type="text"
-          className="w-[35vw] flex justify-end border 
-            border-gray-600 rounded-full py-2 px-4 opacity-85 z-[2]"
+          className="w-[300px] flex justify-end border-transparent bg-[#F1F5F9] rounded py-2 px-4 opacity-85 z-[2]"
           placeholder="Search"
         />
         <Search
           className="absolute right-0 h-full w-14 p-2 
-            bg-gray-50 cursor-pointer z-[-1] border-l border-gray-600"
-        />
+            bg-[#F1F5F9] cursor-pointer z-[2] border-l"
+         color="#838588"/>
       </form>
 
       {/* mobile */}
