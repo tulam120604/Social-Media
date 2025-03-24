@@ -8,7 +8,7 @@ export default function App() {
     <div
       className={`${
         isDarkMode ? "bg-[#F1F5F9] text-gray-900" : "bg-black text-gray-100"
-      } w-full h-full`}
+      } w-full min-h-screen`}
     >
       <style>
         {`

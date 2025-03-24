@@ -10,7 +10,7 @@ export default function Header_component() {
     <header
       className={`${
         isDarkMode ? "bg-white" : "bg-black"
-      } w-full py-2 sticky top-0 z-[10]`}
+      } w-full py-2 sticky top-0 z-[10] shadow-lg`}
     >
       <div className="flex items-center justify-between w-[95vw] mx-auto">
         {/* logo */}

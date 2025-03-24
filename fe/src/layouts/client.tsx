@@ -18,11 +18,12 @@ export function Layout_client() {
 export function Layout_client_with_sidebar() {
   return (
     <div className="flex mt-5 gap-x-4">
-      <aside className="hidden lg:block max-w-[200px]">
-        <div className="sticky top-20 space-y-4">
-          <Box_profile_component />
-          <SideBar_component />
-        </div>
+      <aside
+        className="hidden lg:block space-y-4 sticky *:shadow-lg 
+      top-20 w-[250px] h-[calc(100vh-80px)] overflow-hidden"
+      >
+        <Box_profile_component />
+        <SideBar_component />
       </aside>
       <div className="overflow-y-auto w-full mt-0.5">
         <Outlet />
