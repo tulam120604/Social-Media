@@ -20,7 +20,7 @@ export function Layout_client_with_sidebar() {
     <div className="flex mt-5 gap-x-4">
       <aside
         className="hidden lg:block space-y-4 sticky *:shadow-lg 
-      top-20 w-[250px] h-[calc(100vh-80px)] overflow-hidden"
+      top-21 w-[250px] h-[calc(100vh-85px)] overflow-hidden"
       >
         <Box_profile_component />
         <SideBar_component />

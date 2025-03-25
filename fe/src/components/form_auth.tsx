@@ -87,27 +87,55 @@ export default function Form_auth_component({ type }: { type: string }) {
               )}
             />
           )}
-          <Button
-            className="bg-[#533AAF] hover:opacity-80 text-gray-100 cursor-pointer my-4"
-            type="submit"
-          >
-            Sign in
-          </Button>
           {type === "signin" && (
-            <div className="text-sm opacity-80">
-              Don't have account?{" "}
-              <Link to={"/sign-up"} className="text-[#533AAF]">
-                Signup
-              </Link>
-            </div>
+            <>
+             <div className="flex flex-col gap-y-0">
+             <Button
+                className="bg-[#533AAF] hover:opacity-80 text-gray-100 cursor-pointer"
+                type="submit"
+              >
+                Sign in
+              </Button>
+              <span>or</span>
+              <Button
+                className="bg-[#e4e4e4] hover:opacity-80 hover:bg-[#e4e4e4] text-gray-700 cursor-pointer"
+                type="submit"
+              >
+                Sign in with Google
+              </Button>
+             </div>
+              <div className="text-sm opacity-80">
+                Don't have account?{" "}
+                <Link to={"/sign-up"} className="text-[#533AAF]">
+                  Signup
+                </Link>
+              </div>
+            </>
           )}
           {type === "signup" && (
-            <div className="text-sm opacity-80">
-              Already have account?{" "}
-              <Link to={"/sign-in"} className="text-[#533AAF]">
-                Signin
-              </Link>
-            </div>
+            <>
+              <div className="flex flex-col gap-y-0">
+             <Button
+                className="bg-[#533AAF] hover:opacity-80 text-gray-100 cursor-pointer"
+                type="submit"
+              >
+                Sign up
+              </Button>
+              <span>or</span>
+              <Button
+                className="bg-[#e4e4e4] hover:opacity-80 hover:bg-[#e4e4e4] text-gray-700 cursor-pointer"
+                type="submit"
+              >
+                Sign up with Google
+              </Button>
+              </div>
+              <div className="text-sm opacity-80">
+                Already have account?{" "}
+                <Link to={"/sign-in"} className="text-[#533AAF]">
+                  Signin
+                </Link>
+              </div>
+            </>
           )}
         </form>
       </Form>
