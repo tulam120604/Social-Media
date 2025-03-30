@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "../lib/ui/button";
 import {
   Form,
@@ -10,13 +11,14 @@ import { Hook_authForm } from "../hooks/authForm";
 import { Input } from "../lib/ui/input";
 import { X } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import Btn_auth_with_google from "./btn_auth_with_google";
 
 export default function Form_auth_component({ type }: { type: string }) {
   const navigate = useNavigate();
-  console.log(type);
   const { form, onSubmit } = Hook_authForm();
   return (
     <div className="text-center">
+      {/* {!isLoading && <Loading_overlay />} */}
       <div className="mb-10 relative">
         <span className="font-semibold lg:text-lg">
           {type === "signup" ? "Sign up" : "Sign in"}
@@ -59,6 +61,7 @@ export default function Form_auth_component({ type }: { type: string }) {
               <FormItem>
                 <FormControl>
                   <Input
+                    type="password"
                     placeholder="Enter your password"
                     {...field}
                     className="!border-b font-light"
@@ -89,21 +92,16 @@ export default function Form_auth_component({ type }: { type: string }) {
           )}
           {type === "signin" && (
             <>
-             <div className="flex flex-col gap-y-0">
-             <Button
-                className="bg-[#533AAF] hover:opacity-80 text-gray-100 cursor-pointer"
-                type="submit"
-              >
-                Sign in
-              </Button>
-              <span>or</span>
-              <Button
-                className="bg-[#e4e4e4] hover:opacity-80 hover:bg-[#e4e4e4] text-gray-700 cursor-pointer"
-                type="submit"
-              >
-                Sign in with Google
-              </Button>
-             </div>
+              <div className="flex flex-col gap-y-0">
+                <Button
+                  className="bg-[#533AAF] hover:opacity-80 text-gray-100 cursor-pointer"
+                  type="submit"
+                >
+                  Sign in
+                </Button>
+                <span>or</span>
+                <Btn_auth_with_google />
+              </div>
               <div className="text-sm opacity-80">
                 Don't have account?{" "}
                 <Link to={"/sign-up"} className="text-[#533AAF]">
@@ -115,19 +113,14 @@ export default function Form_auth_component({ type }: { type: string }) {
           {type === "signup" && (
             <>
               <div className="flex flex-col gap-y-0">
-             <Button
-                className="bg-[#533AAF] hover:opacity-80 text-gray-100 cursor-pointer"
-                type="submit"
-              >
-                Sign up
-              </Button>
-              <span>or</span>
-              <Button
-                className="bg-[#e4e4e4] hover:opacity-80 hover:bg-[#e4e4e4] text-gray-700 cursor-pointer"
-                type="submit"
-              >
-                Sign up with Google
-              </Button>
+                <Button
+                  className="bg-[#533AAF] hover:opacity-80 text-gray-100 cursor-pointer"
+                  type="submit"
+                >
+                  Sign up
+                </Button>
+                <span>or</span>
+                <Btn_auth_with_google />
               </div>
               <div className="text-sm opacity-80">
                 Already have account?{" "}

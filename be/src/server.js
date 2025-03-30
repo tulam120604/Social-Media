@@ -3,11 +3,10 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import connectDB from "./connect/DB.js";
-import passport from 'passport'
-import authRouter from './router/auth.js'
-import './config/passport.js'
+import authRouter from "./router/auth.js";
 
 const server = express();
+server.use(express.json())
 
 server.use(
   cors({
@@ -16,9 +15,8 @@ server.use(
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   })
 );
-server.use(passport.initialize());
 connectDB(process.env.PORT_mongoo);
-server.use('/v1', authRouter)
+server.use("/v1", authRouter);
 server.listen(process.env.PORT, () => {
   console.log("Server is running!");
 });

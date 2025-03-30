@@ -1,21 +1,9 @@
 // router/auth.js
 import express from 'express';
-import passport from 'passport';
+import { sign_up } from '../controller/auth/profile.js';
 
 const authRouter = express.Router();
 
-authRouter.get(
-  '/auth/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] })
-);
-
-authRouter.get(
-  '/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  (req, res) => {
-    // Sau khi xác thực thành công, chuyển hướng về trang chủ
-    res.redirect('/');
-  }
-);
+authRouter.post('/auth/sign-up', sign_up)
 
 export default authRouter;
