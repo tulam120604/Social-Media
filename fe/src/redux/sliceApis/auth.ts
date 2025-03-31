@@ -23,19 +23,19 @@ export const sliceAuth = createApi({
     listUser: build.query<ApiResponse<any>, void>({
       query: () => ({ url: "/query", method: "get" }),
     }),
-    signUp: build.mutation<ApiResponse<any>, authRequest>({
+    handleAuth: build.mutation<ApiResponse<any>, authRequest>({
       query: (request) => {
-        console.log(request);
         const uri =
-          request?.action === "sign-up" ? "/auth/sign-up" : "/auth/sign-in";
+          request?.action === "signup" ? "/auth/sign-up" : "/auth/sign-in";
         return {
           url: uri,
           method: "post",
           data: request?.dataForm,
         };
       },
+      transformResponse: (result) => result,
     }),
   }),
 });
 
-export const { useListUserQuery, useSignUpMutation } = sliceAuth;
+export const { useListUserQuery, useHandleAuthMutation } = sliceAuth;

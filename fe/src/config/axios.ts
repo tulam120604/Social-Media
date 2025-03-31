@@ -23,6 +23,7 @@ const axiosInstance = axios.create({
     "Content-Type": "application/json",
     // Add any other headers or configurations you need
   },
+  withCredentials: true, // Thêm withCredentials để gửi cookie
 });
 
 // Add a request interceptor

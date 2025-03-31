@@ -1,12 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Form_auth_component from "../../components/form_auth";
 import { useState, useEffect } from "react";
-import { useSignUpMutation } from "../../redux/sliceApis/auth";
+import { useHandleAuthMutation } from "../../redux/sliceApis/auth";
 import Loading_overlay from "../../components/loading_overlay";
 
 export default function Signup_page() {
   const [animation, setAnimation] = useState<boolean>(false);
-  const [, { isLoading }] = useSignUpMutation();
+  const [, { isLoading }] = useHandleAuthMutation();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   useEffect(() => {

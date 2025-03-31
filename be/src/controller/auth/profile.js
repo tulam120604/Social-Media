@@ -2,16 +2,17 @@ import account from "../../model/account.js";
 import { StatusCodes } from "http-status-codes";
 import { OAuth2Client } from "google-auth-library";
 import { userSchema } from "../../config/validate.js";
+import { create_token } from "../../middleware/auth.js";
 import brcyptjs from "bcryptjs";
 
 const id_client = process.env.GG_client_id;
 const client_gg = new OAuth2Client({ id_client });
 
 const save_data_account = async (data) => {
-  const check_name = await account.findOne({
-    userName: data.userName,
+  const check_account = await account.findOne({
+    email: data.email,
   });
-  if (check_name) {
+  if (check_account) {
     return {
       error: true,
       message: "Tên đăng nhập đã tồn tại!",
@@ -71,7 +72,6 @@ export const sign_up = async (req, res) => {
       });
     }
     const result = await save_data_account(req.body);
-    console.log(result)
     if (result.error) {
       return res.status(StatusCodes.BAD_REQUEST).json({
         error: true,
@@ -83,6 +83,50 @@ export const sign_up = async (req, res) => {
       error: false,
       message: "Sign up OK",
       data: result,
+    });
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      error: true,
+      message: error || "500",
+    });
+  }
+};
+
+// sign in
+export const sign_in = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const data_account = await account.findOne({
+      email,
+    });
+    if (!data_account) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        error: true,
+        message: "Account not found",
+      });
+    }
+    const check_password = await brcyptjs.compare(
+      password,
+      data_account.password
+    );
+    if (!check_password) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        error: true,
+        message: "Wrong password",
+      });
+    }
+    const token = create_token(data_account._id);
+    data_account.password = undefined;
+    res.cookie("jwt", token, {
+      httpOnly: false,
+      secure: false,
+      path: "/",
+      sameSite: "Lax",
+      maxAge: 604800000,
+    });
+    return res.status(StatusCodes.OK).json({
+      error: false,
+      data : data_account,
     });
   } catch (error) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({

@@ -15,7 +15,7 @@ import Btn_auth_with_google from "./btn_auth_with_google";
 
 export default function Form_auth_component({ type }: { type: string }) {
   const navigate = useNavigate();
-  const { form, onSubmit } = Hook_authForm();
+  const { form, onSubmit } = Hook_authForm(type);
   return (
     <div className="text-center">
       {/* {!isLoading && <Loading_overlay />} */}
@@ -37,14 +37,33 @@ export default function Form_auth_component({ type }: { type: string }) {
           className="space-y-6 flex flex-col"
         >
           {/* user name */}
+          {type === "signup" && (
+            <FormField
+              control={form.control}
+              name="userName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter your username"
+                      {...field}
+                      className="!border-b font-light"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
+          {/* pass */}
           <FormField
             control={form.control}
-            name="userName"
+            name="email"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
                   <Input
-                    placeholder="Enter your username"
+                    placeholder="Enter your email"
                     {...field}
                     className="!border-b font-light"
                   />
@@ -53,7 +72,6 @@ export default function Form_auth_component({ type }: { type: string }) {
               </FormItem>
             )}
           />
-          {/* pass */}
           <FormField
             control={form.control}
             name="password"
@@ -71,25 +89,6 @@ export default function Form_auth_component({ type }: { type: string }) {
               </FormItem>
             )}
           />
-          {/* email */}
-          {type === "signup" && (
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter your email"
-                      {...field}
-                      className="!border-b font-light"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          )}
           {type === "signin" && (
             <>
               <div className="flex flex-col gap-y-0">

@@ -2,6 +2,10 @@ import jwt from "jsonwebtoken";
 import account from "../model/account.js";
 import { StatusCodes } from "http-status-codes";
 
+export const create_token = (userId) => {
+  return jwt.sign({ userId }, process.env.KEY_sign_token, { expiresIn: "7d" });
+};
+
 export async function verify_token(value) {
   const decoded_jwt = await new Promise((resolve, reject) => {
     jwt.verify(value, process.env.SECRET_JWT, (error, decoded) => {
