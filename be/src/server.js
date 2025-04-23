@@ -4,9 +4,11 @@ import express from "express";
 import cors from "cors";
 import connectDB from "./connect/DB.js";
 import authRouter from "./router/auth.js";
+import cookieParser from "cookie-parser";
 
 const server = express();
-server.use(express.json())
+server.use(express.json());
+server.use(cookieParser());
 
 server.use(
   cors({

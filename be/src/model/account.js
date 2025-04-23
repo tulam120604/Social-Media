@@ -16,6 +16,7 @@ const schema_account = new mongoose.Schema(
       required: true,
       maxlength: 25,
     },
+    picture: String,
     role: {
       type: String,
       enum: ["admin", "user"],

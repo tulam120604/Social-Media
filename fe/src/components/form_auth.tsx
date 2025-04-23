@@ -93,13 +93,14 @@ export default function Form_auth_component({ type }: { type: string }) {
             <>
               <div className="flex flex-col gap-y-0">
                 <Button
-                  className="bg-[#533AAF] hover:opacity-80 text-gray-100 cursor-pointer"
+                  className="bg-[#533AAF] hover:opacity-80 text-gray-100 cursor-pointer rounded 
+                  hover:bg-[#533AAF] font-normal"
                   type="submit"
                 >
                   Sign in
                 </Button>
                 <span>or</span>
-                <Btn_auth_with_google />
+                <Btn_auth_with_google action={'signin'}/>
               </div>
               <div className="text-sm opacity-80">
                 Don't have account?{" "}
@@ -113,13 +114,14 @@ export default function Form_auth_component({ type }: { type: string }) {
             <>
               <div className="flex flex-col gap-y-0">
                 <Button
-                  className="bg-[#533AAF] hover:opacity-80 text-gray-100 cursor-pointer"
+                  className="bg-[#533AAF] hover:opacity-80 text-gray-100 cursor-pointer rounded 
+                  hover:bg-[#533AAF] font-normal"
                   type="submit"
                 >
                   Sign up
                 </Button>
                 <span>or</span>
-                <Btn_auth_with_google />
+                <Btn_auth_with_google action={'signup'}/>
               </div>
               <div className="text-sm opacity-80">
                 Already have account?{" "}

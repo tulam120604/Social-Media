@@ -1,10 +1,21 @@
 // router/auth.js
 import express from "express";
-import { sign_in, sign_up } from "../controller/auth/profile.js";
+import {
+  authenticate_with_google,
+  sign_in,
+  sign_up,
+} from "../controller/auth/profile.js";
+import { middleware } from "../middleware/auth.js";
+import { view_profile } from "../controller/auth/view.js";
 
 const authRouter = express.Router();
 
+// sign up
 authRouter.post("/auth/sign-up", sign_up);
+authRouter.post("/auth/authenticate-with-google", authenticate_with_google);
+// sign in
 authRouter.post("/auth/sign-in", sign_in);
+// view
+authRouter.get("/auth/profile/view", middleware, view_profile);
 
 export default authRouter;

@@ -2,9 +2,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { axiosBaseQuery } from "../../config/axios";
 
-interface ApiResponse<T> {
-  data: T;
-}
 interface authRequest {
   dataForm: {
     userName: string;
@@ -13,6 +10,9 @@ interface authRequest {
   };
   action: string;
 }
+interface authRequestWithGoogle {
+  access_token: any;
+}
 
 export const sliceAuth = createApi({
   reducerPath: "authApi",
@@ -20,10 +20,13 @@ export const sliceAuth = createApi({
     baseUrl: import.meta.env.VITE_BASE_URL,
   }),
   endpoints: (build) => ({
-    listUser: build.query<ApiResponse<any>, void>({
+    listUser: build.query<any, void>({
       query: () => ({ url: "/query", method: "get" }),
     }),
-    handleAuth: build.mutation<ApiResponse<any>, authRequest>({
+    viewProfile: build.query<any, void>({
+      query: () => ({ url: "/auth/profile/view", method: "get" })
+    }),
+    handleAuth: build.mutation<any, authRequest>({
       query: (request) => {
         const uri =
           request?.action === "signup" ? "/auth/sign-up" : "/auth/sign-in";
@@ -35,7 +38,23 @@ export const sliceAuth = createApi({
       },
       transformResponse: (result) => result,
     }),
+    handleAuthWithGoogle: build.mutation<any, authRequestWithGoogle>({
+      query: (request) => {
+        const uri = "/auth/authenticate-with-google";
+        return {
+          url: uri,
+          method: "post",
+          data: request.access_token,
+          meta: request,
+        };
+      },
+    }),
   }),
 });
 
-export const { useListUserQuery, useHandleAuthMutation } = sliceAuth;
+export const {
+  useListUserQuery,
+  useViewProfileQuery,
+  useHandleAuthMutation,
+  useHandleAuthWithGoogleMutation,
+} = sliceAuth;

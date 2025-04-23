@@ -18,7 +18,7 @@ export const instance = axios.create({
 
 const axiosInstance = axios.create({
   // Replace with your API base URL
-  baseURL: "https://api.example.com",
+  baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
     "Content-Type": "application/json",
     // Add any other headers or configurations you need
@@ -59,8 +59,17 @@ export const axiosBaseQuery =
         data,
         params,
         headers,
+        validateStatus: () => true, // để cho phép nhận mã code ngoài 200
+        withCredentials: true,
       });
-      return { data: result.data };
+      return {
+        data: result,
+        meta: {
+          // Thông tin meta từ response (status, headers...)
+          status: result.status,
+          headers: result.headers,
+        },
+      };
     } catch (axiosError) {
       const error = axiosError;
       return {

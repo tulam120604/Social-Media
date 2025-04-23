@@ -3,7 +3,7 @@ import account from "../model/account.js";
 import { StatusCodes } from "http-status-codes";
 
 export const create_token = (userId) => {
-  return jwt.sign({ userId }, process.env.KEY_sign_token, { expiresIn: "7d" });
+  return jwt.sign({ userId }, process.env.SECRET_JWT, { expiresIn: "7d" });
 };
 
 export async function verify_token(value) {
