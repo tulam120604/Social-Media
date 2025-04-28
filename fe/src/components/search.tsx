@@ -12,17 +12,13 @@ export default function Search_component() {
           className="w-[300px] flex justify-end border-transparent bg-[#F1F5F9] rounded py-2 px-4 opacity-85 z-[2]"
           placeholder="Search"
         />
-        <Search
-          className="absolute right-0 h-full w-14 p-2 
-            bg-[#F1F5F9] cursor-pointer z-[2] border-l"
-         color="#838588"/>
       </form>
 
       {/* mobile */}
       <div className="lg:hidden">
         <Search
           color="#333333"
-          className="translate-x-[150%] h-full cursor-pointer"
+          className="h-full cursor-pointer"
           onClick={() => setStatus_search(!status_search)}
         />
         {status_search && (

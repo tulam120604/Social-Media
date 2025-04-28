@@ -42,7 +42,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => {
     // You can modify the response data here, e.g., handling pagination
-    return response.data;
+    return response;
   },
   (error) => {
     return Promise.reject(error);

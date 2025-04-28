@@ -2,11 +2,13 @@ import { Outlet } from "react-router-dom";
 import Header_component from "../components/header";
 import SideBar_component from "../components/sideBar";
 import Box_profile_component from "../components/box_profile";
+import Header_mobile_component from "../components/header.mobile";
 
 export function Layout_client() {
   return (
     <>
       <Header_component />
+      <Header_mobile_component/>
       <div className="w-[95vw] mx-auto">
         <Outlet />
       </div>
