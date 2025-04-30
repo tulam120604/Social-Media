@@ -182,3 +182,26 @@ export const sign_in = async (req, res) => {
     });
   }
 };
+
+// logout
+export const log_out = (req, res) => {
+  try {
+    const token = req.cookies.jwt;
+    if (!token) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        error: true,
+        message: "Không có token!",
+      });
+    }
+    res.clearCookie("jwt", { path: "/" });
+    return res.status(StatusCodes.NO_CONTENT).json({
+      error: false,
+      message: "Logout OK!",
+    });
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      error: true,
+      message: error || 500,
+    });
+  }
+};

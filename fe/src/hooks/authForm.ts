@@ -4,10 +4,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { schemaFormAuth } from "../validate/auth";
 import { useHandleAuthMutation } from "../redux/sliceApis/auth";
-import { useNavigate } from "react-router-dom";
 
 export function Hook_authForm(action: string) {
-  const navigate = useNavigate();
   const [dispath, { isLoading }] = useHandleAuthMutation();
   const form = useForm<z.infer<typeof schemaFormAuth>>({
     resolver: zodResolver(schemaFormAuth),

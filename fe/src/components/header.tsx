@@ -12,7 +12,7 @@ export default function Header_component() {
         isDarkMode ? "bg-white" : "bg-black"
       } w-full py-3 sticky top-0 z-[10] shadow-lg`}
     >
-      <div className="flex items-center justify-between w-[95vw] mx-auto">
+      <div className="flex items-center justify-between w-[95vw] max-w-[1280px] mx-auto">
         {/* logo */}
         <div className="flex items-center gap-x-2 cursor-pointer">
           <Disc3 color="#413B95" width={30} height={30} />

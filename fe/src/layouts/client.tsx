@@ -9,7 +9,7 @@ export function Layout_client() {
     <>
       <Header_component />
       <Header_mobile_component/>
-      <div className="w-[95vw] mx-auto">
+      <div className="w-[95vw] max-w-[1280px] mx-auto">
         <Outlet />
       </div>
     </>

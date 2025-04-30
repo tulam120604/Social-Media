@@ -6,10 +6,11 @@ export default function Search_component() {
   return (
     <div className="flex items-center">
       {/* desktop */}
-      <form className="hidden lg:flex relative items-center rounded overflow-hidden">
+      <form className="hidden lg:flex relative items-center overflow-hidden">
         <input
           type="text"
-          className="w-[300px] flex justify-end border-transparent bg-[#F1F5F9] rounded py-2 px-4 opacity-85 z-[2]"
+          className="w-[350px] flex justify-end border-transparent bg-[#F1F5F9] rounded-full py-2 
+          px-4 z-[2]"
           placeholder="Search"
         />
       </form>

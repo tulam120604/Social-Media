@@ -24,8 +24,9 @@ export const sliceAuth = createApi({
       query: () => ({ url: "/query", method: "get" }),
     }),
     viewProfile: build.query<any, void>({
-      query: () => ({ url: "/auth/profile/view", method: "get" })
+      query: () => ({ url: "/auth/profile/view", method: "get" }),
     }),
+    // sign in, sign up
     handleAuth: build.mutation<any, authRequest>({
       query: (request) => {
         const uri =
@@ -38,6 +39,16 @@ export const sliceAuth = createApi({
       },
       transformResponse: (result) => result,
     }),
+    // log out
+    handleLogOut: build.mutation<any, any>({
+      query: () => {
+        return {
+          url: "/auth/log-out",
+          method: "post",
+        };
+      },
+    }),
+    // sign in, sign up with google
     handleAuthWithGoogle: build.mutation<any, authRequestWithGoogle>({
       query: (request) => {
         const uri = "/auth/authenticate-with-google";
@@ -56,5 +67,6 @@ export const {
   useListUserQuery,
   useViewProfileQuery,
   useHandleAuthMutation,
+  useHandleLogOutMutation,
   useHandleAuthWithGoogleMutation,
 } = sliceAuth;

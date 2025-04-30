@@ -4,7 +4,7 @@ import axios from "axios";
 interface iAxiosBaseQuery {
   url: string;
   method: string;
-  data?: Record<string, any>;
+  data?: any;
   params?: Record<string, any>;
   headers?: Record<string, any>;
 }

@@ -26,7 +26,7 @@ export default function Box_profile_component() {
         {/* count follow */}
         <span className="text-xs opacity-75">12k followers</span>
         {/* link */}
-        <Link to={'/profile'} className="bg-[#3A84F5] px-2 py-1 text-sm text-gray-100 rounded 
+        <Link to={'/profile/123'} className="bg-[#3A84F5] px-2 py-1 text-sm text-gray-100 rounded 
         font-light">
         Profile
         </Link>
