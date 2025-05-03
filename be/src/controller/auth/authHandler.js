@@ -64,7 +64,6 @@ export const authenticate_with_google = async (req, res) => {
     if (result.error) {
       // nếu mà đã có thì trả về để fe tự redirect
       if (result.code === 301) {
-        let data;
         if (result.data) {
           const token = create_token(result.data._id);
           res.cookie("jwt", token, {
@@ -74,26 +73,26 @@ export const authenticate_with_google = async (req, res) => {
             sameSite: "Lax",
             maxAge: 604800000,
           });
-          data = {
-            userName: result.data.userName,
-            email: result.data.email,
-            picture: result.data.picture,
-            role: result.data.role,
-          };
+          return res.status(StatusCodes.OK).json({
+            error: false,
+            message: "Sign in OK",
+          });
         }
-        result.password = undefined;
-        return res.status(StatusCodes.OK).json({
-          error: false,
-          code: result.code, // code là 301 redirect sang uri mới
-          data,
-        });
       }
       return res.status(StatusCodes.BAD_REQUEST).json({
         error: true,
         message: result.message,
       });
     }
-    return res.status(StatusCodes.CREATED).json({
+    const token = create_token(result._id);
+    res.cookie("jwt", token, {
+      httpOnly: false,
+      secure: false,
+      path: "/",
+      sameSite: "Lax",
+      maxAge: 604800000,
+    });
+    return res.status(StatusCodes.OK).json({
       error: false,
       message: "Sign up OK",
       data: result,
@@ -194,7 +193,7 @@ export const log_out = (req, res) => {
       });
     }
     res.clearCookie("jwt", { path: "/" });
-    return res.status(StatusCodes.NO_CONTENT).json({
+    return res.status(StatusCodes.OK).json({
       error: false,
       message: "Logout OK!",
     });

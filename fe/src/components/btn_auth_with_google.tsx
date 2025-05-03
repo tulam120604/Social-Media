@@ -12,7 +12,8 @@ export default function Btn_auth_with_google({ action }: { action: string }) {
         const result = await dispathAuthGoogle({
           access_token: tokenResponse,
         }).unwrap(); // unwrap dùng để truy cập vào dữ liệu error hoặc success sau khi action trigger
-        if (result?.code === 301) {
+        // cái này nó như kiểu destructuring cái dữ liệu ra, thay vì result.data.status
+        if (result?.status === 200) {
           navigate("/");
         }
       } catch (error) {

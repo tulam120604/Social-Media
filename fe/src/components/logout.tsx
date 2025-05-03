@@ -4,8 +4,10 @@ import useDarkMode from "../utils/getTheme";
 import useClickOutSide from "../hooks/useClickOutSide";
 import { useRef } from "react";
 import { useHandleLogOutMutation } from "../redux/sliceApis/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function Logout_component({ props }: any) {
+  const navigate = useNavigate();
   const ref_Dropdown = useRef(null);
   const isDarkMode = useDarkMode();
   const [dispath] = useHandleLogOutMutation();
@@ -14,7 +16,10 @@ export default function Logout_component({ props }: any) {
   });
 
   const log_out = async () => {
-    await dispath(1);
+    const result = await dispath();
+    if (result?.data?.status === 200) {
+      navigate("/sign-in");
+    }
   };
   return (
     <div

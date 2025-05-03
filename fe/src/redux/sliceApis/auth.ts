@@ -40,7 +40,7 @@ export const sliceAuth = createApi({
       transformResponse: (result) => result,
     }),
     // log out
-    handleLogOut: build.mutation<any, any>({
+    handleLogOut: build.mutation<any, void>({
       query: () => {
         return {
           url: "/auth/log-out",
