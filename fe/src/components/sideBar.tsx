@@ -1,12 +1,21 @@
 import { Link, NavLink } from "react-router-dom";
 import { urls_sidebar, copyrights } from "../config/links";
 import { iType_uri_sideBar } from "../config/types";
+import useDarkMode from "../utils/getTheme";
 
 export default function SideBar_component() {
-  const styleActive = `grid grid-cols-[50px_auto] items-center whitespace-nowrap opacity-85 p-2 bg-gray-200 duration-150 rounded-md mb-1`;
-  const styleNoActive = `grid grid-cols-[50px_auto] items-center whitespace-nowrap opacity-85 p-2 hover:bg-gray-200 duration-150 rounded-md mb-1`;
+  const isDarkMode = useDarkMode();
+  const styleActive = `grid grid-cols-[50px_auto] items-center whitespace-nowrap opacity-85 p-2 
+  bg-gray-200 duration-150 rounded-md mb-1`;
+  const styleNoActive = `${
+    isDarkMode ? "hover:bg-[#333334]" : "hover:bg-[#F0F2F5]"
+  } grid grid-cols-[50px_auto] items-center whitespace-nowrap opacity-85 p-2 duration-150 rounded-md mb-1`;
   return (
-    <section className="scroll-hover bg-white rounded py-4 px-3 w-full h-[calc(100%-200px)]">
+    <section
+      className={`${
+        isDarkMode ? "bg-[#252728] text-gray-100" : "bg-[#fff] text-gray-900 "
+      } scroll-hover rounded py-4 px-3 w-full h-[calc(100%-200px)]`}
+    >
       {/* 1 */}
       {urls_sidebar?.map((uri: iType_uri_sideBar, i: number) => (
         <NavLink

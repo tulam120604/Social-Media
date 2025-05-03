@@ -26,7 +26,9 @@ export default function Form_auth_component({ type }: { type: string }) {
       {/* form */}
       <div
         className={`${
-          isDarkMode ? "bg-[#F1F5F9] text-gray-900" : "bg-black text-gray-100"
+          isDarkMode
+            ? "bg-[#1C1C1D] text-gray-100"
+            : "bg-[#F1F5F9] text-gray-900 "
         } text-center z-[1000] rounded p-6 max-w-sm min-w-xs border shadow`}
       >
         {/* {!isLoading && <Loading_overlay />} */}

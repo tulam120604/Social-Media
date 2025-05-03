@@ -7,14 +7,14 @@ export default function App() {
   return (
     <div
       className={`${
-        isDarkMode ? "bg-[#F1F5F9] text-gray-900" : "bg-black text-gray-100"
+        isDarkMode ? "bg-[#1C1C1D] text-gray-100" : "bg-[#F1F5F9] text-gray-900 "
       } w-full min-h-screen`}
     >
       <style>
         {`
           input::placeholder {
             color: ${
-              isDarkMode ? "#bbb" : "#888"
+              isDarkMode ? "#888" : "#bbb"
             }; /* Điều chỉnh màu của placeholder input */
           }
         `}

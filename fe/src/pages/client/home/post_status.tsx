@@ -1,6 +1,8 @@
 import { FileVideo, ImageUp } from "lucide-react";
+import useDarkMode from "../../../utils/getTheme";
 
 export default function Post_status() {
+  const isDarkMode = useDarkMode();
   return (
     <div className="flex gap-x-4 items-start">
       <img
@@ -13,12 +15,20 @@ export default function Post_status() {
         <input
           type="text"
           placeholder="What's on your mind?"
-          className="bg-[#F1F5F9] w-full px-2 pt-3 pb-10 rounded opacity-80"
+          className={`${
+            isDarkMode
+              ? "bg-[#333334] text-gray-100"
+              : "bg-[#F0F2F5] text-gray-900 "
+          } w-full px-2 pt-3 pb-10 rounded opacity-80`}
         />
         <div className="flex justify-between">
           <div
-            className="flex gap-x-4 items-center *:flex *:items-center **:gap-x-1 
-          *:text-sm *:opacity-75 *:cursor-pointer *:hover:bg-[#F1F5F9] *:p-1 **:rounded *:duration-200"
+            className={`${
+              isDarkMode
+                ? "*:hover:bg-[#333334] text-gray-100"
+                : "*:hover:bg-[#F0F2F5] text-gray-900 "
+            } flex gap-x-4 items-center *:flex *:items-center **:gap-x-1 
+            *:text-sm *:opacity-75 *:cursor-pointer *:p-1 **:rounded *:duration-200`}
           >
             {/* image */}
             <button type="button">

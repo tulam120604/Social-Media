@@ -1,16 +1,22 @@
 import { ChevronLeft, Search } from "lucide-react";
 import { useState } from "react";
+import useDarkMode from "../utils/getTheme";
 
 export default function Search_component() {
   const [status_search, setStatus_search] = useState<boolean>(false);
+  const isDarkMode = useDarkMode();
   return (
     <div className="flex items-center">
       {/* desktop */}
       <form className="hidden lg:flex relative items-center overflow-hidden">
         <input
           type="text"
-          className="w-[350px] flex justify-end border-transparent bg-[#F1F5F9] rounded-full py-2 
-          px-4 z-[2]"
+          className={`${
+            isDarkMode
+              ? "bg-[#333334] text-gray-100"
+              : "bg-[#F0F2F5] text-gray-900 "
+          } w-[350px] flex justify-end border-transparent rounded-full py-2 
+          px-4 z-[2] outline-0`}
           placeholder="Search"
         />
       </form>

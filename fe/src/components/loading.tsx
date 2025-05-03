@@ -5,7 +5,7 @@ export function Loading_overlay() {
   return (
     <div
       className={`${
-        isDarkMode ? "bg-gray-200" : "bg-black"
+        isDarkMode ? "bg-[#1C1C1D]" : "bg-[#F1F5F9]"
       } w-screen h-screen fixed top-0 left-0 grid place-content-center`}
     >
       <div
@@ -13,10 +13,10 @@ export function Loading_overlay() {
       font-semibold font-serif text-[#413B95] border-3 border-[#413B95]
       rounded-lg text-center"
       >
-        <span className="-translate-y-1 select-none">s</span>
+        <span className="select-none">L</span>
       </div>
       <section className="fixed bottom-1 text-center w-screen text-[#413B95]">
-        Social Media by Tu Lam
+        Linksta by Tu Lam
       </section>
     </div>
   );
@@ -30,18 +30,18 @@ export function Loading_skeleton() {
         <div className="flex items-center gap-x-2 mb-4">
           <div
             className={`${
-              isDarkMode ? "bg-gray-300" : "bg-gray-700"
+              isDarkMode ? "bg-gray-700" : "bg-gray-300"
             } w-12 rounded-full h-12`}
           />
           <div>
             <div
               className={`${
-                isDarkMode ? "bg-gray-300" : "bg-gray-700"
+                isDarkMode ? "bg-gray-700" : "bg-gray-300"
               } h-3 rounded-full w-16 mb-2.5`}
             />{" "}
             <div
               className={`${
-                isDarkMode ? "bg-gray-300" : "bg-gray-700"
+                isDarkMode ? "bg-gray-700" : "bg-gray-300"
               } h-3 rounded-full w-16`}
             />
           </div>
@@ -49,7 +49,7 @@ export function Loading_skeleton() {
       </div>
       <div
         className={`${
-          isDarkMode ? "bg-gray-300" : "bg-gray-700"
+          isDarkMode ? "bg-gray-700" : "bg-gray-300"
         } animate-pulse w-full h-48 rounded-lg mb-5 flex justify-center items-center`}
       >
         <svg
