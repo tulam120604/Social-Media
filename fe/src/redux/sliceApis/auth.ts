@@ -21,7 +21,7 @@ export const sliceAuth = createApi({
   }),
   endpoints: (build) => ({
     listUser: build.query<any, void>({
-      query: () => ({ url: "/query", method: "get" }),
+      query: () => ({ url: "/auth/list", method: "get" }),
     }),
     viewProfile: build.query<any, void>({
       query: () => ({ url: "/auth/profile/view", method: "get" }),

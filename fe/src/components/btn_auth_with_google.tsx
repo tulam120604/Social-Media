@@ -27,7 +27,7 @@ export default function Btn_auth_with_google({ action }: { action: string }) {
   return (
     <>
       <Button
-        className="bg-transparent hover:opacity-80 text-gray-800 cursor-pointer rounded 
+        className="bg-transparent hover:opacity-80 cursor-pointer rounded 
                   hover:bg-transparent font-normal border shadow-none"
         type="button"
         onClick={() => submit()}

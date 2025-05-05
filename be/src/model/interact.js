@@ -6,6 +6,10 @@ const schema_interact = new mongoose.Schema({
     enum: ["like", "laugh", "sad", "wow", "wrath"],
     default: "like",
   },
+  id_post: {
+    type: mongoose.Types.ObjectId,
+    ref: "post",
+  },
   count_interact: {
     type: Number,
     default: 0,

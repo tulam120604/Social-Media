@@ -75,7 +75,7 @@ export const authenticate_with_google = async (req, res) => {
           });
           return res.status(StatusCodes.OK).json({
             error: false,
-            message: "Sign in OK",
+            message: "Đăng nhập OK",
           });
         }
       }
@@ -94,7 +94,7 @@ export const authenticate_with_google = async (req, res) => {
     });
     return res.status(StatusCodes.OK).json({
       error: false,
-      message: "Sign up OK",
+      message: "Đăng kí OK",
       data: result,
     });
   } catch (error) {
@@ -127,7 +127,7 @@ export const sign_up = async (req, res) => {
     result.password = undefined;
     return res.status(StatusCodes.CREATED).json({
       error: false,
-      message: "Sign up OK",
+      message: "Đăng kí OK",
       data: result,
     });
   } catch (error) {
@@ -158,7 +158,7 @@ export const sign_in = async (req, res) => {
     if (!check_password) {
       return res.status(StatusCodes.BAD_REQUEST).json({
         error: true,
-        message: "Wrong password",
+        message: "Mật khẩu sai",
       });
     }
     const token = create_token(data_account._id);
@@ -195,7 +195,7 @@ export const log_out = (req, res) => {
     res.clearCookie("jwt", { path: "/" });
     return res.status(StatusCodes.OK).json({
       error: false,
-      message: "Logout OK!",
+      message: "Đăng xuất OK!",
     });
   } catch (error) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({

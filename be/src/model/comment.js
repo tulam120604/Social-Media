@@ -5,6 +5,10 @@ const schema_comment = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: "account",
   },
+  id_post: {
+    type: mongoose.Types.ObjectId,
+    ref: "post",
+  },
   content: String,
 });
 

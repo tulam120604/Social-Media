@@ -6,7 +6,7 @@ const schema_post = new mongoose.Schema({
     ref: "account",
   },
   content: String,
-  media_urls: String,
+  media_urls: [String],
   visibility: {
     type: String,
     enum: ["public", "private", "friends"],
