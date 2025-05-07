@@ -6,15 +6,33 @@ import {
   FormItem,
   FormMessage,
 } from "../lib/ui/form";
-import { Hook_authForm } from "../hooks/authForm";
+import { useAuthForm } from "../hooks/authForm";
 import { Input } from "../lib/ui/input";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Btn_auth_with_google from "./btn_auth_with_google";
 import useDarkMode from "../utils/getTheme";
+import { useViewProfileQuery } from "../redux/sliceApis/auth";
+import { useEffect } from "react";
 
 export default function Form_auth_component({ type }: { type: string }) {
   const isDarkMode = useDarkMode();
-  const { form, onSubmit } = Hook_authForm(type);
+  const { data, isLoading, isFetching } = useViewProfileQuery();
+
+  const router = useNavigate();
+  // check : user tồn tại => redirect path home
+  const { pathname } = useLocation();
+  useEffect(() => {
+    if (!isLoading && !isFetching) {
+      if (
+        (data?.status === 200 && pathname === "/sign-in") ||
+        pathname === "/sign-up"
+      ) {
+        router("/", { replace: true });
+      }
+    }
+  }, [data, isLoading, isFetching, pathname, router]);
+
+  const { form, onSubmit } = useAuthForm(type);
   return (
     <div
       className="grid place-content-center w-screen h-screen bg-[url(/public/Images/bg_login.jpg)] 

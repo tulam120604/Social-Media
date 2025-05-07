@@ -1,0 +1,10 @@
+import express from "express";
+import { create_socialPost } from "../controller/post/create_post.js";
+import { middleware } from "../middleware/auth.js";
+
+const socialPostRouter = express.Router();
+
+// postRouter("/post/list", middleware, create_post);
+socialPostRouter.post("/socialPost/create", middleware, create_socialPost);
+
+export default socialPostRouter;

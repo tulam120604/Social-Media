@@ -19,12 +19,15 @@ export const sliceAuth = createApi({
   baseQuery: axiosBaseQuery({
     baseUrl: import.meta.env.VITE_BASE_URL,
   }),
+  tagTypes: ["Auth", "View"],
   endpoints: (build) => ({
     listUser: build.query<any, void>({
       query: () => ({ url: "/auth/list", method: "get" }),
+      providesTags: ["View"],
     }),
     viewProfile: build.query<any, void>({
       query: () => ({ url: "/auth/profile/view", method: "get" }),
+      providesTags: ["Auth"],
     }),
     // sign in, sign up
     handleAuth: build.mutation<any, authRequest>({
@@ -38,6 +41,7 @@ export const sliceAuth = createApi({
         };
       },
       transformResponse: (result) => result,
+      invalidatesTags: ["Auth"],
     }),
     // log out
     handleLogOut: build.mutation<any, void>({
@@ -47,6 +51,7 @@ export const sliceAuth = createApi({
           method: "post",
         };
       },
+      invalidatesTags: ["Auth"],
     }),
     // sign in, sign up with google
     handleAuthWithGoogle: build.mutation<any, authRequestWithGoogle>({
@@ -59,6 +64,7 @@ export const sliceAuth = createApi({
           meta: request,
         };
       },
+      invalidatesTags: ["Auth"],
     }),
   }),
 });

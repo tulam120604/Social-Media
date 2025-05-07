@@ -5,12 +5,12 @@ import Home_page from "../pages/client/home/page";
 import Signin_page from "../pages/auth/signin";
 import Signup_page from "../pages/auth/signup";
 import Profile_page from "../pages/client/profile/page";
-import AuthLayout from "../layouts/auth";
+import { PrivateRouter, PublicRouter } from "../layouts/auth";
 
 export default function Routes_page() {
   return (
     <Routes>
-      <Route element={<AuthLayout />}>
+      <Route element={<PrivateRouter />}>
         {/* client */}
         <Route path="/" element={<Layout_client />}>
           <Route path="/" element={<Layout_client_with_sidebar />}>
@@ -26,8 +26,10 @@ export default function Routes_page() {
       </Route>
 
       {/* auth */}
-      <Route path="/sign-in" element={<Signin_page />} />
-      <Route path="/sign-up" element={<Signup_page />} />
+      <Route element={<PublicRouter />}>
+        <Route path="/sign-in" element={<Signin_page />} />
+        <Route path="/sign-up" element={<Signup_page />} />
+      </Route>
     </Routes>
   );
 }

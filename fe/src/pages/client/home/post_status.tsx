@@ -1,8 +1,49 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FileVideo, ImageUp } from "lucide-react";
 import useDarkMode from "../../../utils/getTheme";
+import { ChangeEvent, useState } from "react";
+import { useCreatePostMutation } from "../../../redux/sliceApis/post";
+import { useForm } from "react-hook-form";
+import { Loading_Spinner } from "../../../components/loading";
 
 export default function Post_status() {
   const isDarkMode = useDarkMode();
+
+  // create post status
+  const [dispath, { isLoading }] = useCreatePostMutation();
+  const { register, handleSubmit, reset } = useForm<any>();
+
+  const [image, setImage] = useState<string[] | null>(null);
+  const [status, setStatus] = useState<string>("public");
+
+  // render img upload
+  function uploadImage(e: ChangeEvent<HTMLInputElement>) {
+    const files = e?.target?.files;
+    if (files && files.length > 0) {
+      const imageUrl = URL.createObjectURL(files[0]);
+      setImage((prev) => [...(prev || []), imageUrl]);
+    }
+  }
+
+  // submit
+  async function submitForm(value: { content: string }) {
+    try {
+      const formData = new FormData();
+      image?.forEach((file) => {
+        formData.append("media_urls", file);
+      });
+      formData.append("content", value?.content);
+      formData.append("status", status);
+      await dispath({
+        type: "create_socialPost",
+        dataRequest: formData,
+      }).unwrap();
+      reset();
+      setImage([]);
+    } catch (error) {
+      console.error("Post creation failed:", error);
+    }
+  }
   return (
     <div className="flex gap-x-4 items-start">
       <img
@@ -11,9 +52,10 @@ export default function Post_status() {
         className="w-12 h-12 rounded-full"
       />
       {/* form post status & type*/}
-      <form className="w-full space-y-2">
+      <form className="w-full space-y-1" onSubmit={handleSubmit(submitForm)}>
         <input
           type="text"
+          {...register("content")}
           placeholder="What's on your mind?"
           className={`${
             isDarkMode
@@ -21,6 +63,20 @@ export default function Post_status() {
               : "bg-[#F0F2F5] text-gray-900 "
           } w-full px-2 pt-3 pb-10 rounded opacity-80`}
         />
+
+        {/* show image & video upload */}
+        <div className="flex flex-wrap gap-2">
+          {image &&
+            image?.map((value: any, i: number) => (
+              <img
+                key={i}
+                src={value}
+                className="max-w-full h-full max-h-[200px] mt-1"
+              />
+            ))}
+        </div>
+
+        {/* upload image & video */}
         <div className="flex justify-between">
           <div
             className={`${
@@ -31,10 +87,17 @@ export default function Post_status() {
             *:text-sm *:opacity-75 *:cursor-pointer *:p-1 **:rounded *:duration-200`}
           >
             {/* image */}
-            <button type="button">
+            <label htmlFor="uploadImage">
               <ImageUp strokeWidth={1.88} size={18} />
               <span>Photo</span>
-            </button>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={uploadImage}
+                className="hidden"
+                id="uploadImage"
+              />
+            </label>
             {/* video */}
             <button type="button">
               <FileVideo strokeWidth={1.88} size={18} />
@@ -50,6 +113,7 @@ export default function Post_status() {
         </div>
         {/* type */}
       </form>
+      {isLoading && <Loading_Spinner />}
     </div>
   );
 }

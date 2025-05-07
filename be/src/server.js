@@ -5,6 +5,7 @@ import cors from "cors";
 import connectDB from "./connect/DB.js";
 import authRouter from "./router/auth.js";
 import cookieParser from "cookie-parser";
+import socialPostRouter from "./router/socialPost.js";
 
 const server = express();
 server.use(express.json());
@@ -20,6 +21,7 @@ server.use(
 );
 connectDB(process.env.PORT_mongoo);
 server.use("/v1", authRouter);
+server.use("/v1", socialPostRouter);
 server.listen(process.env.PORT, () => {
   console.log("Server is running!");
 });

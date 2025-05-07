@@ -5,21 +5,23 @@ import { axiosBaseQuery } from "../../config/axios";
 export const slicePost = createApi({
   reducerPath: "postApi",
   baseQuery: axiosBaseQuery({
-    baseUrl: import.meta.env.BASE_URL,
+    baseUrl: import.meta.env.VITE_BASE_URL,
   }),
   endpoints: (build) => ({
     listPost: build.query<any, void>({
       query: () => ({ url: "/post/list", method: "get" }),
     }),
-    createPost: build.query<any, void>({
+    createPost: build.mutation<any, any>({
       query: (request) => {
         return {
-          url: "/post/create",
+          url: "/socialPost/create",
           method: "post",
-          data: request,
+          data: request?.dataRequest,
         };
       },
       transformResponse: (result) => result,
     }),
   }),
 });
+
+export const { useListPostQuery, useCreatePostMutation } = slicePost;

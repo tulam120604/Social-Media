@@ -1,3 +1,4 @@
+import { LoaderCircle } from "lucide-react";
 import useDarkMode from "../utils/getTheme";
 
 export function Loading_overlay() {
@@ -66,6 +67,14 @@ export function Loading_skeleton() {
           />
         </svg>
       </div>
+    </div>
+  );
+}
+
+export function Loading_Spinner() {
+  return (
+    <div className="bg-[#33333366] w-screen h-screen fixed top-0 left-0 grid place-content-center">
+      <LoaderCircle className=" animate-spin" />
     </div>
   );
 }

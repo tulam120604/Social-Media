@@ -5,7 +5,7 @@ import { z } from "zod";
 import { schemaFormAuth } from "../validate/auth";
 import { useHandleAuthMutation } from "../redux/sliceApis/auth";
 
-export function Hook_authForm(action: string) {
+export function useAuthForm(action: string) {
   const [dispath, { isLoading }] = useHandleAuthMutation();
   const form = useForm<z.infer<typeof schemaFormAuth>>({
     resolver: zodResolver(schemaFormAuth),
@@ -16,8 +16,7 @@ export function Hook_authForm(action: string) {
       dataForm: value,
       action,
     };
-    const result = await dispath(request);
-    console.log(result);
+    await dispath(request);
   };
   return {
     form,

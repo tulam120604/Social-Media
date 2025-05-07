@@ -1,16 +1,16 @@
 import mongoose from "mongoose";
 
-const schema_post = new mongoose.Schema({
+const schema_socialPost = new mongoose.Schema({
   id_account: {
     type: mongoose.Types.ObjectId,
     ref: "account",
   },
   content: String,
   media_urls: [String],
-  visibility: {
+  status: {
     type: String,
     enum: ["public", "private", "friends"],
-    default: "friends",
+    default: "public",
   },
   interact: {
     type: mongoose.Types.ObjectId,
@@ -22,4 +22,4 @@ const schema_post = new mongoose.Schema({
   },
 });
 
-export default mongoose.model("post", schema_post);
+export default mongoose.model("socialPost", schema_socialPost);
