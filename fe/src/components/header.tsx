@@ -1,10 +1,20 @@
 import Search_component from "./search";
 import Auth_header from "./auth_header";
 import useDarkMode from "../utils/getTheme";
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Header_component() {
   const isDarkMode = useDarkMode();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  console.log(navigate);
+  function backToHome() {
+    if (pathname === "/") {
+      window.location.reload();
+    } else {
+      navigate("/");
+    }
+  }
   return (
     <header
       className={`${
@@ -14,12 +24,12 @@ export default function Header_component() {
       <div className="flex items-center justify-between w-[95vw] max-w-[1280px] mx-auto">
         {/* logo */}
         <div className="flex items-center gap-x-2 cursor-pointer">
-          <Link
-            to={"/"}
-            className="opacity-85 font-bold text-2xl"
+          <button
+            onClick={backToHome}
+            className="opacity-85 font-bold text-2xl cursor-pointer"
           >
             Linksta
-          </Link>
+          </button>
         </div>
 
         {/* search */}

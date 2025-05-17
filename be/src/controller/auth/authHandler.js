@@ -1,4 +1,4 @@
-import account from "../../model/account.js";
+import account from "../../model/auth/account.js";
 import { StatusCodes } from "http-status-codes";
 import { userSchema } from "../../config/validate.js";
 import { create_token } from "../../middleware/auth.js";

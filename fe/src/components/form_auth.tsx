@@ -13,6 +13,7 @@ import Btn_auth_with_google from "./btn_auth_with_google";
 import useDarkMode from "../utils/getTheme";
 import { useViewProfileQuery } from "../redux/sliceApis/auth";
 import { useEffect } from "react";
+import { Loading_Spinner } from "./loading";
 
 export default function Form_auth_component({ type }: { type: string }) {
   const isDarkMode = useDarkMode();
@@ -41,6 +42,7 @@ export default function Form_auth_component({ type }: { type: string }) {
       {/* overlay */}
       <div className="w-screen h-screen fixed bg-[#34343488]" />
       <div />
+
       {/* form */}
       <div
         className={`${
@@ -49,7 +51,7 @@ export default function Form_auth_component({ type }: { type: string }) {
             : "bg-[#F1F5F9] text-gray-900 "
         } text-center z-[1000] rounded p-6 max-w-sm min-w-xs border shadow`}
       >
-        {/* {!isLoading && <Loading_overlay />} */}
+        {isLoading && <Loading_Spinner />}
         <div className="mb-10">
           <span className="font-semibold lg:text-lg">
             {type === "signup" ? "Sign up" : "Sign in"}

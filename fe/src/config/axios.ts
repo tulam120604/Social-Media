@@ -7,6 +7,7 @@ interface iAxiosBaseQuery {
   data?: any;
   params?: Record<string, any>;
   headers?: Record<string, any>;
+  isFormData?: boolean;
 }
 
 export const instance = axios.create({
@@ -19,10 +20,6 @@ export const instance = axios.create({
 const axiosInstance = axios.create({
   // Replace with your API base URL
   baseURL: import.meta.env.VITE_BASE_URL,
-  headers: {
-    "Content-Type": "application/json",
-    // Add any other headers or configurations you need
-  },
   withCredentials: true, // Thêm withCredentials để gửi cookie
 });
 
@@ -51,14 +48,25 @@ axiosInstance.interceptors.response.use(
 
 export const axiosBaseQuery =
   ({ baseUrl } = { baseUrl: "" }) =>
-  async ({ url, method, data, params, headers }: iAxiosBaseQuery) => {
+  async ({
+    url,
+    method,
+    data,
+    params,
+    headers,
+    isFormData,
+  }: iAxiosBaseQuery) => {
     try {
+      const finalHeaders = {
+        ...headers,
+        ...(isFormData ? {} : { "Content-Type": "application/json" }),
+      };
       const result = await axiosInstance({
         url: baseUrl + url,
         method,
         data,
         params,
-        headers,
+        headers: finalHeaders,
         validateStatus: () => true, // để cho phép nhận mã code ngoài 200
         withCredentials: true,
       });

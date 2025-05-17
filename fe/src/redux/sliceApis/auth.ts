@@ -22,7 +22,7 @@ export const sliceAuth = createApi({
   tagTypes: ["Auth", "View"],
   endpoints: (build) => ({
     listUser: build.query<any, void>({
-      query: () => ({ url: "/auth/list", method: "get" }),
+      query: () => ({ url: "/auth/list_all", method: "get" }),
       providesTags: ["View"],
     }),
     viewProfile: build.query<any, void>({

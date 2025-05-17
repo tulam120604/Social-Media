@@ -87,7 +87,11 @@ export default function Auth_header() {
             ref={ref_Dropdown}
           >
             <img
-              src={data?.data?.data?.picture}
+              src={
+                data?.data?.data?.picture
+                  ? data?.data?.data?.picture
+                  : "https://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
+              }
               alt=""
               className="rounded-full w-10 h-10"
             />

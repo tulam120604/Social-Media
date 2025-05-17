@@ -3,10 +3,12 @@ import { useViewProfileQuery } from "../redux/sliceApis/auth";
 import { useEffect } from "react";
 import { Loading_overlay } from "../components/loading";
 
-
 // private router
 export function PrivateRouter() {
-  const { data, isLoading, isFetching } = useViewProfileQuery();
+  const { data, isLoading, isFetching } = useViewProfileQuery(undefined, {
+    refetchOnReconnect: true,
+    refetchOnFocus: true,
+  });
   const router = useNavigate();
   const { pathname } = useLocation();
   useEffect(() => {

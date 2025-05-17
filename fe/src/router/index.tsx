@@ -6,6 +6,7 @@ import Signin_page from "../pages/auth/signin";
 import Signup_page from "../pages/auth/signup";
 import Profile_page from "../pages/client/profile/page";
 import { PrivateRouter, PublicRouter } from "../layouts/auth";
+import Friends_page from "../pages/client/friends/page";
 
 export default function Routes_page() {
   return (
@@ -15,6 +16,7 @@ export default function Routes_page() {
         <Route path="/" element={<Layout_client />}>
           <Route path="/" element={<Layout_client_with_sidebar />}>
             <Route index element={<Home_page />} />
+            <Route path="/friends" element={<Friends_page />} />
           </Route>
 
           {/* profile */}

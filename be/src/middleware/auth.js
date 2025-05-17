@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import account from "../model/account.js";
+import account from "../model/auth/account.js";
 import { StatusCodes } from "http-status-codes";
 
 export const create_token = (userId) => {
@@ -24,13 +24,13 @@ export async function middleware(req, res, next) {
     const token = req.cookies.jwt;
     if (!token) {
       return res.status(StatusCodes.NOT_FOUND).json({
-        message: "no jwt",
+        message: "No jwt",
       });
     }
     const user = await verify_token(token);
     if (!user) {
       return res.status(StatusCodes.NOT_FOUND).json({
-        message: "no account",
+        message: "No account",
       });
     }
     req.user = user;

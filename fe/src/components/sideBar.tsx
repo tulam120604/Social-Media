@@ -5,8 +5,10 @@ import useDarkMode from "../utils/getTheme";
 
 export default function SideBar_component() {
   const isDarkMode = useDarkMode();
-  const styleActive = `grid grid-cols-[50px_auto] items-center whitespace-nowrap opacity-85 p-2 
-  bg-gray-200 duration-150 rounded-md mb-1`;
+  const styleActive = `
+  ${isDarkMode ? "bg-[#3B3D3E]" : "bg-[#F0F2F5]"}
+  grid grid-cols-[50px_auto] items-center whitespace-nowrap opacity-85 p-2 
+  duration-150 rounded-md mb-1`;
   const styleNoActive = `${
     isDarkMode ? "hover:bg-[#333334]" : "hover:bg-[#F0F2F5]"
   } grid grid-cols-[50px_auto] items-center whitespace-nowrap opacity-85 p-2 duration-150 rounded-md mb-1`;

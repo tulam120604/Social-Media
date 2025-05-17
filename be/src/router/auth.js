@@ -7,7 +7,7 @@ import {
   sign_up,
 } from "../controller/auth/authHandler.js";
 import { middleware } from "../middleware/auth.js";
-import { view_profile } from "../controller/auth/view.js";
+import { view_all_account, view_profile } from "../controller/auth/view.js";
 
 const authRouter = express.Router();
 
@@ -18,6 +18,9 @@ authRouter.post("/auth/authenticate-with-google", authenticate_with_google);
 authRouter.post("/auth/sign-in", sign_in);
 // view
 authRouter.get("/auth/profile/view", middleware, view_profile);
+// view all
+authRouter.get("/auth/list_all", middleware, view_all_account);
+
 // sign out
 authRouter.post("/auth/log-out", log_out);
 

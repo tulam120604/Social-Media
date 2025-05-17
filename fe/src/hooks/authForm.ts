@@ -19,8 +19,8 @@ export function useAuthForm(action: string) {
     await dispath(request);
   };
   return {
+    isLoading,
     form,
     onSubmit,
-    isLoading,
   };
 }

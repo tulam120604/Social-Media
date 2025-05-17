@@ -10,10 +10,11 @@ export default function Post_status() {
   const isDarkMode = useDarkMode();
 
   // create post status
-  const [dispath, { isLoading }] = useCreatePostMutation();
+  const [createPost, { isLoading }] = useCreatePostMutation();
   const { register, handleSubmit, reset } = useForm<any>();
 
-  const [image, setImage] = useState<string[] | null>(null);
+  const [showiImage, setShowImage] = useState<string[] | null>(null);
+  const [images, setImages] = useState<any[] | null>(null);
   const [status, setStatus] = useState<string>("public");
 
   // render img upload
@@ -21,29 +22,31 @@ export default function Post_status() {
     const files = e?.target?.files;
     if (files && files.length > 0) {
       const imageUrl = URL.createObjectURL(files[0]);
-      setImage((prev) => [...(prev || []), imageUrl]);
+      setShowImage((prev) => [...(prev || []), imageUrl]);
+      setImages((prev) => [...(prev || []), ...Array.from(files)]);
     }
   }
-
   // submit
   async function submitForm(value: { content: string }) {
     try {
       const formData = new FormData();
-      image?.forEach((file) => {
+      images?.forEach((file) => {
         formData.append("media_urls", file);
       });
       formData.append("content", value?.content);
       formData.append("status", status);
-      await dispath({
+      await createPost({
         type: "create_socialPost",
         dataRequest: formData,
-      }).unwrap();
+      });
       reset();
-      setImage([]);
+      setImages([]);
+      setShowImage([]);
     } catch (error) {
       console.error("Post creation failed:", error);
     }
   }
+  console.log(isLoading)
   return (
     <div className="flex gap-x-4 items-start">
       <img
@@ -66,8 +69,8 @@ export default function Post_status() {
 
         {/* show image & video upload */}
         <div className="flex flex-wrap gap-2">
-          {image &&
-            image?.map((value: any, i: number) => (
+          {showiImage &&
+            showiImage?.map((value: any, i: number) => (
               <img
                 key={i}
                 src={value}

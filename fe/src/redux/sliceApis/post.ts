@@ -17,6 +17,7 @@ export const slicePost = createApi({
           url: "/socialPost/create",
           method: "post",
           data: request?.dataRequest,
+          isFormData: true,
         };
       },
       transformResponse: (result) => result,
