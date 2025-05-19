@@ -3,7 +3,10 @@ import { useViewProfileQuery } from "../redux/sliceApis/auth";
 import { Bell, Home, MessageCircleMore, Users } from "lucide-react";
 
 export default function Header_mobile_component() {
-  const { data, isLoading } = useViewProfileQuery();
+  const { data, isLoading } = useViewProfileQuery(undefined, {
+    refetchOnFocus: true,
+    refetchOnReconnect: true,
+  });
 
   return (
     <div

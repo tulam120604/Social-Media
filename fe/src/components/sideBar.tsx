@@ -35,22 +35,7 @@ export default function SideBar_component() {
       <div className="border-y border-gray-400 mt-4 py-4">
         <strong className="text-sm opacity-80 font-medium">Group</strong>
         <div className="mt-2">
-          {urls_sidebar?.map((uri: iType_uri_sideBar, i: number) => (
-            <NavLink
-              key={i}
-              className={({ isActive }) =>
-                isActive ? styleActive : styleNoActive
-              }
-              to={uri?.path}
-            >
-              <img
-                className="rounded-full w-6 h-6"
-                src="https://picsum.photos/320/180"
-                alt=""
-              />
-              <span className="text-sm">{uri?.name}</span>
-            </NavLink>
-          ))}
+          <span className="text-sm opacity-80">No group!</span>
         </div>
       </div>
       {/* 3 */}

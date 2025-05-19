@@ -1,33 +1,27 @@
-import {
-  BookMarked,
-  ImageUp,
-  SquareSquare,
-  Users,
-} from "lucide-react";
+import { BookMarked, SquareSquare, Users } from "lucide-react";
 
 export const urls_sidebar = [
   {
-    name: "My Posts",
-    path: "/profile/my-posts",
-    icon: <ImageUp strokeWidth={1.7} size={20} />,
-  },
-  {
     name: "Friends",
     path: "/friends",
-    icon: <Users strokeWidth={1.9} size={20}/>,
+    icon: <Users strokeWidth={1.9} size={20} />,
+  },
+  {
+    name: "Group",
+    path: "/profile/groups",
+    icon: <Users strokeWidth={1.7} size={20} />,
   },
   {
     name: "Explore",
     path: "/music",
-    icon: <SquareSquare strokeWidth={1.7} size={20}/>,
+    icon: <SquareSquare strokeWidth={1.7} size={20} />,
   },
   {
     name: "Save",
     path: "/profile/my-save",
-    icon: <BookMarked strokeWidth={1.7} size={20}/>,
+    icon: <BookMarked strokeWidth={1.7} size={20} />,
   },
 ];
-
 
 // copyright
 export const copyrights = [

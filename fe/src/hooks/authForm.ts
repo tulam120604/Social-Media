@@ -12,12 +12,18 @@ export function useAuthForm(action: string) {
   });
 
   const onSubmit = async (value: any) => {
-    const request = {
-      dataForm: value,
-      action,
-    };
-    await dispath(request);
+    try {
+      const request = {
+        dataForm: value,
+        action,
+      };
+      const result = await dispath(request).unwrap();
+      return result;
+    } catch (error) {
+      console.error(error);
+    }
   };
+
   return {
     isLoading,
     form,

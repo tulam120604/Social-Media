@@ -8,12 +8,24 @@
   font-family: "Poppins", sans-serif;
 }
 
+.scroll-hover-x {
+  overflow-x: scroll; /* Luôn hiển thị thanh cuộn, nhưng sẽ mờ đi */
+  scrollbar-width: thin; /* Với Firefox */
+  scrollbar-color: transparent transparent; /* Màu thanh cuộn sẽ là trong suốt */
+  transition: scrollbar-color 0.3s, opacity 0.3s; /* Thêm hiệu ứng mờ dần */
+}
+.scroll-hover-x:hover {
+  scrollbar-color: darkgrey #ffffff; /* Màu thanh cuộn sẽ là trong suốt */
+  opacity: 1; /* Hiển thị thanh cuộn dọc khi hover */
+}
+
 .scroll-hover {
   overflow-y: scroll; /* Luôn hiển thị thanh cuộn, nhưng sẽ mờ đi */
   scrollbar-width: thin; /* Với Firefox */
   scrollbar-color: transparent transparent; /* Màu thanh cuộn sẽ là trong suốt */
   transition: scrollbar-color 0.3s, opacity 0.3s; /* Thêm hiệu ứng mờ dần */
 }
+
 
 .scroll-hover:hover {
   scrollbar-color: darkgrey #ffffff; /* Màu thanh cuộn sẽ là trong suốt */

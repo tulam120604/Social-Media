@@ -7,7 +7,6 @@ export default function Header_component() {
   const isDarkMode = useDarkMode();
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  console.log(navigate);
   function backToHome() {
     if (pathname === "/") {
       window.location.reload();

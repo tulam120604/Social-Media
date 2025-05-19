@@ -7,7 +7,8 @@ import Post_status from "./post_status";
 export default function Home_page() {
   const isDarkMode = useDarkMode();
   return (
-    <div className="w-full max-w-screen overflow-x-auto grid lg:grid-cols-[calc(100%-370px)_350px] justify-between">
+    <div className="w-full max-w-screen overflow-x-auto grid 
+    lg:grid-cols-[calc(100%-320px)_300px] justify-between">
       <div
         className={`${
           isDarkMode

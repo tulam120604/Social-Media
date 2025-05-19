@@ -19,7 +19,7 @@ export function Layout_client() {
 // layout include sidebar
 export function Layout_client_with_sidebar() {
   return (
-    <div className="flex mt-5 gap-x-4">
+    <div className="flex mt-5 gap-x-4 items-start">
       <aside
         className="hidden lg:block space-y-4 sticky *:shadow-lg 
       top-21 w-[250px] h-[calc(100vh-85px)] overflow-hidden"
@@ -27,7 +27,7 @@ export function Layout_client_with_sidebar() {
         <Box_profile_component />
         <SideBar_component />
       </aside>
-      <div className="overflow-y-auto w-full mt-0.5">
+      <div className=" w-full">
         <Outlet />
       </div>
     </div>

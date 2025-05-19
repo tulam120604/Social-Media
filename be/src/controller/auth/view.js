@@ -6,7 +6,6 @@ import { StatusCodes } from "http-status-codes";
 export const view_profile = async (req, res) => {
   try {
     const result = req.user;
-    console.log(result);
     const data = {
       userName: result.userName,
       email: result.email,
@@ -28,7 +27,12 @@ export const view_profile = async (req, res) => {
 // view all account
 export const view_all_account = async (req, res) => {
   try {
-    const data = await account.find({}, { password: 0 });
+    // console.log(req.user);
+    // lọc lấy user loại trừ chính mình
+    const data = await account.find(
+      { _id: { $ne: req.user._id } },
+      { password: 0 }
+    );
     return res.status(StatusCodes.OK).json({
       error: false,
       data,
@@ -59,10 +63,37 @@ export const view_friendList = async (req, res) => {
 };
 
 // view list  friend request
-export const view_friendRequest = async () => {
+export const view_friendRequest = async (req, res) => {
   try {
-    const userId = req.user._id;
-    const data = await friendRequest.find({ userId }).populate("receiverId");
+    const receiverId = req.user._id;
+    const data = await friendRequest.find({ receiverId }).populate("senderId");
+    return res.status(StatusCodes.OK).json({
+      error: false,
+      data,
+    });
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      error: true,
+      message: error || 500,
+    });
+  }
+};
+
+// view friend suggets
+export const view_friend_suggest = async (req, res) => {
+  try {
+    // lọc lấy user loại trừ chính mình
+    const data_account = await account
+      .find({ _id: { $ne: req.user._id } }, { password: 0 })
+      .limit(100);
+    // distinct trả về 1 mảng chỉ chứa field dữ liệu đó, thay vì dùng $ne
+    const data_friend = await friendList.distinct("friendId", {
+      userId: req.user._id,
+    });
+    const friendIds = data_friend.map((id) => id.toString());
+    const data = data_account.filter(
+      (item) => !friendIds.includes(item._id.toString())
+    );
     return res.status(StatusCodes.OK).json({
       error: false,
       data,

@@ -8,6 +8,7 @@ export function PrivateRouter() {
   const { data, isLoading, isFetching } = useViewProfileQuery(undefined, {
     refetchOnReconnect: true,
     refetchOnFocus: true,
+    refetchOnMountOrArgChange: false,
   });
   const router = useNavigate();
   const { pathname } = useLocation();
@@ -33,24 +34,27 @@ export function PrivateRouter() {
 
 // public
 export function PublicRouter() {
-  const { data, isLoading, isFetching } = useViewProfileQuery();
-  const router = useNavigate();
   const { pathname } = useLocation();
+  const isAuthPage = pathname === "/sign-in" || pathname === "/sign-up";
+  const { data, isLoading, isFetching } = useViewProfileQuery(undefined, {
+    skip: isAuthPage,
+    refetchOnFocus: true,
+    refetchOnReconnect: true,
+    refetchOnMountOrArgChange: false,
+  });
+  const router = useNavigate();
+
   useEffect(() => {
     if (!isLoading && !isFetching) {
-      if (
-        data?.status === 200 &&
-        (pathname === "/sign-in" || pathname === "/sign-up")
-      ) {
+      if ((data?.status === 200 || data?.status === 20) && isAuthPage) {
         router("/", { replace: true });
       }
     }
-  }, [data, isLoading, isFetching, pathname, router]);
+  }, [data, isLoading, isFetching, router, isAuthPage]);
 
   // block render component lại
   if (isLoading || isFetching) {
     return <Loading_overlay />;
   }
-  //  }, [data])
   return <Outlet />;
 }

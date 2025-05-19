@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 export default function Story_component() {
   return (
     <>
-      <div className="flex gap-x-3 items-center overflow-x-auto hidden-scroll *:cursor-pointer text-center">
+      <div className="flex gap-x-3 items-center overflow-x-auto hidden-scroll *:cursor-pointer 
+      text-center scroll-hover-x">
         <button>
           <div className="relative w-20">
             <img

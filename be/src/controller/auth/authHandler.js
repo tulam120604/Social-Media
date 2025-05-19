@@ -162,7 +162,6 @@ export const sign_in = async (req, res) => {
       });
     }
     const token = create_token(data_account._id);
-    data_account.password = undefined;
     res.cookie("jwt", token, {
       httpOnly: false,
       secure: false,

@@ -7,7 +7,17 @@ import {
   sign_up,
 } from "../controller/auth/authHandler.js";
 import { middleware } from "../middleware/auth.js";
-import { view_all_account, view_profile } from "../controller/auth/view.js";
+import {
+  view_all_account,
+  view_friend_suggest,
+  view_friendList,
+  view_friendRequest,
+  view_profile,
+} from "../controller/auth/view.js";
+import {
+  addFriend,
+  handleFriendRequets,
+} from "../controller/auth/friendRequest.js";
 
 const authRouter = express.Router();
 
@@ -20,7 +30,16 @@ authRouter.post("/auth/sign-in", sign_in);
 authRouter.get("/auth/profile/view", middleware, view_profile);
 // view all
 authRouter.get("/auth/list_all", middleware, view_all_account);
-
+// view friend requests
+authRouter.get("/auth/view_friend_request", middleware, view_friendRequest);
+// view friend suggets
+authRouter.get("/auth/view_friend_suggest", middleware, view_friend_suggest);
+// view list friend
+authRouter.get("/auth/view_list_friend", middleware, view_friendList);
+// handle friend requests
+authRouter.post("/auth/handle_friend_request", middleware, handleFriendRequets);
+// add friend
+authRouter.post("/auth/add_friend", middleware, addFriend);
 // sign out
 authRouter.post("/auth/log-out", log_out);
 

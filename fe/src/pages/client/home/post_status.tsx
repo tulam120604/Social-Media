@@ -46,7 +46,6 @@ export default function Post_status() {
       console.error("Post creation failed:", error);
     }
   }
-  console.log(isLoading)
   return (
     <div className="flex gap-x-4 items-start">
       <img
