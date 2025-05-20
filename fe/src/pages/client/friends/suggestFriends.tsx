@@ -5,6 +5,7 @@ import {
   useViewFriendSuggestQuery,
 } from "../../../redux/sliceApis/auth";
 import useDarkMode from "../../../utils/getTheme";
+import { Link } from "react-router-dom";
 
 interface iItem {
   _id: string | number;
@@ -19,8 +20,6 @@ interface iItem {
 export default function SuggestFriends_component() {
   const isDarkMode = useDarkMode();
   const { data, isLoading, isError } = useViewFriendSuggestQuery(undefined, {
-    refetchOnFocus: true,
-    refetchOnReconnect: true,
   });
 
   //
@@ -43,29 +42,35 @@ export default function SuggestFriends_component() {
           </div>
         )}
         {!isLoading &&
-          !loading_trigger &&
           data?.data?.data &&
           data?.data?.data?.map((item: iItem) => (
-            <div className="flex items-center gap-x-3 my-4 p-2">
+            <div className="grid grid-cols-[52px_auto] items-center gap-x-3 my-4 p-2">
               {/* avatar */}
-              <img
-                src={
-                  item?.picture
-                    ? item?.picture
-                    : "https://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
-                }
-                alt=""
-                className="w-13 h-13 rounded-full cursor-pointer"
-              />
+              <Link to={`/profile/${item?._id}`}>
+                <img
+                  src={
+                    item?.picture
+                      ? item?.picture
+                      : "https://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
+                  }
+                  alt=""
+                  className="w-13 h-13 rounded-full cursor-pointer"
+                />
+              </Link>
               {/* name & action */}
               <div className="flex flex-col gap-y-1 text-sm *:hover:opacity-100 *:duration-200 w-full">
-                <span className="cursor-pointer opacity-80">
+                <Link
+                  to={`/profile/${item?._id}`}
+                  className="cursor-pointer opacity-80"
+                >
                   {item?.userName}
-                </span>
+                </Link>
                 <div>
                   <button
-                    className="rounded bg-[#0866FF] w-full py-1 cursor-pointer opacity-80 hover:opacity-100 duration-200"
+                    className={`${loading_trigger ?  'opacity-30' : 'opacity-80'} 
+                    rounded bg-[#0866FF] w-full py-1 cursor-pointer hover:opacity-100 duration-200`}
                     type="button"
+                    disabled={loading_trigger}
                     onClick={() =>
                       handleFriendRequest({
                         receiverId: item?._id,

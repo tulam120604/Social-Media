@@ -34,11 +34,19 @@ export const sliceAuth = createApi({
       providesTags: ["View"],
     }),
     viewProfile: build.query<any, void>({
-      query: () => ({ url: "/auth/profile/view", method: "get" }),
+      query: () => ({ url: `/auth/profile/view`, method: "get" }),
+      providesTags: ["Auth"],
+    }),
+    viewUserById: build.query<any, string | number | undefined>({
+      query: (id) => ({ url: `/auth/profile/view_user_by_id/${id}`, method: "get" }),
       providesTags: ["Auth"],
     }),
     viewFriendSuggest: build.query<any, void>({
       query: () => ({ url: "/auth/view_friend_suggest", method: "get" }),
+      providesTags: ["Auth"],
+    }),
+    countFriend: build.query<any, void>({
+      query: () => ({ url: "/auth/countFriend", method: "get" }),
       providesTags: ["Auth"],
     }),
     // sign in, sign up
@@ -91,7 +99,18 @@ export const sliceAuth = createApi({
       },
       invalidatesTags: ["View"],
     }),
-    // handle friend requests
+ // remove friend
+    removeFriend: build.mutation<any, any>({
+      query: (request) => {
+        const uri = "/auth/remove_friend";
+        return {
+          url: uri,
+          method: "post",
+          data: request,
+        };
+      },
+      invalidatesTags: ["View"],
+    }),    // handle friend requests
     handleFriendRequest: build.mutation<any, any>({
       query: (request) => {
         const uri = "/auth/handle_friend_request";
@@ -109,8 +128,11 @@ export const sliceAuth = createApi({
 export const {
   useListUserQuery,
   useViewFriendSuggestQuery,
+  useViewUserByIdQuery,
+  useCountFriendQuery,
   useListFriendRequestQuery,
   useListFriendQuery,
+  useRemoveFriendMutation,
   useViewProfileQuery,
   useHandleAuthMutation,
   useAddFriendMutation,

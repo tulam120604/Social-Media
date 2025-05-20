@@ -19,7 +19,7 @@ import { Loading_Spinner } from "./loading";
 export default function Form_auth_component({ type }: { type: string }) {
   const isDarkMode = useDarkMode();
   const [message, setMessage] = useState<string | number | null>(null);
-  const { data, isLoading, isFetching } = useViewProfileQuery();
+  const { data, isLoading, isFetching } = useViewProfileQuery(undefined);
   const router = useNavigate();
   // check : user tồn tại => redirect path home
   const { pathname } = useLocation();

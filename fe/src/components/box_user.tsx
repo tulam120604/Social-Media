@@ -1,5 +1,7 @@
 /* eslint-disable no-useless-escape */
+import { Link } from "react-router-dom";
 import useDarkMode from "../utils/getTheme";
+import { useRemoveFriendMutation } from "../redux/sliceApis/auth";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function Box_user_component({ props }: any) {
@@ -12,6 +14,7 @@ export default function Box_user_component({ props }: any) {
     }
     return undefined;
   };
+  const [removeFriend, { isLoading }] = useRemoveFriendMutation();
   return (
     <div
       className={`${
@@ -21,17 +24,21 @@ export default function Box_user_component({ props }: any) {
       } border rounded grid place-content-center`}
     >
       <div className="flex flex-col items-center space-y-2 py-10">
-        <img
-          src={
-            props?.picture
-              ? props?.picture
-              : "https://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
-          }
-          alt=""
-          className="w-13 h-13 rounded-full cursor-pointer"
-        />
-        <span>{props?.friendId?.userName}</span>
-        <span className="opacity-70 text-sm">
+        <Link to={`/profile/${props?.friendId?._id}`}>
+          <img
+            src={
+              props?.picture
+                ? props?.picture
+                : "https://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
+            }
+            alt=""
+            className="w-13 h-13 rounded-full cursor-pointer"
+          />
+        </Link>
+        <Link to={`/profile/${props?.friendId?._id}`}>
+          {props?.friendId?.userName}
+        </Link>
+        <span className="opacity-70 text-sm -mt-2">
           {matchEmail(props?.friendId?.email)}
         </span>
         <div className="flex items-center space-x-4">
@@ -56,14 +63,15 @@ export default function Box_user_component({ props }: any) {
             ? "bg-[#333334] text-gray-100"
             : "bg-[#F0F2F5] text-gray-900 "
         }
-        rounded px-2 py-1.5 cursor-pointer opacity-80 text-sm`}
+        ${isLoading ? "opacity-30" : "opacity-80"}
+        rounded px-2 py-1.5 cursor-pointer text-sm`}
             type="button"
-            //   onClick={() =>
-            //     handleFriendRequest({
-            //       receiverId: item?._id,
-            //       status: "rejected",
-            //     })
-            //   }
+            onClick={() =>
+              removeFriend({
+                receiverId: props?.friendId?._id,
+              })
+            }
+            disabled={isLoading}
           >
             Unfollow
           </button>

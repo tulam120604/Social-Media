@@ -6,9 +6,6 @@ import { Loading_overlay } from "../components/loading";
 // private router
 export function PrivateRouter() {
   const { data, isLoading, isFetching } = useViewProfileQuery(undefined, {
-    refetchOnReconnect: true,
-    refetchOnFocus: true,
-    refetchOnMountOrArgChange: false,
   });
   const router = useNavigate();
   const { pathname } = useLocation();
@@ -38,9 +35,6 @@ export function PublicRouter() {
   const isAuthPage = pathname === "/sign-in" || pathname === "/sign-up";
   const { data, isLoading, isFetching } = useViewProfileQuery(undefined, {
     skip: isAuthPage,
-    refetchOnFocus: true,
-    refetchOnReconnect: true,
-    refetchOnMountOrArgChange: false,
   });
   const router = useNavigate();
 

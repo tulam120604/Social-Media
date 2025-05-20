@@ -67,5 +67,35 @@ export const addFriend = async (req, res) => {
   }
 };
 
+export const removeFriend = async (req, res) => {
+  try {
+    const { receiverId } = req.body;
+    const senderId = req.user._id;
+    if (!senderId|| !receiverId) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        error: true,
+        message: "Thiếu thông tin để hủy kết bạn!",
+      });
+    }
+    await friendList.findOneAndDelete({
+      userId: senderId,
+      friendId: receiverId,
+    });
+    await friendList.findOneAndDelete({
+      friendId: senderId,
+      userId: receiverId,
+    });
+    return res.status(StatusCodes.CREATED).json({
+      error: false,
+      message: "Đã hủy kết bạn!",
+    });
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      error: true,
+      message: error || 500,
+    });
+  }
+};
+
 // senderId
 // receiverId

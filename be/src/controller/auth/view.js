@@ -7,11 +7,41 @@ export const view_profile = async (req, res) => {
   try {
     const result = req.user;
     const data = {
+      _id: result._id,
       userName: result.userName,
       email: result.email,
       picture: result.picture,
       role: result.role,
     };
+    return res.status(StatusCodes.OK).json({
+      error: false,
+      data,
+    });
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      error: true,
+      message: error || 500,
+    });
+  }
+};
+
+// view user by id
+export const view_user_by_id = async (req, res) => {
+  try {
+    const id = req.params.id;
+    if (!id) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        error: true,
+        message: "không có id!",
+      });
+    }
+    const data = await account.findOne({ _id: id });
+    if (!data) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        error: true,
+        message: "không tìm thấy tài khoản!",
+      });
+    }
     return res.status(StatusCodes.OK).json({
       error: false,
       data,
@@ -50,6 +80,23 @@ export const view_friendList = async (req, res) => {
   try {
     const userId = req.user._id;
     const data = await friendList.find({ userId }).populate("friendId");
+    return res.status(StatusCodes.OK).json({
+      error: false,
+      data,
+    });
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      error: true,
+      message: error || 500,
+    });
+  }
+};
+
+// view list friend
+export const countFriend = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const data = await friendList.countDocuments({ userId });
     return res.status(StatusCodes.OK).json({
       error: false,
       data,

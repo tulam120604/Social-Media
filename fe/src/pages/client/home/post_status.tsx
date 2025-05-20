@@ -5,6 +5,13 @@ import { ChangeEvent, useState } from "react";
 import { useCreatePostMutation } from "../../../redux/sliceApis/post";
 import { useForm } from "react-hook-form";
 import { Loading_Spinner } from "../../../components/loading";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../../lib/ui/select";
 
 export default function Post_status() {
   const isDarkMode = useDarkMode();
@@ -13,7 +20,7 @@ export default function Post_status() {
   const [createPost, { isLoading }] = useCreatePostMutation();
   const { register, handleSubmit, reset } = useForm<any>();
 
-  const [showiImage, setShowImage] = useState<string[] | null>(null);
+  const [showImage, setShowImage] = useState<string[] | null>(null);
   const [images, setImages] = useState<any[] | null>(null);
   const [status, setStatus] = useState<string>("public");
 
@@ -68,8 +75,8 @@ export default function Post_status() {
 
         {/* show image & video upload */}
         <div className="flex flex-wrap gap-2">
-          {showiImage &&
-            showiImage?.map((value: any, i: number) => (
+          {showImage &&
+            showImage?.map((value: any, i: number) => (
               <img
                 key={i}
                 src={value}
@@ -105,6 +112,17 @@ export default function Post_status() {
               <FileVideo strokeWidth={1.88} size={18} />
               <span>Video</span>
             </button>
+            {/* status */}
+            <Select value={status} defaultValue={status} onValueChange={setStatus}>
+              <SelectTrigger className="!px-2 !py-0.5 h-auto border-none">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="public">Công khai</SelectItem>
+                <SelectItem value="friends">Bạn bè</SelectItem>
+                <SelectItem value="private">Riêng tư</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           <button
             className="px-2 py-1.5 bg-[#4183F5] text-gray-50 rounded 

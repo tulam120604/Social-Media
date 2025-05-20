@@ -9,10 +9,7 @@ export default function ListFriends_component() {
   const isDarkMode = useDarkMode();
 
   const { data, isLoading, isError } = useListFriendQuery(undefined, {
-    refetchOnFocus: true,
-    refetchOnReconnect: true,
   });
-  console.log(data?.data?.data);
   return (
     <div
       className={`${
@@ -30,8 +27,10 @@ export default function ListFriends_component() {
             </div>
           </div>
         )}
-        <div className="grid grid-cols-2 lg:grid-cols-3 *:w-full 
-        w-full justify-between">
+        <div
+          className="grid grid-cols-2 lg:grid-cols-3 *:w-full 
+        w-full justify-between gap-x-4"
+        >
           {!isLoading &&
             data?.data?.data &&
             data?.data?.data?.map((item: any) => (
