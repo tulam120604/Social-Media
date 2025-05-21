@@ -1,5 +1,5 @@
 import { ThumbsUp } from "lucide-react";
-import useDarkMode from "../utils/getTheme";
+import useDarkMode from "../../utils/getTheme";
 
 export default function Button_like() {
     const isDarkMode = useDarkMode();

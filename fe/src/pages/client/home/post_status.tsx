@@ -12,9 +12,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../../lib/ui/select";
+import { useViewProfileQuery } from "../../../redux/sliceApis/auth";
+import { useToast } from "../../../lib/ui/use-toast";
 
 export default function Post_status() {
   const isDarkMode = useDarkMode();
+  const { data } = useViewProfileQuery(undefined, {});
+  const { toast } = useToast();
 
   // create post status
   const [createPost, { isLoading }] = useCreatePostMutation();
@@ -42,9 +46,18 @@ export default function Post_status() {
       });
       formData.append("content", value?.content);
       formData.append("status", status);
-      await createPost({
+      const result = await createPost({
         type: "create_socialPost",
         dataRequest: formData,
+      }).unwrap();
+      toast({
+        title: result?.data?.message,
+        duration: 5000,
+        className: `${
+          isDarkMode
+            ? "bg-[#333334] text-gray-100 border-transparent"
+            : "bg-[#F0F2F5] text-gray-900  border-transparent"
+        }`,
       });
       reset();
       setImages([]);
@@ -56,7 +69,11 @@ export default function Post_status() {
   return (
     <div className="flex gap-x-4 items-start">
       <img
-        src="https://picsum.photos/320/180"
+        src={
+          data?.data?.data?.picture
+            ? data?.data?.data?.picture
+            : "https://picsum.photos/320/180"
+        }
         alt=""
         className="w-12 h-12 rounded-full"
       />
@@ -113,7 +130,11 @@ export default function Post_status() {
               <span>Video</span>
             </button>
             {/* status */}
-            <Select value={status} defaultValue={status} onValueChange={setStatus}>
+            <Select
+              value={status}
+              defaultValue={status}
+              onValueChange={setStatus}
+            >
               <SelectTrigger className="!px-2 !py-0.5 h-auto border-none">
                 <SelectValue />
               </SelectTrigger>

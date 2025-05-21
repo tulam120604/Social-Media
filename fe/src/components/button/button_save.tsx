@@ -1,5 +1,5 @@
 import { Bookmark } from "lucide-react";
-import useDarkMode from "../utils/getTheme";
+import useDarkMode from "../../utils/getTheme";
 
 export default function Button_save() {
     const isDarkMode = useDarkMode();

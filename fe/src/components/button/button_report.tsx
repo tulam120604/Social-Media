@@ -1,5 +1,5 @@
 import { MessageSquareWarning } from "lucide-react";
-import useDarkMode from "../utils/getTheme";
+import useDarkMode from "../../utils/getTheme";
 
 export default function Button_report() {
     const isDarkMode = useDarkMode();

@@ -1,6 +1,6 @@
 import { useGoogleLogin } from "@react-oauth/google";
-import { useHandleAuthWithGoogleMutation } from "../redux/sliceApis/auth";
-import { Button } from "../lib/ui/button";
+import { useHandleAuthWithGoogleMutation } from "../../redux/sliceApis/auth";
+import { Button } from "../../lib/ui/button";
 import { useNavigate } from "react-router-dom";
 
 export default function Btn_auth_with_google({ action }: { action: string }) {

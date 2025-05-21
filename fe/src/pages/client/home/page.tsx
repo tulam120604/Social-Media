@@ -3,13 +3,14 @@ import Story_component from "../../../components/story";
 import useDarkMode from "../../../utils/getTheme";
 import Brithdays from "./brithdays";
 import Friends_request from "./friends_request";
+import ListPost_component from "./listPost";
 import Post_status from "./post_status";
 
 export default function Home_page() {
   const isDarkMode = useDarkMode();
   return (
     <div
-      className="w-full max-w-screen overflow-x-auto grid 
+      className="w-full max-w-[95vw] overflow-x-auto gid
     lg:grid-cols-[calc(100%-320px)_300px] justify-between"
     >
       <div
@@ -21,19 +22,16 @@ export default function Home_page() {
       >
         <Story_component />
         <Post_status />
+        {/* list post */}
+        <ListPost_component />
+        <ListPost_component />
+        <ListPost_component />
+        <ListPost_component />
+        <ListPost_component />
+        <ListPost_component />
       </div>
       {/* :desktop - brith day & friend */}
-      <div
-        className={`${
-          isDarkMode
-            ? "*:bg-[#252728] text-gray-100"
-            : "*:bg-[#fff] text-gray-900 "
-        } hidden lg:block space-y-4 *:p-4 *:rounded *:shadow-lg sticky top-0`}
-      >
-        <Friends_request />
-        <Chat_component />
-        <Brithdays />
-      </div>
+      
     </div>
   );
 }

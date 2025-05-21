@@ -10,7 +10,7 @@ import {
 import { useAuthForm } from "../hooks/authForm";
 import { Input } from "../lib/ui/input";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Btn_auth_with_google from "./btn_auth_with_google";
+import Btn_auth_with_google from "./button/btn_auth_with_google";
 import useDarkMode from "../utils/getTheme";
 import { useViewProfileQuery } from "../redux/sliceApis/auth";
 import { useEffect, useState } from "react";

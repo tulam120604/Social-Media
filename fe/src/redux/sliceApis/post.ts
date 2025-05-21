@@ -9,7 +9,7 @@ export const slicePost = createApi({
   }),
   endpoints: (build) => ({
     listPost: build.query<any, void>({
-      query: () => ({ url: "/post/list", method: "get" }),
+      query: () => ({ url: "/socialPost/list", method: "get" }),
     }),
     createPost: build.mutation<any, any>({
       query: (request) => {
