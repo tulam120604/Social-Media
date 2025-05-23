@@ -24,7 +24,7 @@ function Profile_desktop({
   };
   return (
     <div
-      className={`hidden lg:flex w-full items-center space-x-10 px-10 py-5 border-b`}
+      className={`hidden lg:flex w-full items-center space-x-10 px-10 py-5`}
     >
       {/* avatar */}
       <img
@@ -80,7 +80,7 @@ function Profile_mobile({
   };
   return (
     <div
-      className={`grid place-content-center lg:hidden w-full px-10 py-5 border-b`}
+      className={`grid place-content-center lg:hidden w-full px-10 py-5`}
     >
       {/* avatar */}
       <img

@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
-import { useViewProfileQuery } from "../redux/sliceApis/auth";
+import { useViewProfileQuery } from "../../redux/sliceApis/auth";
 import { Bell, Home, MessageCircleMore, Users } from "lucide-react";
-import useDarkMode from "../utils/getTheme";
+import useDarkMode from "../../utils/getTheme";
 
 export default function Header_mobile_component() {
   const isDarkMode = useDarkMode();

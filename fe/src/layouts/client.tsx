@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
-import Header_component from "../components/header";
+import Header_component from "../components/header/header";
 import SideBar_component from "../components/sideBar";
-import Header_mobile_component from "../components/header.mobile";
+import Header_mobile_component from "../components/header/header.mobile";
 import useDarkMode from "../utils/getTheme";
 import Friends_request from "../pages/client/home/friends_request";
 import Chat_component from "../chat/view.chat";
@@ -45,10 +45,6 @@ export function Layout_client_with_sidebar() {
             >
               <Friends_request />
               <Chat_component />
-              <Brithdays />
-              <Brithdays />
-              <Brithdays />
-              <Brithdays />
               <Brithdays />
             </div>
           </div>

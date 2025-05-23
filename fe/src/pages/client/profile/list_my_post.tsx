@@ -2,12 +2,12 @@
 import { LoaderCircle } from "lucide-react";
 import ReloadPage from "../../../components/reloadPage";
 import BoxSocialPost_component from "../../../components/socialPost/boxSocialPost";
-import { useListPostQuery } from "../../../redux/sliceApis/post";
+import { useListMyPostQuery } from "../../../redux/sliceApis/post";
 
-export default function ListPost_component() {
-  const { data, isLoading, isError } = useListPostQuery();
+export default function ListMyPost_component() {
+  const { data, isLoading, isError } = useListMyPostQuery();
   return (
-    <div className="w-full h-full !bg-transparent !p-0">
+    <>
       {isLoading && (
         <div className="grid place-content-center p-2 w-full">
           <LoaderCircle className="animate-spin" />
@@ -26,6 +26,6 @@ export default function ListPost_component() {
           <ReloadPage />
         </div>
       )}
-    </div>
+    </>
   );
 }

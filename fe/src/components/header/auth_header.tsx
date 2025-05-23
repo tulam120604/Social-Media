@@ -1,11 +1,11 @@
 import { Bell, ChevronDown, MessageCircleMore, Users } from "lucide-react";
-import { useViewProfileQuery } from "../redux/sliceApis/auth";
-import useDarkMode from "../utils/getTheme";
+import { useViewProfileQuery } from "../../redux/sliceApis/auth";
+import useDarkMode from "../../utils/getTheme";
 import { useRef, useState } from "react";
-import Logout_component from "./logout";
-import useClickOutSide from "../hooks/useClickOutSide";
-import Notification_component from "./notification";
-import Messenger_component from "./messenger";
+import Logout_component from "../logout";
+import useClickOutSide from "../../hooks/useClickOutSide";
+import Notification_component from "../notification";
+import Messenger_component from "../messenger";
 
 export default function Auth_header() {
   const { data, isLoading } = useViewProfileQuery();

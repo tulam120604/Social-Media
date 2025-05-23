@@ -7,9 +7,15 @@ export const slicePost = createApi({
   baseQuery: axiosBaseQuery({
     baseUrl: import.meta.env.VITE_BASE_URL,
   }),
+  tagTypes: ["LIST_POST", "VIEW_POST"],
   endpoints: (build) => ({
     listPost: build.query<any, void>({
       query: () => ({ url: "/socialPost/list", method: "get" }),
+      providesTags: ["LIST_POST"],
+    }),
+    listMyPost: build.query<any, void>({
+      query: () => ({ url: "/socialPost/list_my_post", method: "get" }),
+      providesTags: ["LIST_POST"],
     }),
     createPost: build.mutation<any, any>({
       query: (request) => {
@@ -21,8 +27,10 @@ export const slicePost = createApi({
         };
       },
       transformResponse: (result) => result,
+      invalidatesTags: ["LIST_POST"],
     }),
   }),
 });
 
-export const { useListPostQuery, useCreatePostMutation } = slicePost;
+export const { useListPostQuery, useListMyPostQuery, useCreatePostMutation } =
+  slicePost;

@@ -1,6 +1,6 @@
-import Search_component from "./search";
+import Search_component from "../search";
 import Auth_header from "./auth_header";
-import useDarkMode from "../utils/getTheme";
+import useDarkMode from "../../utils/getTheme";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Header_component() {

@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FileVideo, ImageUp } from "lucide-react";
-import useDarkMode from "../../../utils/getTheme";
+import useDarkMode from "../../utils/getTheme";
 import { ChangeEvent, useState } from "react";
-import { useCreatePostMutation } from "../../../redux/sliceApis/post";
+import { useCreatePostMutation } from "../../redux/sliceApis/post";
 import { useForm } from "react-hook-form";
-import { Loading_Spinner } from "../../../components/loading";
+import { Loading_Spinner } from "../loading";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../../lib/ui/select";
-import { useViewProfileQuery } from "../../../redux/sliceApis/auth";
-import { useToast } from "../../../lib/ui/use-toast";
+} from "../../lib/ui/select";
+import { useViewProfileQuery } from "../../redux/sliceApis/auth";
+import { useToast } from "../../lib/ui/use-toast";
 
 export default function Post_status() {
   const isDarkMode = useDarkMode();
@@ -79,8 +79,7 @@ export default function Post_status() {
       />
       {/* form post status & type*/}
       <form className="w-full space-y-1" onSubmit={handleSubmit(submitForm)}>
-        <input
-          type="text"
+        <textarea
           {...register("content")}
           placeholder="What's on your mind?"
           className={`${
