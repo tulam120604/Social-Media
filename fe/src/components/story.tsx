@@ -11,7 +11,7 @@ export default function Story_component() {
             <img
               src="https://picsum.photos/320/180"
               alt=""
-              className="rounded-full w-16 h-16 mx-auto"
+              className="rounded-full w-16 h-16 mx-auto border"
             />
             <Plus
               strokeWidth={2}
@@ -30,7 +30,7 @@ export default function Story_component() {
               <img
                 src="https://picsum.photos/320/180"
                 alt=""
-                className="rounded-full w-16 h-16 mx-auto"
+                className="rounded-full w-16 h-16 mx-auto border"
               />
             </div>
             <span className="text-xs opacity-80 font-medium line-clamp-2 mt-2">

@@ -93,7 +93,7 @@ export default function Auth_header() {
                   : "https://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
               }
               alt=""
-              className="rounded-full w-10 h-10"
+              className="rounded-full w-10 h-10 border"
             />
             <ChevronDown
               className={`${

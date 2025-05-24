@@ -1,4 +1,4 @@
-import Post_status from "../../../components/socialPost/post_status";
+import Post_status from "../../../components/socialPost/create_socialPost";
 import useDarkMode from "../../../utils/getTheme";
 import Infor_profile from "./infor_profile";
 import ListMyPost_component from "./list_my_post";

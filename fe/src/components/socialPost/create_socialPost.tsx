@@ -75,7 +75,7 @@ export default function Post_status() {
             : "https://picsum.photos/320/180"
         }
         alt=""
-        className="w-12 h-12 rounded-full"
+        className="w-12 h-12 rounded-full border"
       />
       {/* form post status & type*/}
       <form className="w-full space-y-1" onSubmit={handleSubmit(submitForm)}>

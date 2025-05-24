@@ -1,7 +1,7 @@
 import Story_component from "../../../components/story";
 import useDarkMode from "../../../utils/getTheme";
 import ListPost_component from "./listPost";
-import Post_status from "../../../components/socialPost/post_status";
+import Post_status from "../../../components/socialPost/create_socialPost";
 
 export default function Home_page() {
   const isDarkMode = useDarkMode();

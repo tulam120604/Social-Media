@@ -43,7 +43,7 @@ export default function SideBar_component() {
                   : "https://picsum.photos/320/180"
               }
               alt=""
-              className="rounded-full w-5 h-5 object-cover border border-transparent"
+              className="rounded-full w-5 h-5 object-cover border"
             />
             <span className="text-sm">{data?.data?.data?.userName}</span>
           </NavLink>

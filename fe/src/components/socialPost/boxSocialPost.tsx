@@ -2,6 +2,7 @@
 import useDarkMode from "../../utils/getTheme";
 import { formatRelativeTime } from "../../utils/formatTime";
 import { Dot } from "lucide-react";
+import InteractSocialPost_component from "../interact/interactSocialPost";
 
 export default function BoxSocialPost_component({ props }: any) {
   const isDarkMode = useDarkMode();
@@ -20,7 +21,7 @@ export default function BoxSocialPost_component({ props }: any) {
               : "https://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
           }
           alt=""
-          className="w-10 h-10 rounded-full cursor-pointer"
+          className="w-10 h-10 rounded-full cursor-pointer border"
         />
         <div className="flex flex-col opacity-80">
           <span>{props?.id_account?.userName}</span>
@@ -49,6 +50,11 @@ export default function BoxSocialPost_component({ props }: any) {
             />
           </div>
         ))}
+
+      {/* interact & comment */}
+      <div className="px-4">
+        <InteractSocialPost_component />
+      </div>
     </div>
   );
 }
