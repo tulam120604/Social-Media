@@ -5,13 +5,17 @@ export const list_post = async (req, res) => {
   try {
     const id_account = req.user._id;
     //
-    const myPost = await socialPost
+    let myPost = await socialPost
       .find({ id_account })
       .populate("id_account")
       .sort({ createdAt: -1 })
       .lean();
     //
     // console.log(myPost)
+    myPost = myPost.map((post) => ({
+      ...post,
+      isOwner: true,
+    }));
     const friendPost = await socialPost
       .find({ id_account: { $ne: id_account } })
       .populate("id_account")
@@ -20,7 +24,7 @@ export const list_post = async (req, res) => {
     const data = [...myPost, ...friendPost];
     return res.status(StatusCodes.OK).json({
       error: false,
-      data
+      data,
     });
   } catch (error) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -42,7 +46,7 @@ export const list_my_post = async (req, res) => {
     //
     return res.status(StatusCodes.OK).json({
       error: false,
-      data
+      data,
     });
   } catch (error) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({

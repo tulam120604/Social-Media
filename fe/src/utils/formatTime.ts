@@ -17,10 +17,10 @@ export function formatRelativeTime(isoTime: string): string {
   const diffInMinutes = now.diff(inputTime, 'minute');
 
   if (diffInDays >= 1) {
-    return `${diffInDays} ngày trước`;
+    return `${diffInDays} day ago`;
   } else if (diffInHours >= 1) {
-    return `${diffInHours} tiếng trước`;
+    return `${diffInHours} hours ago`;
   } else {
-    return `${diffInMinutes} phút trước`;
+    return `${diffInMinutes} minutes ago`;
   }
 }

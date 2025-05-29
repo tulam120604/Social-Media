@@ -26,8 +26,8 @@ export default function Logout_component() {
       <button
         className={`${
           isDarkMode
-            ? "bg-[#333334] hover:bg-[#1C1C1D] text-gray-100"
-            : "bg-[#fff] hover:bg-[#F1F5F9] text-gray-900 "
+            ? "hover:bg-[#1C1C1D] text-gray-100"
+            : "hover:bg-[#F1F5F9] text-gray-900 "
         } flex items-center gap-x-2 cursor-pointer p-2 rounded-lg duration-200`}
         onClick={log_out}
       >

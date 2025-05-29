@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MessageCircle, ThumbsUp } from "lucide-react";
 import useDarkMode from "../../utils/getTheme";
 import { useState } from "react";
 import Comment_component from "./comment";
 
-export default function InteractSocialPost_component() {
+export default function InteractSocialPost_component({ props }: any) {
+  console.log(props);
   const isDarkMode = useDarkMode();
   const [statusInteract, setStatusInteract] = useState("like");
   const [comment, setComment] = useState(false);
@@ -11,8 +13,16 @@ export default function InteractSocialPost_component() {
     <>
       {/* list interact*/}
       <div className="w-full flex justify-between *:opacity-80 text-sm py-2">
-        <span>26k</span>
-        <span>26k</span>
+        <span>{props?.interact_count}</span>
+        <div className="flex items-center gap-x-1">
+          {props?.comment_count}
+          <MessageCircle
+            fill="#333334"
+            color="#333334"
+            size={18}
+            className="-rotate-90"
+          />
+        </div>
       </div>
 
       {/* interact */}
@@ -51,7 +61,7 @@ export default function InteractSocialPost_component() {
           <span>Comment</span>
         </div>
       </div>
-      {comment && <Comment_component />}
+      {comment && <Comment_component idPost={props?._id} />}
     </>
   );
 }

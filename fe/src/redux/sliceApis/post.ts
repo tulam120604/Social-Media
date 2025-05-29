@@ -7,7 +7,7 @@ export const slicePost = createApi({
   baseQuery: axiosBaseQuery({
     baseUrl: import.meta.env.VITE_BASE_URL,
   }),
-  tagTypes: ["LIST_POST", "VIEW_POST"],
+  tagTypes: ["LIST_POST", "VIEW_POST", "LIST_COMMENT"],
   endpoints: (build) => ({
     listPost: build.query<any, void>({
       query: () => ({ url: "/socialPost/list", method: "get" }),
@@ -16,6 +16,10 @@ export const slicePost = createApi({
     listMyPost: build.query<any, void>({
       query: () => ({ url: "/socialPost/list_my_post", method: "get" }),
       providesTags: ["LIST_POST"],
+    }),
+    listComment: build.query<any, void>({
+      query: () => ({ url: "/socialPost/list_comment", method: "get" }),
+      providesTags: ["LIST_COMMENT"],
     }),
     createPost: build.mutation<any, any>({
       query: (request) => {
@@ -29,8 +33,41 @@ export const slicePost = createApi({
       transformResponse: (result) => result,
       invalidatesTags: ["LIST_POST"],
     }),
+    removeMyPost: build.mutation<any, any>({
+      query: (request) => {
+        return {
+          url:
+            request?.action === "delete"
+              ? `/socialPost/remove_my_post/${request?.idPost}`
+              : `/socialPost/${request}`,
+          method: "delete",
+        };
+      },
+      transformResponse: (result) => result?.data,
+      invalidatesTags: ["LIST_POST"],
+    }),
+    addComment: build.mutation<any, any>({
+      query: (request) => {
+        return {
+          url:
+            request?.action === "add_comment"
+              ? `/socialPost/add_comment`
+              : `/socialPost/${request}`,
+          method: request?.action === "add_comment" ? "post" : "put",
+          data: request,
+        };
+      },
+      transformResponse: (result) => result?.data,
+      invalidatesTags: ["LIST_POST", "LIST_COMMENT"],
+    }),
   }),
 });
 
-export const { useListPostQuery, useListMyPostQuery, useCreatePostMutation } =
-  slicePost;
+export const {
+  useListPostQuery,
+  useListCommentQuery,
+  useListMyPostQuery,
+  useAddCommentMutation,
+  useRemoveMyPostMutation,
+  useCreatePostMutation,
+} = slicePost;

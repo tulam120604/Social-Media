@@ -13,13 +13,13 @@ const schema_socialPost = new mongoose.Schema(
       enum: ["public", "private", "friends"],
       default: "public",
     },
-    interact: {
-      type: mongoose.Types.ObjectId,
-      ref: "interact",
+    interact_count: {
+      type: Number,
+      default: 0,
     },
-    comment: {
-      type: mongoose.Types.ObjectId,
-      ref: "comment",
+    comment_count: {
+      type: Number,
+      default: 0,
     },
   },
   {
