@@ -4,7 +4,7 @@ import { StatusCodes } from "http-status-codes";
 
 export const create_socialPost = async (req, res) => {
   try {
-    const id_account = req.user.id;
+    const id_account = req.user._id;
     if (!id_account) {
       return res.status(StatusCodes.NOT_FOUND).json({
         error: true,
