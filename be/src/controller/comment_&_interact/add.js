@@ -2,7 +2,7 @@ import { StatusCodes } from "http-status-codes";
 import comment from "../../model/socialPost/comment.js";
 import socialPost from "../../model/socialPost/socialPost.js";
 
-// add
+// add comment
 export const add_comment = async (req, res) => {
   try {
     const userId = req.user._id;
@@ -39,6 +39,19 @@ export const add_comment = async (req, res) => {
       error: false,
       message: "Đã thêm bình luận!",
     });
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      error: true,
+      message: error || 500,
+    });
+  }
+};
+
+// add status interact
+
+export const add_interact = async (req, res) => {
+  try {
+    console.log(req.body);
   } catch (error) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       error: true,

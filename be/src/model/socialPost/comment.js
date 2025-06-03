@@ -12,4 +12,5 @@ const schema_comment = new mongoose.Schema({
   content: String,
 });
 
+
 export default mongoose.model("comment", schema_comment);

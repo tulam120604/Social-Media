@@ -1,16 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react";
 import { useListCommentQuery } from "../../redux/sliceApis/post";
 import useDarkMode from "../../utils/getTheme";
 
 export default function ListComment_component() {
   const isDarkMode = useDarkMode();
-  const { data, isLoading, isError } = useListCommentQuery();
+  const [limit, setLimit] = useState<number>(5);
+  const { data, isLoading, isError } = useListCommentQuery({
+    page: 1,
+    limit,
+  });
   return (
     <>
       {(!isError || !isLoading) &&
         data?.data?.data &&
         data.data?.data?.map((item: any) => (
-          <div className="flex gap-x-2">
+          <div className="flex gap-x-2 my-2">
             {/* avatar */}
             <img
               src={
@@ -34,6 +39,18 @@ export default function ListComment_component() {
             </div>
           </div>
         ))}
+
+      {/* show more */}
+      {data?.data?.pagination && data?.data?.pagination?.totalPage > 1 && (
+        <div
+          className="w-full flex justify-center"
+          onClick={() => setLimit((pre) => pre + 5)}
+        >
+          <button type="button" className="text-sm text-center cursor-pointer">
+            Show more
+          </button>
+        </div>
+      )}
     </>
   );
 }
