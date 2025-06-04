@@ -3,18 +3,18 @@ import { MessageCircle, ThumbsUp } from "lucide-react";
 import useDarkMode from "../../utils/getTheme";
 import { useState } from "react";
 import Comment_component from "./comment";
-import { useAddInteractMutation } from "../../redux/sliceApis/post";
+import { useAddLikeMutation } from "../../redux/sliceApis/post";
 
-export default function InteractSocialPost_component({ props }: any) {
+export default function LikeSocialPost_component({ props }: any) {
   const isDarkMode = useDarkMode();
   const [comment, setComment] = useState(false);
-  const [addInteract] = useAddInteractMutation();
-  async function handleAddInteract(status: string) {
+  const [addLike] = useAddLikeMutation();
+  async function handleAddLike(status: string) {
     try {
-      await addInteract({
+      await addLike({
         idPost: props?._id,
         status,
-        action: "add_interact",
+        action: "add_like",
       });
     } catch (error) {
       console.log(error);
@@ -22,12 +22,12 @@ export default function InteractSocialPost_component({ props }: any) {
   }
   return (
     <>
-      {/* list interact*/}
+      {/* list like*/}
       <div className="w-full flex justify-between *:opacity-80 text-sm py-2">
         <span>
-          {typeof props?.interact_count === "number" &&
-            props?.interact_count > 0 &&
-            props?.interact_count}
+          {typeof props?.like_count === "number" &&
+            props?.like_count > 0 &&
+            props?.like_count}
         </span>
         {typeof props?.comment_count === "number" &&
           props?.comment_count > 0 && (
@@ -54,35 +54,13 @@ export default function InteractSocialPost_component({ props }: any) {
         {/* interact */}
         <button
           type="button"
-          onClick={() => handleAddInteract("like")}
+          onClick={() => handleAddLike("like")}
           className={`${
             isDarkMode ? "hover:bg-[#333334]" : "hover:bg-[#F0F2F5]"
           } opacity-70 relative group`}
         >
           <ThumbsUp />
           <span>Like</span>
-          <div
-            className={`${
-              isDarkMode ? "bg-[#191919]" : "bg-[#ebeaea]"
-            } absolute group-hover:visible invisible flex -top-full p-1 items-center gap-x-2 
-        *:cursor-pointer *:text-3xl *:duration-150 rounded-full left-0 duration-200 delay-1000 scale-0 group-hover:scale-100`}
-          >
-            {[
-              { emoji: "👍", status: "like" },
-              { emoji: "😂", status: "laugh" },
-              { emoji: "😢", status: "sad" },
-              { emoji: "😲", status: "wow" },
-              { emoji: "😠", status: "wrath" },
-            ].map((item, index) => (
-              <button
-                key={index}
-                onClick={() => handleAddInteract(item.status)}
-                className="hover:scale-130"
-              >
-                {item.emoji}
-              </button>
-            ))}
-          </div>
         </button>
         <div
           className={`${

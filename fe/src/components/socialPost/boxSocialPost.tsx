@@ -2,11 +2,11 @@
 import useDarkMode from "../../utils/getTheme";
 import { formatRelativeTime } from "../../utils/formatTime";
 import { Dot, Ellipsis } from "lucide-react";
-import InteractSocialPost_component from "../interact/interactSocialPost";
 import { useRef, useState } from "react";
 import DeleteSocialPost_component from "./deleteSocialPost";
 import EditSocialPost_component from "./editSocialPost";
 import useClickOutSide from "../../hooks/useClickOutSide";
+import LikeSocialPost_component from "../interact/likeSocialPost";
 
 export default function BoxSocialPost_component({ props }: any) {
   const isDarkMode = useDarkMode();
@@ -93,7 +93,7 @@ export default function BoxSocialPost_component({ props }: any) {
 
       {/* interact & comment */}
       <div className="px-4">
-        <InteractSocialPost_component props={props} />
+        <LikeSocialPost_component props={props} />
       </div>
     </div>
   );

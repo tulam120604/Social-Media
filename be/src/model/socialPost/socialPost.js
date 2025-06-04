@@ -13,7 +13,7 @@ const schema_socialPost = new mongoose.Schema(
       enum: ["public", "private", "friends"],
       default: "public",
     },
-    interact_count: {
+    like_count: {
       type: Number,
       default: 0,
     },

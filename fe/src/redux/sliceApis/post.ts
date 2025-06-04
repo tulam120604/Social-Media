@@ -71,14 +71,14 @@ export const slicePost = createApi({
       transformResponse: (result) => result?.data,
       invalidatesTags: ["LIST_POST", "LIST_COMMENT"],
     }),
-    addInteract: build.mutation<any, any>({
+    addLike: build.mutation<any, any>({
       query: (request) => {
         return {
           url:
-            request?.action === "add_interact"
-              ? `/socialPost/add_interact`
+            request?.action === "add_like"
+              ? `/socialPost/add_like`
               : `/socialPost/${request}`,
-          method: request?.action === "add_interact" ? "post" : "put",
+          method: request?.action === "add_like" ? "post" : "put",
           data: request,
         };
       },
@@ -91,7 +91,7 @@ export const {
   useListCommentQuery,
   useListMyPostQuery,
   useAddCommentMutation,
-  useAddInteractMutation,
+  useAddLikeMutation,
   useRemoveMyPostMutation,
   useCreatePostMutation,
 } = slicePost;

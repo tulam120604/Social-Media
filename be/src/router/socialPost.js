@@ -4,8 +4,8 @@ import { middleware } from "../middleware/auth.js";
 import { upload } from "../middleware/upload.js";
 import { list_my_post, list_post } from "../controller/post/view_post.js";
 import { remove_my_post } from "../controller/post/remove_post.js";
-import { add_comment, add_interact } from "../controller/comment_&_interact/add.js";
-import { list_comment } from "../controller/comment_&_interact/list.js";
+import { add_comment, add_like } from "../controller/comment_&_like/add.js";
+import { list_comment } from "../controller/comment_&_like/view.js";
 
 const socialPostRouter = express.Router();
 
@@ -32,7 +32,7 @@ socialPostRouter.post("/socialPost/add_comment", middleware, add_comment);
 socialPostRouter.get("/socialPost/list_comment", list_comment);
 
 // add interact post
-socialPostRouter.post("/socialPost/add_interact", middleware, add_interact);
+socialPostRouter.post("/socialPost/add_like", middleware, add_like);
 
 
 export default socialPostRouter;

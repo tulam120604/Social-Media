@@ -40,3 +40,14 @@ export const list_comment = async (req, res) => {
     });
   }
 };
+
+export const view_like = async (req, res) => {
+  try {
+    
+  } catch (error) {
+       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      error: true,
+      message: error || 500,
+    });
+  }
+}
