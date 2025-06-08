@@ -3,12 +3,13 @@ import { useState } from "react";
 import { useListCommentQuery } from "../../redux/sliceApis/post";
 import useDarkMode from "../../utils/getTheme";
 
-export default function ListComment_component() {
+export default function ListComment_component({ idPost }: any) {
   const isDarkMode = useDarkMode();
   const [limit, setLimit] = useState<number>(5);
   const { data, isLoading, isError } = useListCommentQuery({
     page: 1,
     limit,
+    postId: idPost,
   });
   return (
     <>

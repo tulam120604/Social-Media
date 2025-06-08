@@ -113,7 +113,7 @@ export default function Comment_component({
         {/* type */}
       </form>
       {/* list */}
-      <ListComment_component />
+      <ListComment_component idPost={idPost}/>
     </div>
   );
 }

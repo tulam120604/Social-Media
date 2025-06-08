@@ -6,8 +6,8 @@ const schema_like = new mongoose.Schema({
     ref: "account",
   },
   like: {
-    type: String,
-    default: "like",
+    type: Boolean,
+    default: false,
   },
   id_post: {
     type: mongoose.Types.ObjectId,

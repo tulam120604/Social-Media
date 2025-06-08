@@ -79,14 +79,14 @@ export const add_like = async (req, res) => {
       const existingLike = await like.findOne({
         id_account: userId,
         id_post,
-        like: status,
+        like: true,
       });
 
       if (!existingLike) {
         const createLike = await like.create({
           id_account: userId,
           id_post,
-          like: status,
+          like: true,
         });
 
         if (createLike) {

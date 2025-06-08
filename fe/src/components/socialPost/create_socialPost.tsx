@@ -138,9 +138,9 @@ export default function Post_status() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="public">Công khai</SelectItem>
-                <SelectItem value="friends">Bạn bè</SelectItem>
-                <SelectItem value="private">Riêng tư</SelectItem>
+                <SelectItem value="public">Public</SelectItem>
+                <SelectItem value="friends">Friends</SelectItem>
+                <SelectItem value="private">Private</SelectItem>
               </SelectContent>
             </Select>
           </div>

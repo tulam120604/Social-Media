@@ -3,7 +3,7 @@ import comment from "../../model/socialPost/comment.js";
 
 export const list_comment = async (req, res) => {
   try {
-    const { _page = 1, _limit = 5 } = req.query;
+    const { _page = 1, _limit = 5, postId } = req.query;
     const page = parseInt(_page);
     const limit = parseInt(_limit);
     const skip = (page - 1) * limit;
@@ -15,22 +15,25 @@ export const list_comment = async (req, res) => {
     if (limit < 1)
       return res.status(StatusCodes.BAD_REQUEST).json({
         error: true,
-        message: "Không được giới hạn bình luận nhỏ hơn 1!",
+        message: "Giới hạn danh sách bình luận phải lớn hơn 1!",
       });
     const data = await comment
-      .find()
+      .find({
+        id_post : postId
+      })
       .skip(skip)
       .limit(limit)
+      .sort({ createdAt: -1 })
       .populate("id_account", "userName picture")
       .lean();
-      const total = await comment.countDocuments();
+    const total = await comment.countDocuments();
     return res.status(StatusCodes.OK).json({
       error: false,
       data,
       pagination: {
         page,
         limit,
-        totalPage : Math.ceil(total / limit)
+        totalPage: Math.ceil(total / limit),
       },
     });
   } catch (error) {
@@ -40,14 +43,3 @@ export const list_comment = async (req, res) => {
     });
   }
 };
-
-export const view_like = async (req, res) => {
-  try {
-    
-  } catch (error) {
-       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      error: true,
-      message: error || 500,
-    });
-  }
-}

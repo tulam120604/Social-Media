@@ -5,6 +5,7 @@ import { axiosBaseQuery } from "../../config/axios";
 interface iPaginate {
   page: number;
   limit: number;
+  postId?: any;
 }
 
 export const slicePost = createApi({
@@ -24,9 +25,9 @@ export const slicePost = createApi({
     }),
     // list comment
     listComment: build.query<any, iPaginate>({
-      query: ({ page, limit }) => ({
+      query: ({ page, limit, postId }) => ({
         url: `/socialPost/list_comment?_page=${page}&limit=${limit}`,
-        params: { _page: page, _limit: limit },
+        params: { _page: page, _limit: limit, postId },
         method: "get",
       }),
       providesTags: ["LIST_COMMENT"],
@@ -71,17 +72,18 @@ export const slicePost = createApi({
       transformResponse: (result) => result?.data,
       invalidatesTags: ["LIST_POST", "LIST_COMMENT"],
     }),
-    addLike: build.mutation<any, any>({
+    mutateLike: build.mutation<any, any>({
       query: (request) => {
         return {
           url:
-            request?.action === "add_like"
+            request?.action === "add_or_remove_like"
               ? `/socialPost/add_like`
               : `/socialPost/${request}`,
-          method: request?.action === "add_like" ? "post" : "put",
+          method: request?.action === "add_or_remove_like" ? "post" : "put",
           data: request,
         };
       },
+      invalidatesTags: ["LIST_POST"],
     }),
   }),
 });
@@ -91,7 +93,7 @@ export const {
   useListCommentQuery,
   useListMyPostQuery,
   useAddCommentMutation,
-  useAddLikeMutation,
+  useMutateLikeMutation,
   useRemoveMyPostMutation,
   useCreatePostMutation,
 } = slicePost;
