@@ -6,11 +6,13 @@ import Logout_component from "../logout";
 import useClickOutSide from "../../hooks/useClickOutSide";
 import Notification_component from "../notification";
 import Messenger_component from "../messenger";
+import { useNavigate } from "react-router-dom";
 
 export default function Auth_header() {
   const { data, isLoading } = useViewProfileQuery();
   const [activeTab, setActiveTab] = useState<string>("");
   const ref_Dropdown = useRef(null);
+  const navigate = useNavigate();
   const ref_Tab = useRef(null);
   const [statusDropdown, setStatusDropDown] = useState(false);
   const isDarkMode = useDarkMode();
@@ -34,6 +36,9 @@ export default function Auth_header() {
   ];
 
   function updateActiveTab(index: number) {
+    if (index === 0) {
+      navigate("/friends");
+    }
     const tabValue =
       index === 1 ? "messenger" : index === 2 ? "notification" : "";
     setActiveTab((prev) => (prev === tabValue ? "" : tabValue));

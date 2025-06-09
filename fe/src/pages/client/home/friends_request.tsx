@@ -33,7 +33,6 @@ export default function Friends_request() {
       </div>
     );
   }
-
   return (
     <>
       {!isLoading &&
@@ -91,7 +90,7 @@ export default function Friends_request() {
                           type="button"
                           onClick={() =>
                             handleFriendRequest({
-                              receiverId: item?._id,
+                              senderId: item?.senderId?._id,
                               status: "rejected",
                             })
                           }

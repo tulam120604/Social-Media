@@ -137,10 +137,22 @@ export const view_friend_suggest = async (req, res) => {
     const data_friend = await friendList.distinct("friendId", {
       userId: req.user._id,
     });
+    const friendReq = await friendRequest.find({
+      senderId: req.user._id,
+      status: "pending",
+    });
+    // lấy arr chứa id của danh sách gửi kết bạn
+    const pendingReceiverIds = friendReq.map((f) => f.receiverId.toString());
     const friendIds = data_friend.map((id) => id.toString());
-    const data = data_account.filter(
-      (item) => !friendIds.includes(item._id.toString())
-    );
+    // lọc trừ bạn bè và đã gửi lời mời
+    const data = data_account
+      .filter((item) => {
+        const id = item._id.toString();
+        return (
+          !friendIds.includes(id) &&
+          !pendingReceiverIds.includes(id)
+        )
+      })
     return res.status(StatusCodes.OK).json({
       error: false,
       data,

@@ -97,7 +97,7 @@ export const sliceAuth = createApi({
           data: request,
         };
       },
-      invalidatesTags: ["View"],
+      // invalidatesTags: ["View"],
     }),
  // remove friend
     removeFriend: build.mutation<any, any>({

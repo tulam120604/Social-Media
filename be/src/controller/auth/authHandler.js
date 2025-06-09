@@ -142,9 +142,11 @@ export const sign_up = async (req, res) => {
 export const sign_in = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const data_account = await account.findOne({
-      email,
-    });
+    const data_account = await account
+      .findOne({
+        email,
+      })
+      .select("+password");
     if (!data_account) {
       return res.status(StatusCodes.NOT_FOUND).json({
         error: true,

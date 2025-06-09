@@ -2,6 +2,19 @@ import friendRequest from "../../model/auth/friendRequest.js";
 import friendList from "../../model/auth/friendList.js";
 import { StatusCodes } from "http-status-codes";
 
+// accepted
+async function acceptedFriendRequest(receiverId, senderId) {
+  await friendList.create({
+    userId: receiverId,
+    friendId: senderId,
+  });
+  await friendList.create({
+    userId: senderId,
+    friendId: receiverId,
+  });
+  await friendRequest.findOneAndDelete({ senderId, receiverId });
+}
+
 export const handleFriendRequets = async (req, res) => {
   try {
     const { status, senderId } = req.body;
@@ -12,24 +25,23 @@ export const handleFriendRequets = async (req, res) => {
         message: "Không có thông tin!",
       });
     }
-    const result = await friendRequest.findOne({ senderId, receiverId });
+
+    const result = await friendRequest.findOne({
+      senderId,
+      receiverId,
+    });
     if (result) {
       if (status === "accepted") {
-        await friendList.create({
-          userId: receiverId,
-          friendId: senderId,
-        });
-        await friendList.create({
-          userId: senderId,
-          friendId: receiverId,
-        });
-        await friendRequest.findOneAndDelete({ senderId, receiverId });
+        await acceptedFriendRequest(receiverId, senderId);
         return res.status(StatusCodes.CREATED).json({
           error: false,
           message: "Đã chấp nhận lời mời kết bạn!",
         });
       } else {
-        await friendRequest.findOneAndDelete({ senderId, receiverId });
+        await friendRequest.findOneAndDelete({
+          senderId,
+          receiverId,
+        });
         return res.status(StatusCodes.CREATED).json({
           error: false,
           message: "Đã từ chối lời mời kết bạn!",
@@ -71,7 +83,7 @@ export const removeFriend = async (req, res) => {
   try {
     const { receiverId } = req.body;
     const senderId = req.user._id;
-    if (!senderId|| !receiverId) {
+    if (!senderId || !receiverId) {
       return res.status(StatusCodes.NOT_FOUND).json({
         error: true,
         message: "Thiếu thông tin để hủy kết bạn!",

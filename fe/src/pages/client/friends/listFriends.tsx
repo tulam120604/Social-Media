@@ -8,8 +8,7 @@ import ReloadPage from "../../../components/reloadPage";
 export default function ListFriends_component() {
   const isDarkMode = useDarkMode();
 
-  const { data, isLoading, isError } = useListFriendQuery(undefined, {
-  });
+  const { data, isLoading, isError } = useListFriendQuery(undefined, {});
   return (
     <div
       className={`${
@@ -31,11 +30,13 @@ export default function ListFriends_component() {
           className="grid grid-cols-2 lg:grid-cols-3 *:w-full 
         w-full justify-between gap-x-4"
         >
-          {!isLoading &&
-            data?.data?.data &&
+          {!isLoading && data?.data?.data && data?.data?.data?.length > 0 ? (
             data?.data?.data?.map((item: any) => (
               <Box_user_component props={item} />
-            ))}
+            ))
+          ) : (
+            <span className="text-sm">No friends!</span>
+          )}
         </div>
         {/* <span className="text-sm">No friends!</span> */}
       </div>
