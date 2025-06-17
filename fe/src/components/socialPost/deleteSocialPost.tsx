@@ -2,6 +2,8 @@ import { Trash2 } from "lucide-react";
 import useDarkMode from "../../utils/getTheme";
 import { useRemoveMyPostMutation } from "../../redux/sliceApis/post";
 import { useToast } from "../../lib/ui/use-toast";
+import ConfirmDialog_component from "../modal_dialog/confirmDialog";
+import { useState } from "react";
 
 export default function DeleteSocialPost_component({
   idPost,
@@ -11,6 +13,15 @@ export default function DeleteSocialPost_component({
   const isDarkMode = useDarkMode();
   const { toast } = useToast();
   const [removeMyPost, { isLoading, isError }] = useRemoveMyPostMutation();
+
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleDelete = () => {
+    setOpen(true);
+  };
+  const onCancel = () => {
+    setOpen(false);
+  };
 
   async function actionDelete() {
     try {
@@ -27,6 +38,7 @@ export default function DeleteSocialPost_component({
             : "bg-[#F0F2F5] text-gray-900  border-transparent"
         }`,
       });
+      setOpen(false);
     } catch (error) {
       console.log(error);
     }
@@ -43,11 +55,17 @@ export default function DeleteSocialPost_component({
         }
         ${(isLoading || isError) && "!opacity-40"}
         flex items-center gap-x-2 cursor-pointer px-2 py-1 rounded duration-200 w-full`}
-        onClick={actionDelete}
+        onClick={handleDelete}
       >
         <Trash2 size={20} />
         Delete
       </button>
+      <ConfirmDialog_component
+        open={open}
+        message="Are you sure you want to delete post?"
+        onConfirm={actionDelete}
+        onCancel={onCancel}
+      />
     </>
   );
 }

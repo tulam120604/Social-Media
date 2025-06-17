@@ -22,7 +22,14 @@ export default function Post_status() {
 
   // create post status
   const [createPost, { isLoading }] = useCreatePostMutation();
-  const { register, handleSubmit, reset } = useForm<any>();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+    clearErrors,
+    reset,
+  } = useForm<any>();
 
   const [showImage, setShowImage] = useState<string[] | null>(null);
   const [images, setImages] = useState<any[] | null>(null);
@@ -46,6 +53,11 @@ export default function Post_status() {
       });
       formData.append("content", value?.content);
       formData.append("status", status);
+      if (!images && value?.content?.trim() === "") {
+        setError("content", { type: "manual" }); // Đặt lỗi thủ công
+        return;
+      }
+      clearErrors("content");
       const result = await createPost({
         type: "create_socialPost",
         dataRequest: formData,
@@ -86,7 +98,9 @@ export default function Post_status() {
             isDarkMode
               ? "bg-[#333334] text-gray-100"
               : "bg-[#F0F2F5] text-gray-900 "
-          } w-full px-2 pt-3 pb-10 rounded opacity-80`}
+          } 
+          ${errors.content && "border border-red-500"}
+           w-full px-2 pt-3 pb-10 rounded opacity-80`}
         />
 
         {/* show image & video upload */}

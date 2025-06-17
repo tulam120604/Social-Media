@@ -2,6 +2,27 @@ import socialPost from "../../model/socialPost/socialPost.js";
 import like from "../../model/socialPost/like.js";
 import { StatusCodes } from "http-status-codes";
 
+// kiểm tra và trả về trạng thái đã like cho bài viết
+async function has_user_like_post(data, id_account) {
+  const idPost = [];
+  for (const id of data) {
+    if (id?._id) idPost.push(id._id);
+  }
+  const likePost = await like
+    .find({
+      id_account,
+      id_post: {
+        $in: idPost,
+      },
+    })
+    .lean();
+  const likePostId = new Set(likePost.map((like) => like.id_post.toString()));
+  // nếu đã like rồi thì gắn thêm 1 field nữa để hiện UI
+  for (const post of data) {
+    post.statusLike = likePostId.has(post._id.toString());
+  }
+}
+
 export const list_post = async (req, res) => {
   try {
     const id_account = req.user._id;
@@ -24,25 +45,7 @@ export const list_post = async (req, res) => {
       .lean();
     const data = [...myPost, ...friendPost];
     if (id_account) {
-      const idPost = [];
-      for (const id of data) {
-        if (id?._id) idPost.push(id._id);
-      }
-      const likePost = await like
-        .find({
-          id_account,
-          id_post: {
-            $in: idPost,
-          },
-        })
-        .lean();
-      const likePostId = new Set(
-        likePost.map((like) => like.id_post.toString())
-      );
-      // nếu đã like rồi thì gắn thêm 1 field nữa để hiện UI
-      for (const post of data) {
-        post.statusLike = likePostId.has(post._id.toString());
-      }
+      await has_user_like_post(data, id_account);
     }
     return res.status(StatusCodes.OK).json({
       error: false,
@@ -72,6 +75,7 @@ export const list_my_post = async (req, res) => {
       .sort({ createdAt: -1 })
       .lean();
     //
+    await has_user_like_post(data, id_account);
     return res.status(StatusCodes.OK).json({
       error: false,
       data,
