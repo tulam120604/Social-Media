@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Pencil } from "lucide-react";
+import { Pencil, X } from "lucide-react";
 import useDarkMode from "../../utils/getTheme";
 import {
   Select,
@@ -29,7 +29,7 @@ export default function EditSocialPost_component({ Post }: { Post: any }) {
         } flex items-center gap-x-2 cursor-pointer px-2 py-1 rounded duration-200 w-full h-full`}
       >
         <Pencil size={20} />
-        <span className="whitespace-nowrap">Edit social post</span>
+        <span className="whitespace-nowrap">Edit</span>
       </button>
 
       {/* box edit */}
@@ -45,32 +45,50 @@ export default function EditSocialPost_component({ Post }: { Post: any }) {
         `}
         >
           {/* Header */}
-          <div className="flex items-center gap-3 mb-4">
-            <img
-              src={
-                Post?.id_account?.picture
-                  ? Post?.id_account?.picture
-                  : "https://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
-              }
-              alt="avatar"
-              className="w-10 h-10 rounded-full object-cover"
-            />
+          <div className="w-full flex justify-between">
+            {/* avatar & status post */}
+            <div className="flex items-center gap-3 mb-4">
+              <img
+                src={
+                  Post?.id_account?.picture
+                    ? Post?.id_account?.picture
+                    : "https://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
+                }
+                alt="avatar"
+                className="w-10 h-10 rounded-full object-cover"
+              />
+              <div>
+                <p className="font-semibold">{Post?.id_account?.userName}</p>
+                <Select
+                  value={status}
+                  defaultValue={Post?.status}
+                  onValueChange={setStatus}
+                >
+                  <SelectTrigger className="!px-2 !py-0.5 h-auto border-none">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="public">Public</SelectItem>
+                    <SelectItem value="friends">Friends</SelectItem>
+                    <SelectItem value="private">Private</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            {/* close */}
             <div>
-              <p className="font-semibold">{Post?.id_account?.userName}</p>
-              <Select
-                value={status}
-                defaultValue={Post?.status}
-                onValueChange={setStatus}
+              <button
+                className={`${
+                  isDarkMode
+                    ? "hover:bg-[#1C1C1D] text-gray-100"
+                    : "hover:bg-[#F1F5F9] text-gray-900 "
+                }
+                    flex items-center gap-x-2 cursor-pointer p-2 rounded-full duration-200`}
+                onClick={() => setOpen((pre) => !pre)}
               >
-                <SelectTrigger className="!px-2 !py-0.5 h-auto border-none">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="public">Public</SelectItem>
-                  <SelectItem value="friends">Friends</SelectItem>
-                  <SelectItem value="private">Private</SelectItem>
-                </SelectContent>
-              </Select>
+                <X size={20} />
+              </button>
             </div>
           </div>
 
@@ -100,18 +118,13 @@ export default function EditSocialPost_component({ Post }: { Post: any }) {
               ))}
           </div>
 
-          {/* Buttons */}
-          <div className="mt-4 flex justify-end gap-3 *:cursor-pointer">
-            <button
-              type="button"
-              className="px-4 py-2 rounded-md text-sm bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-500"
-            >
-              Cancel
-            </button>
-            <button className="px-4 py-2 rounded-md text-sm bg-blue-600 text-white hover:bg-blue-700">
-              Save
-            </button>
-          </div>
+          {/* button save */}
+          <button
+            className="w-full cursor-pointer py-2 rounded-md text-sm 
+          bg-blue-600 text-white hover:bg-blue-700"
+          >
+            Save
+          </button>
         </div>
       )}
     </>

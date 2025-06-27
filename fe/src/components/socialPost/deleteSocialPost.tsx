@@ -3,7 +3,7 @@ import useDarkMode from "../../utils/getTheme";
 import { useRemoveMyPostMutation } from "../../redux/sliceApis/post";
 import { useToast } from "../../lib/ui/use-toast";
 import ConfirmDialog_component from "../modal_dialog/confirmDialog";
-import { useState } from "react";
+import {useState } from "react";
 
 export default function DeleteSocialPost_component({
   idPost,
@@ -44,6 +44,7 @@ export default function DeleteSocialPost_component({
     }
   }
 
+
   return (
     <>
       <button
@@ -62,6 +63,7 @@ export default function DeleteSocialPost_component({
       </button>
       <ConfirmDialog_component
         open={open}
+        setOpen={setOpen}
         message="Are you sure you want to delete post?"
         onConfirm={actionDelete}
         onCancel={onCancel}

@@ -6,6 +6,7 @@ import { list_my_post, list_post } from "../controller/post/view_post.js";
 import { remove_my_post } from "../controller/post/remove_post.js";
 import { add_comment, add_like } from "../controller/comment_&_like/add.js";
 import { list_comment } from "../controller/comment_&_like/view.js";
+import { edit_multiple_field, edit_single_field } from "../controller/post/edit_post.js";
 
 const socialPostRouter = express.Router();
 
@@ -33,6 +34,10 @@ socialPostRouter.get("/socialPost/list_comment", list_comment);
 
 // add interact post
 socialPostRouter.post("/socialPost/add_like", middleware, add_like);
+
+// edit post
+socialPostRouter.patch('/socialPost/edit_single_field/:id', middleware, edit_single_field)
+socialPostRouter.post('/socialPost/edit_multiple_field/:id', middleware, edit_multiple_field)
 
 
 export default socialPostRouter;

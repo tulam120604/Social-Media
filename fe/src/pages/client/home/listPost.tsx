@@ -15,7 +15,6 @@ export default function ListPost_component() {
       )}
       <div className="space-y-4 *:rounded">
         {!isLoading &&
-          data?.data?.data &&
           data?.data?.data?.map((item: any) => (
             <BoxSocialPost_component props={item} />
           ))}

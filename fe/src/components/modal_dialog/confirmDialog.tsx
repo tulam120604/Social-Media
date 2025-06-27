@@ -1,7 +1,12 @@
+import { useRef } from "react";
+import useClickOutSide from "../../hooks/useClickOutSide";
 import useDarkMode from "../../utils/getTheme";
+
+type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
 
 type Props = {
   open: boolean;
+  setOpen: SetState<boolean>; // ✅ dùng type ta vừa định nghĩa
   message: string;
   onConfirm: () => void;
   onCancel: () => void;
@@ -9,11 +14,18 @@ type Props = {
 
 export default function ConfirmDialog_component({
   open,
+  setOpen,
   message,
   onConfirm,
   onCancel,
 }: Props) {
   const isDarkMode = useDarkMode();
+  const ref_ConfirmDialog = useRef<HTMLDivElement>(null);
+  // click outside
+  useClickOutSide(ref_ConfirmDialog, () => {
+    setOpen(false);
+  });
+
   if (!open) return null;
 
   return (
@@ -22,6 +34,7 @@ export default function ConfirmDialog_component({
     inset-0 bg-black/40 z-1000 flex items-center justify-center"
     >
       <div
+        ref={ref_ConfirmDialog}
         className={`${
           isDarkMode
             ? "bg-[#323233] text-gray-100"
