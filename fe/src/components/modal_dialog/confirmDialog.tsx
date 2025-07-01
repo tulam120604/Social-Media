@@ -31,8 +31,7 @@ export default function ConfirmDialog_component({
   return (
     <div
       className="fixed top-1/2 left-1/2 -translate-1/2 w-screen h-screen 
-    inset-0 bg-black/40 z-1000 flex items-center justify-center"
-    >
+    inset-0 bg-black/40 z-1000 flex items-center justify-center">
       <div
         ref={ref_ConfirmDialog}
         className={`${
