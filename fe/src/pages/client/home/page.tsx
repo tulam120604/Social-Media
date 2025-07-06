@@ -1,4 +1,4 @@
-import Story_component from "../../../components/story";
+import Story_component from "../../../components/stories/story";
 import useDarkMode from "../../../utils/getTheme";
 import ListPost_component from "./listPost";
 import Post_status from "../../../components/socialPost/create_socialPost";

@@ -11,6 +11,11 @@ export const schema_story = new mongoose.Schema(
       maxlength: 500,
     },
     media: String,
+    status: {
+      type: String,
+      enum: ['public', 'friends', 'private'],
+      default : 'public',
+    },
     expiresAt: {
       type: Date,
       default: () => Date.now() + 24 * 60 * 60 * 1000,
@@ -19,7 +24,7 @@ export const schema_story = new mongoose.Schema(
   },
   {
     timestamps: true,
-    versionKey: fasle,
+    versionKey: false,
   }
 );
- export default mongoose.model('story', schema_story)
+export default mongoose.model('story', schema_story)

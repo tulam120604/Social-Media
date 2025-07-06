@@ -2,14 +2,13 @@
 import React, { useState, useEffect } from "react";
 import { Camera, Plus } from "lucide-react";
 import useDarkMode from "../../utils/getTheme";
-
 interface StoryCreatorProps {
   /**
    * Hàm callback khi người dùng nhấn "Đăng".
    * @param data.file Ảnh hoặc video đã chọn
    * @param data.caption Chú thích
    */
-  onCreate?: (data: { file: File; caption: string }) => void;
+  onCreate?: (data: { file: File; status: string }) => void;
 }
 
 /**
@@ -21,7 +20,7 @@ export default function Btn_Create_Story({ onCreate }: StoryCreatorProps) {
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
-  const [caption, setCaption] = useState("");
+  const [status, setStatus] = useState<string>("public");
   useEffect(() => {
     if (!file) {
       setPreview(null);
@@ -37,11 +36,13 @@ export default function Btn_Create_Story({ onCreate }: StoryCreatorProps) {
     if (selected) setFile(selected);
   };
 
-  const handleSubmit = () => {
-    if (file && onCreate) onCreate({ file, caption });
+  const handleSubmit = async () => {
+    if (file && onCreate) {
+      await onCreate({ file, status });
+    }
     // reset
+
     setFile(null);
-    setCaption("");
     setOpen(false);
   };
 
@@ -83,10 +84,9 @@ export default function Btn_Create_Story({ onCreate }: StoryCreatorProps) {
 
           {/* Content */}
           <div
-            className={`${
-              isDarkMode ? "bg-black/80" : "bg-white"
-            } relative dark:bg-gray-900 
-          rounded-xl w-[90%] max-w-md p-6 shadow-xl space-y-4 animate-[fadeIn_.2s_ease-out]`}
+            className={`${isDarkMode ? "bg-[#252728]" : "bg-white"
+              } relative rounded-xl w-[90%] max-w-md p-6 shadow-xl 
+            space-y-4 animate-[fadeIn_.2s_ease-out]`}
           >
             <h2 className="text-lg font-semibold text-center">
               Create new story
@@ -117,10 +117,10 @@ export default function Btn_Create_Story({ onCreate }: StoryCreatorProps) {
               />
             </label>
 
-            <div className="flex justify-end gap-2 *:cursor-pointer">
+            <div className="flex justify-end gap-2 *:cursor-pointer *:px-4 *:py-2 *:rounded-lg text-sm">
               <button
                 type="button"
-                className="px-4 py-2 rounded-lg text-sm border border-gray-300 dark:border-gray-700 transition hover:opacity-75"
+                className="border border-gray-300 dark:border-gray-700 transition hover:opacity-75"
                 onClick={cancel_story}
               >
                 Cancel
@@ -128,7 +128,7 @@ export default function Btn_Create_Story({ onCreate }: StoryCreatorProps) {
               <button
                 type="button"
                 disabled={!file}
-                className="px-4 py-2 rounded-lg text-sm text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50"
+                className="text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50"
                 onClick={handleSubmit}
               >
                 Create
