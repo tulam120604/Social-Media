@@ -15,9 +15,11 @@ import useDarkMode from "../utils/getTheme";
 import { useViewProfileQuery } from "../redux/sliceApis/auth";
 import { useEffect, useState } from "react";
 import { Loading_Spinner } from "./loading";
+import { useToast } from "../lib/ui/use-toast";
 
 export default function Form_auth_component({ type }: { type: string }) {
   const isDarkMode = useDarkMode();
+  const { toast } = useToast();
   const [message, setMessage] = useState<string | number | null>(null);
   const { data, isLoading, isFetching } = useViewProfileQuery(undefined);
   const router = useNavigate();
@@ -34,19 +36,40 @@ export default function Form_auth_component({ type }: { type: string }) {
     }
   }, [data, isLoading, isFetching, pathname, router]);
 
-  const { form, onSubmit } = useAuthForm(type);
+  const { form, onSubmit, isLoading: loadingMutation } = useAuthForm(type);
   const handleSubmitForm = async (data: any) => {
     const result = await onSubmit(data);
-    if (result?.status === 404) {
-      setMessage("Thông tin tài khoản không chính xác!");
+    if (type === "signup") {
+      if (result?.status === 201) {
+        toast({
+          title: "Create account is successful!",
+          duration: 5000,
+          className: `${
+            isDarkMode
+              ? "bg-[#333334] text-gray-100 border-transparent"
+              : "bg-[#F0F2F5] text-gray-900  border-transparent"
+          }`,
+        });
+        router("/");
+      }
     }
-    console.log(result);
+    if (result?.status === 404) {
+      setMessage("Incorrect account!");
+    } else if (result?.status === 500) {
+      setMessage("System error, please try again later!");
+    }
   };
   return (
     <div
       className="grid place-content-center w-screen h-screen bg-[url(/public/Images/bg_login.jpg)] 
     bg-no-repeat bg-cover bg-fixed"
     >
+      {/* loading */}
+      {loadingMutation && (
+        <div className="fixed z-2000">
+          <Loading_Spinner />
+        </div>
+      )}
       {/* overlay */}
       <div className="w-screen h-screen fixed bg-[#34343488]" />
       <div />
@@ -70,7 +93,7 @@ export default function Form_auth_component({ type }: { type: string }) {
             onSubmit={form.handleSubmit(handleSubmitForm)}
             className="space-y-6 flex flex-col"
           >
-            {/* user name */}
+            {/* full name */}
             {type === "signup" && (
               <FormField
                 control={form.control}
@@ -79,12 +102,12 @@ export default function Form_auth_component({ type }: { type: string }) {
                   <FormItem>
                     <FormControl>
                       <Input
-                        placeholder="Enter your username"
+                        placeholder="FullName"
                         {...field}
                         className="!border-b font-light"
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="-my-1" />
                   </FormItem>
                 )}
               />
@@ -97,7 +120,7 @@ export default function Form_auth_component({ type }: { type: string }) {
                 <FormItem>
                   <FormControl>
                     <Input
-                      placeholder="Enter your email"
+                      placeholder="Email"
                       {...field}
                       className="!border-b font-light"
                     />
@@ -114,7 +137,7 @@ export default function Form_auth_component({ type }: { type: string }) {
                   <FormControl>
                     <Input
                       type="password"
-                      placeholder="Enter your password"
+                      placeholder="Password"
                       {...field}
                       className="!border-b font-light"
                     />

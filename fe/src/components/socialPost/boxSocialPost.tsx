@@ -68,7 +68,7 @@ export default function BoxSocialPost_component({ props }: any) {
                   : "bg-[#fff] text-gray-900 "
               } absolute shadow-[-2px_2px_20px_rgba(0,0,0,0.25)] p-3 right-0 top-full rounded-lg z-10`}
             >
-              <EditSocialPost_component Post={props}/>
+              <EditSocialPost_component Post={props} />
               <DeleteSocialPost_component idPost={props?._id} />
             </div>
           )}

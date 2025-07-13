@@ -124,6 +124,14 @@ export const sign_up = async (req, res) => {
         message: result.error,
       });
     }
+    const token = create_token(result._id);
+    res.cookie("jwt", token, {
+      httpOnly: false,
+      secure: false,
+      path: "/",
+      sameSite: "Lax",
+      maxAge: 604800000,
+    });
     result.password = undefined;
     return res.status(StatusCodes.CREATED).json({
       error: false,

@@ -4,11 +4,11 @@ import { StatusCodes } from "http-status-codes";
 
 export const create_story = async (req, res) => {
   try {
-    const id_account = req.use._id;
+    const id_account = req.user._id;
     if (!id_account) {
       return res.status(StatusCodes.NOT_FOUND).json({
         error: true,
-        message: "Không có id tài khoản!",
+        message: "Không có tài khoản!",
       });
     }
 
@@ -17,7 +17,9 @@ export const create_story = async (req, res) => {
       ...req.body,
     };
 
+
     const img = req.files;
+    console.log(req)
     if (img) {
       const img_upload = await uploadFile(img);
       if (

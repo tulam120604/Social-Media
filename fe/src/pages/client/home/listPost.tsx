@@ -5,7 +5,10 @@ import BoxSocialPost_component from "../../../components/socialPost/boxSocialPos
 import { useListPostQuery } from "../../../redux/sliceApis/post";
 
 export default function ListPost_component() {
-  const { data, isLoading, isError } = useListPostQuery();
+  const { data, isLoading, isError } = useListPostQuery(undefined, {
+    refetchOnFocus: true,
+    refetchOnReconnect: true,
+  });
   return (
     <div className="w-full h-full !bg-transparent !p-0">
       {isLoading && (

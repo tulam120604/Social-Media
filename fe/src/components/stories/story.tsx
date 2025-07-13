@@ -16,14 +16,20 @@ export default function Story_component() {
   //         : "bg-[#F0F2F5] text-gray-900  border-transparent"
   //       }`,
   //   });
-  async function handleCreateStory({ file, status }: { file: File; status: string }) {
+  async function handleCreateStory({
+    file,
+    status,
+  }: {
+    file: File;
+    status: string;
+  }) {
     try {
       const formData = new FormData();
-      formData.append("media", file)
+      formData.append("media", file);
       const data = {
         media: formData,
         status: status,
-      }
+      };
       const result = await createStory(data).unwrap();
       toast({
         title: result?.data?.message,
@@ -37,11 +43,11 @@ export default function Story_component() {
 
   return (
     <>
-      {
-        isLoading && (<Loading_Spinner />)
-      }
-      <div className="flex gap-x-3 items-center overflow-x-auto hidden-scroll *:cursor-pointer 
-      text-center scroll-hover-x h-full">
+      {isLoading && <Loading_Spinner />}
+      <div
+        className="flex gap-x-3 items-center overflow-x-auto hidden-scroll *:cursor-pointer 
+      text-center scroll-hover-x h-full"
+      >
         <Btn_Create_Story onCreate={handleCreateStory} />
         {Array.from({ length: 20 }, () => (
           <Link to={"/stories"}>
