@@ -1,22 +1,47 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Pencil, X } from "lucide-react";
 import useDarkMode from "../../utils/getTheme";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../../lib/ui/select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
 export default function EditSocialPost_component({ Post }: { Post: any }) {
   const isDarkMode = useDarkMode();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, dirtyFields },
+    clearErrors,
+    setValue,
+    reset,
+  } = useForm<any>({
+    defaultValues: {
+      content: Post?.content,
+      status: Post?.status,
+      media_urls: Post?.media_urls,
+    },
+  });
+  useEffect(() => {
+    if (Post) {
+      reset({
+        content: Post.content,
+        status: Post?.status,
+        media_urls: Post.media_urls,
+      });
+    }
+  }, [Post]);
+  //
+  const isDirty = Object.keys(dirtyFields).length > 0;
 
   const [open, setOpen] = useState<boolean>(false);
   const [status, setStatus] = useState<string>(Post?.status ?? "Public");
-
-  console.log(Post);
+  async function submitForm(value: any) {
+    try {
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+  }
+  console.log(isDirty);
   return (
     <>
       <button
@@ -34,14 +59,14 @@ export default function EditSocialPost_component({ Post }: { Post: any }) {
 
       {/* box edit */}
       {open && (
-        <div
+        <form
           className={`${
             isDarkMode
               ? "bg-[#333334] text-gray-100"
               : "bg-[#fff] text-gray-900 "
           } 
-        max-w-lg w-full mx-auto mt-10 rounded-xl p-4 fixed top-1/2 left-1/2 
-        -translate-1/2 max-h-[85vh] shadow-[0_0_0_10000vw_rgba(0,0,0,0.3)]
+        max-w-lg w-full mx-auto rounded-xl p-4 fixed top-1/2 left-1/2 mt-5 
+        -translate-1/2 max-h-[85vh] shadow-[0_0_0_10000vw_rgba(0,0,0,0.6)]
         `}
         >
           {/* Header */}
@@ -59,20 +84,20 @@ export default function EditSocialPost_component({ Post }: { Post: any }) {
               />
               <div>
                 <p className="font-semibold">{Post?.id_account?.userName}</p>
-                <Select
-                  value={status}
-                  defaultValue={Post?.status}
-                  onValueChange={setStatus}
+                <select
+                  {...register("status")}
+                  className={`${
+                    isDarkMode
+                      ? "bg-[#333334] text-gray-100 border-gray-500"
+                      : "bg-[#fff] text-gray-900 border-gray-300"
+                  } p-1 border rounded text-sm cursor-pointer`}
                 >
-                  <SelectTrigger className="!px-2 !py-0.5 h-auto border-none">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="public">Public</SelectItem>
-                    <SelectItem value="friends">Friends</SelectItem>
-                    <SelectItem value="private">Private</SelectItem>
-                  </SelectContent>
-                </Select>
+                  <option value="public">Public</option>
+                  <option value="friends">Friends</option>
+                  <option value="private">Private</option>
+                </select>
+
+                {/*  */}
               </div>
             </div>
 
@@ -93,9 +118,9 @@ export default function EditSocialPost_component({ Post }: { Post: any }) {
           </div>
 
           {/* content */}
-          <div className="max-h-[60vh] scroll-hover">
+          <div className="max-h-[60vh] scroll-hover pb-5">
             <textarea
-              value={Post?.content}
+              defaultValue={Post?.content}
               placeholder="Bạn đang nghĩ gì?"
               className={`${
                 isDarkMode
@@ -106,26 +131,29 @@ export default function EditSocialPost_component({ Post }: { Post: any }) {
             />
 
             {/* Ảnh đính kèm (nếu có) */}
-            {Post?.media_urls?.length > 0 &&
-              Post?.media_urls?.map((uri: string) => (
-                <div className="grid place-content-center bg-transparent">
-                  <img
-                    src={uri}
-                    alt=""
-                    className="w-full h-full max-h-[500px] cursor-pointer"
-                  />
-                </div>
-              ))}
+              {Post?.media_urls?.length > 0 &&
+                Post?.media_urls?.map((uri: string) => (
+                  <div className="relative !:w-auto" key={uri}>
+                    <button className="absolute top-2 right-2 z-10">
+                      <Pencil />
+                    </button>
+                    <img
+                      src={uri}
+                      alt=""
+                      className="max-h-[500px] cursor-pointer"
+                    />
+                  </div>
+                ))}
           </div>
 
           {/* button save */}
           <button
             className="w-full cursor-pointer py-2 rounded-md text-sm 
-          bg-blue-600 text-white hover:bg-blue-700"
+          bg-blue-600 text-white hover:bg-blue-700 duration-200"
           >
             Save
           </button>
-        </div>
+        </form>
       )}
     </>
   );

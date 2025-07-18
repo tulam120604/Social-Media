@@ -19,7 +19,6 @@ export const create_story = async (req, res) => {
 
 
     const img = req.files;
-    console.log(req)
     if (img) {
       const img_upload = await uploadFile(img);
       if (

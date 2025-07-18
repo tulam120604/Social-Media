@@ -2,7 +2,7 @@ import { uploadFile } from "../../middleware/upload.js";
 import socialPost from "../../model/socialPost/socialPost.js";
 import { StatusCodes } from "http-status-codes";
 
-// edit single field
+// edit single field post
 export const edit_single_field = async (req, res) => {
   try {
     const id_account = req.user._id;
@@ -53,7 +53,7 @@ export const edit_single_field = async (req, res) => {
   }
 };
 
-// edit multipleField
+// edit multipleField post
 export const edit_multiple_field = async (req, res) => {
   try {
     const id_account = req.user._id;

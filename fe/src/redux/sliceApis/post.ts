@@ -45,6 +45,22 @@ export const slicePost = createApi({
       transformResponse: (result) => result,
       invalidatesTags: ["LIST_POST"],
     }),
+    // edit
+    editPost: build.mutation<any, any>({
+      query: (request) => {
+        return {
+          url:
+            request?.action === "edit_single_field"
+              ? `/socialPost/edit_single_field/${request?.idPost}`
+              : `/socialPost/edit_multiple_field/${request?.idPost}`,
+          method: request?.action === "edit_single_field" ? "path" : "put",
+          data: request?.dataRequest,
+        };
+      },
+      transformResponse: (result) => result?.data,
+      invalidatesTags: ["LIST_POST", "VIEW_POST"],
+    }),
+    // remove
     removeMyPost: build.mutation<any, any>({
       query: (request) => {
         return {
@@ -58,6 +74,7 @@ export const slicePost = createApi({
       transformResponse: (result) => result?.data,
       invalidatesTags: ["LIST_POST"],
     }),
+    // comment
     addComment: build.mutation<any, any>({
       query: (request) => {
         return {
@@ -72,6 +89,7 @@ export const slicePost = createApi({
       transformResponse: (result) => result?.data,
       invalidatesTags: ["LIST_POST", "LIST_COMMENT"],
     }),
+    // like
     mutateLike: build.mutation<any, any>({
       query: (request) => {
         return {
@@ -92,6 +110,7 @@ export const {
   useListPostQuery,
   useListCommentQuery,
   useListMyPostQuery,
+  useEditPostMutation,
   useAddCommentMutation,
   useMutateLikeMutation,
   useRemoveMyPostMutation,

@@ -47,32 +47,34 @@ export default function BoxSocialPost_component({ props }: any) {
         </div>
 
         {/* option nếu bài viết của chính mình */}
-        <div className="relative" ref={ref_Popup}>
-          <button
-            className={`${
-              isDarkMode
-                ? "hover:bg-[#303132] text-gray-100"
-                : "hover:bg-[#dbdbdb] text-gray-900 "
-            } cursor-pointer duration-200 rounded-full p-1.5`}
-            onClick={() => setStatusPopup((pre) => !pre)}
-          >
-            <Ellipsis />
-          </button>
-
-          {/* popup */}
-          {statusPopup && (
-            <div
+        {props?.isOwner && (
+          <div className="relative" ref={ref_Popup}>
+            <button
               className={`${
                 isDarkMode
-                  ? "bg-[#333334] text-gray-100"
-                  : "bg-[#fff] text-gray-900 "
-              } absolute shadow-[-2px_2px_20px_rgba(0,0,0,0.25)] p-3 right-0 top-full rounded-lg z-10`}
+                  ? "hover:bg-[#303132] text-gray-100"
+                  : "hover:bg-[#dbdbdb] text-gray-900 "
+              } cursor-pointer duration-200 rounded-full p-1.5`}
+              onClick={() => setStatusPopup((pre) => !pre)}
             >
-              <EditSocialPost_component Post={props} />
-              <DeleteSocialPost_component idPost={props?._id} />
-            </div>
-          )}
-        </div>
+              <Ellipsis />
+            </button>
+
+            {/* popup */}
+            {statusPopup && (
+              <div
+                className={`${
+                  isDarkMode
+                    ? "bg-[#333334] text-gray-100"
+                    : "bg-[#fff] text-gray-900 "
+                } absolute shadow-[-2px_2px_20px_rgba(0,0,0,0.25)] p-3 right-0 top-full rounded-lg z-10`}
+              >
+                <EditSocialPost_component Post={props} />
+                <DeleteSocialPost_component idPost={props?._id} />
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* content */}
