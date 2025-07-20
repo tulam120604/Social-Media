@@ -13,7 +13,7 @@ export default function ListMyPost_component() {
           <LoaderCircle className="animate-spin" />
         </div>
       )}
-      <div className="space-y-4 *:rounded">
+      <div className="space-y-4 *:rounded-lg">
         {!isLoading &&
           data?.data?.data &&
           data?.data?.data?.map((item: any) => (

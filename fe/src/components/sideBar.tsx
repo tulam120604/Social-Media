@@ -1,5 +1,5 @@
-import { Link, NavLink } from "react-router-dom";
-import { urls_sidebar, copyrights } from "../config/links";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { urls_sidebar } from "../config/links";
 import { iType_uri_sideBar } from "../config/types";
 import useDarkMode from "../utils/getTheme";
 import { useViewProfileQuery } from "../redux/sliceApis/auth";
@@ -8,21 +8,27 @@ import { LoaderCircle } from "lucide-react";
 
 export default function SideBar_component() {
   const isDarkMode = useDarkMode();
-  const { data, isLoading, isError } = useViewProfileQuery(undefined, {
-  });
+  const { data, isLoading, isError } = useViewProfileQuery(undefined, {});
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  function backToHome() {
+    if (pathname === "/") {
+      window.location.reload();
+    } else {
+      navigate("/");
+    }
+  }
+
+  const style =
+    "flex gap-x-3 items-center whitespace-nowrap opacity-95 px-2 py-3 duration-150 rounded-md mb-1";
+
   const styleActive = `
-  ${isDarkMode ? "bg-[#3B3D3E]" : "bg-[#F0F2F5]"}
-  grid grid-cols-[50px_auto] items-center whitespace-nowrap opacity-85 p-2 
-  duration-150 rounded-md mb-1`;
+  ${isDarkMode ? "bg-[#3B3D3E]" : "bg-[#F0F2F5]"} ${style}`;
   const styleNoActive = `${
     isDarkMode ? "hover:bg-[#333334]" : "hover:bg-[#F0F2F5]"
-  } grid grid-cols-[50px_auto] items-center whitespace-nowrap opacity-85 p-2 duration-150 rounded-md mb-1`;
+  } ${style}`;
   return (
-    <section
-      className={`${
-        isDarkMode ? "bg-[#252728] text-gray-100" : "bg-[#fff] text-gray-900 "
-      } scroll-hover rounded py-4 px-3 w-full h-full`}
-    >
+    <section className="scroll-hover py-4 px-3 w-full">
       {isLoading && (
         <div className="grid place-content-center gap-x-3 my-4 p-2 w-full h-full">
           <LoaderCircle className=" animate-spin" />
@@ -30,6 +36,31 @@ export default function SideBar_component() {
       )}
       {!isLoading && !isError && (
         <>
+          <div className="flex items-center gap-x-2 cursor-pointer px-2 py-5 mb-5">
+            <button
+              onClick={backToHome}
+              className="opacity-85 font-bold text-2xl cursor-pointer !font-serif"
+            >
+              Linksta
+            </button>
+          </div>
+          {/* 1 */}
+          {urls_sidebar?.map((uri: iType_uri_sideBar, i: number) => (
+            <NavLink
+              key={i}
+              className={({ isActive }) =>
+                isActive ? styleActive : styleNoActive
+              }
+              to={uri?.path}
+            >
+              <div className="*:w-7 *:h-7">
+                {uri?.icon &&
+                  (typeof uri.icon === "function" ? <uri.icon /> : uri.icon)}
+              </div>
+              <span>{uri?.name}</span>
+            </NavLink>
+          ))}
+          {/* user */}
           <NavLink
             className={({ isActive }) =>
               isActive ? styleActive : styleNoActive
@@ -43,40 +74,10 @@ export default function SideBar_component() {
                   : "https://picsum.photos/320/180"
               }
               alt=""
-              className="rounded-full w-5 h-5 object-cover border"
+              className="rounded-full w-7 h-7 object-cover border-none"
             />
-            <span className="text-sm">{data?.data?.data?.userName}</span>
+            <span>Profile</span>
           </NavLink>
-          {/* 1 */}
-          {urls_sidebar?.map((uri: iType_uri_sideBar, i: number) => (
-            <NavLink
-              key={i}
-              className={({ isActive }) =>
-                isActive ? styleActive : styleNoActive
-              }
-              to={uri?.path}
-            >
-              {uri?.icon &&
-                (typeof uri.icon === "function" ? <uri.icon /> : uri.icon)}
-              <span className="text-sm">{uri?.name}</span>
-            </NavLink>
-          ))}
-
-          {/* 2 */}
-          <div className="border-y border-gray-400 mt-4 py-4">
-            <strong className="text-sm opacity-80 font-medium">Group</strong>
-            <div className="mt-2">
-              <span className="text-sm opacity-80">No group!</span>
-            </div>
-          </div>
-          {/* 3 */}
-          <div className="opacity-70 text-sm whitespace-normal flex flex-wrap gap-1 border-gray-400 py-4">
-            {copyrights?.map((uri: iType_uri_sideBar, i: number) => (
-              <Link key={i} to={uri?.path}>
-                {uri?.name}
-              </Link>
-            ))}
-          </div>
         </>
       )}
       {isError && (

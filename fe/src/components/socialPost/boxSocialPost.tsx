@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import useDarkMode from "../../utils/getTheme";
 import { formatRelativeTime } from "../../utils/formatTime";
 import { Dot, Ellipsis } from "lucide-react";
 import { useRef, useState } from "react";
@@ -7,20 +6,25 @@ import DeleteSocialPost_component from "./deleteSocialPost";
 import EditSocialPost_component from "./editSocialPost";
 import useClickOutSide from "../../hooks/useClickOutSide";
 import LikeSocialPost_component from "../interact/likeSocialPost";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 export default function BoxSocialPost_component({ props }: any) {
-  const isDarkMode = useDarkMode();
   const [statusPopup, setStatusPopup] = useState<boolean>(false);
   const ref_Popup = useRef(null);
   useClickOutSide(ref_Popup, () => {
     setStatusPopup(false);
   });
+
+  // responsive for carousel
+  const responsive = {
+    all: {
+      breakpoint: { max: 4000, min: 0 },
+      items: 1,
+    },
+  };
   return (
-    <div
-      className={`${
-        isDarkMode ? "bg-[#252728] text-gray-100" : "bg-[#fff] text-gray-900 "
-      } space-y-2 py-4`}
-    >
+    <div className="space-y-2 py-4 dark:bg-[#0B1117] dark:text-gray-100 bg-[#fff] text-gray-900">
       {/* user */}
       <div className="flex justify-between px-4">
         <div className="flex gap-x-2">
@@ -50,11 +54,8 @@ export default function BoxSocialPost_component({ props }: any) {
         {props?.isOwner && (
           <div className="relative" ref={ref_Popup}>
             <button
-              className={`${
-                isDarkMode
-                  ? "hover:bg-[#303132] text-gray-100"
-                  : "hover:bg-[#dbdbdb] text-gray-900 "
-              } cursor-pointer duration-200 rounded-full p-1.5`}
+              className="dark:hover:bg-[#303132] dark:text-gray-100 cursor-pointer 
+              hover:bg-[#dbdbdb] text-gray-900 duration-200 rounded-full p-1.5"
               onClick={() => setStatusPopup((pre) => !pre)}
             >
               <Ellipsis />
@@ -63,11 +64,9 @@ export default function BoxSocialPost_component({ props }: any) {
             {/* popup */}
             {statusPopup && (
               <div
-                className={`${
-                  isDarkMode
-                    ? "bg-[#333334] text-gray-100"
-                    : "bg-[#fff] text-gray-900 "
-                } absolute shadow-[-2px_2px_20px_rgba(0,0,0,0.25)] p-3 right-0 top-full rounded-lg z-10`}
+                className="absolute shadow-[-2px_2px_20px_rgba(0,0,0,0.25)] 
+                p-3 right-0 top-full rounded-lg z-10 bg-[#fff] text-gray-900 
+                dark:bg-[#333334] dark:text-gray-100"
               >
                 <EditSocialPost_component Post={props} />
                 <DeleteSocialPost_component idPost={props?._id} />
@@ -76,23 +75,23 @@ export default function BoxSocialPost_component({ props }: any) {
           </div>
         )}
       </div>
-
+      {/* image (any) */}
+      <Carousel responsive={responsive}>
+        {props?.media_urls?.length > 0 &&
+          props?.media_urls?.map((uri: string) => (
+            <div className="border border-gray-300 dark:border-gray-700 rounded w-full grid place-content-center bg-transparent">
+              <img
+                src={uri}
+                alt=""
+                className="w-full h-full max-h-[1000px] cursor-pointer"
+              />
+            </div>
+          ))}
+      </Carousel>
       {/* content */}
       <div className="px-4">
         <p className="opacity-90 whitespace-pre-line">{props?.content}</p>
       </div>
-      {/* image (any) */}
-      {props?.media_urls?.length > 0 &&
-        props?.media_urls?.map((uri: string) => (
-          <div className="grid place-content-center bg-transparent">
-            <img
-              src={uri}
-              alt=""
-              className="w-full h-full max-h-[500px] cursor-pointer"
-            />
-          </div>
-        ))}
-
       {/* interact & comment */}
       <div className="px-4">
         <LikeSocialPost_component props={props} />

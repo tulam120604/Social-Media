@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useListCommentQuery } from "../../redux/sliceApis/post";
-import useDarkMode from "../../utils/getTheme";
 
 export default function ListComment_component({ idPost }: any) {
-  const isDarkMode = useDarkMode();
   const [limit, setLimit] = useState<number>(5);
   const { data, isLoading, isError } = useListCommentQuery({
     page: 1,
@@ -29,14 +27,11 @@ export default function ListComment_component({ idPost }: any) {
             />
             {/* name & comment */}
             <div
-              className={`${
-                isDarkMode
-                  ? "bg-[#333334] text-gray-100"
-                  : "bg-[#F0F2F5] text-gray-900 "
-              } flex flex-col gap-y-0.5 rounded-xl px-3 py-2 *:opacity-80`}
+              className="w-full dark:bg-[#252728] bg-[#F0F2F5] 
+              flex flex-col gap-y-0.5 rounded-xl px-3 py-2"
             >
               <span>{item?.id_account?.userName}</span>
-              <span className="text-sm">{item?.content}</span>
+              <span className="text-sm opacity-80">{item?.content}</span>
             </div>
           </div>
         ))}

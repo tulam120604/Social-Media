@@ -1,29 +1,23 @@
 import Story_component from "../../../components/stories/story";
-import useDarkMode from "../../../utils/getTheme";
 import ListPost_component from "./listPost";
 import Post_status from "../../../components/socialPost/create_socialPost";
+import Suggest_for_you from "./suggest_for_you";
 
 export default function Home_page() {
-  const isDarkMode = useDarkMode();
   return (
-    <div
-      className="w-full max-w-[95vw] overflow-x-auto gid
-    lg:grid-cols-[calc(100%-320px)_300px] justify-between"
-    >
-      <div
-        className={`${
-          isDarkMode
-            ? "*:bg-[#252728] text-gray-100"
-            : "*:bg-[#fff] text-gray-900 "
-        } max-w-[95vw] flex flex-col gap-y-4 *:p-4 *:rounded *:shadow-lg`}
-      >
+    <div className="w-full grid lg:grid-cols-[1fr_300px] gap-x-6">
+      {/* left */}
+      <div className="w-full overflow-hidden flex flex-col gap-y-4">
         <Story_component />
         <Post_status />
         {/* list post */}
         <ListPost_component />
       </div>
-      {/* :desktop - brith day & friend */}
-      
+
+      {/* right */}
+      <div className="px-4">
+        <Suggest_for_you />
+      </div>
     </div>
   );
 }

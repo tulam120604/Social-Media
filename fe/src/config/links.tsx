@@ -1,20 +1,25 @@
-import { BookMarked, SquareSquare, Users } from "lucide-react";
+import { BookMarked, Heart, Home, MessageCircleMore, Users } from "lucide-react";
 
 export const urls_sidebar = [
+  {
+    name: "Home",
+    path: "/",
+    icon: <Home strokeWidth={1.9} size={20} />,
+  },
   {
     name: "Friends",
     path: "/friends",
     icon: <Users strokeWidth={1.9} size={20} />,
   },
   {
-    name: "Group",
+    name: "Messages",
     path: "/profile/groups",
-    icon: <Users strokeWidth={1.7} size={20} />,
+    icon: <MessageCircleMore strokeWidth={1.7} size={20} />,
   },
   {
-    name: "Explore",
-    path: "/music",
-    icon: <SquareSquare strokeWidth={1.7} size={20} />,
+    name: "Notifications",
+    path: "/notifications",
+    icon: <Heart strokeWidth={1.7} size={20} />,
   },
   {
     name: "Save",

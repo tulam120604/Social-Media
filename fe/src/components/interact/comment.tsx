@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useViewProfileQuery } from "../../redux/sliceApis/auth";
 import { useAddCommentMutation } from "../../redux/sliceApis/post";
-import useDarkMode from "../../utils/getTheme";
 import ListComment_component from "./listComment";
 
 export default function Comment_component({
@@ -9,7 +8,6 @@ export default function Comment_component({
 }: {
   idPost: string | number | undefined;
 }) {
-  const isDarkMode = useDarkMode();
   const { register, handleSubmit, reset } = useForm();
   const { data, isLoading } = useViewProfileQuery();
   const [addComment, { isLoading: loadingAddComment }] =
@@ -36,11 +34,7 @@ export default function Comment_component({
       >
         {/* avatar */}
         {isLoading ? (
-          <div
-            className={`${
-              isDarkMode ? "bg-[#333334]" : "bg-[#F0F2F5]"
-            } w-10 h-10 rounded-full animate-pulse`}
-          />
+          <div className="w-10 h-10 rounded-full animate-pulse dark:bg-[#333334] bg-[#F0F2F5]" />
         ) : (
           <img
             src={
@@ -54,13 +48,11 @@ export default function Comment_component({
         )}
 
         <div
-          className={`${
-            isDarkMode
-              ? "bg-[#333334] text-gray-100"
-              : "bg-[#F0F2F5] text-gray-900 "
-          } flex items-center w-full rounded py-1 px-2`}
+          className="dark:border dark:text-gray-100 text-gray-900 
+          flex items-center w-full rounded py-1 px-2"
         >
           <input
+            placeholder="Add a comment..."
             {...register("content")}
             className="w-full p-2 rounded opacity-80 outline-none"
           />
@@ -80,12 +72,9 @@ export default function Comment_component({
           {/* upload image & video */}
           <div className="flex justify-between">
             <div
-              className={`${
-                isDarkMode
-                  ? "*:hover:bg-[#333334] text-gray-100"
-                  : "*:hover:bg-[#F0F2F5] text-gray-900 "
-              } flex gap-x-4 items-center *:flex *:items-center **:gap-x-1 
-                    *:text-sm *:opacity-75 *:cursor-pointer *:p-1 **:rounded *:duration-200`}
+              className="dark:*:hover:bg-[#333334] dark:text-gray-100 *:hover:bg-[#F0F2F5] 
+              text-gray-900 flex gap-x-4 items-center *:flex *:items-center **:gap-x-1 
+              *:text-sm *:opacity-75 *:cursor-pointer *:p-1 **:rounded *:duration-200"
             >
               {/* image */}
               {/* <label htmlFor="uploadImage">
@@ -113,7 +102,7 @@ export default function Comment_component({
         {/* type */}
       </form>
       {/* list */}
-      <ListComment_component idPost={idPost}/>
+      <ListComment_component idPost={idPost} />
     </div>
   );
 }

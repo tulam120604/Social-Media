@@ -69,13 +69,17 @@ export const list_my_post = async (req, res) => {
         message: "Không có id tài khoản!",
       });
     }
-    const data = await socialPost
+    const dataPost = await socialPost
       .find({ id_account })
       .populate("id_account")
       .sort({ createdAt: -1 })
       .lean();
     //
-    await has_user_like_post(data, id_account);
+    await has_user_like_post(dataPost, id_account);
+    const data = dataPost.map((post) => ({
+      ...post,
+      isOwner: true
+    }))
     return res.status(StatusCodes.OK).json({
       error: false,
       data,

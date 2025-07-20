@@ -2,7 +2,7 @@
 
 @plugin "tailwindcss-animate";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 * {
   font-family: "Poppins", sans-serif;
@@ -15,26 +15,42 @@
   transition: scrollbar-color 0.3s, opacity 0.3s; /* Thêm hiệu ứng mờ dần */
 }
 .scroll-hover-x:hover {
-  scrollbar-color: darkgrey #ffffff; /* Màu thanh cuộn sẽ là trong suốt */
+  scrollbar-color: #999 transparent;
   opacity: 1; /* Hiển thị thanh cuộn dọc khi hover */
 }
 
 .scroll-hover {
-  overflow-y: scroll; /* Luôn hiển thị thanh cuộn, nhưng sẽ mờ đi */
-  scrollbar-width: thin; /* Với Firefox */
-  scrollbar-color: transparent transparent; /* Màu thanh cuộn sẽ là trong suốt */
-  transition: scrollbar-color 0.3s, opacity 0.3s; /* Thêm hiệu ứng mờ dần */
+  overflow-y: auto;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: transparent transparent; /* Thanh cuộn ẩn đi */
+  transition: scrollbar-color 0.3s ease;
 }
 
-
+/* Khi hover: hiện thanh cuộn với màu nhẹ */
 .scroll-hover:hover {
-  scrollbar-color: darkgrey #ffffff; /* Màu thanh cuộn sẽ là trong suốt */
-  opacity: 1; /* Hiển thị thanh cuộn dọc khi hover */
+  scrollbar-color: #999 transparent;
 }
 
-.hidden-scroll::-webkit-scrollbar {
-  display: none;  /* Ẩn thanh cuộn */
+/* WebKit browsers (Chrome, Safari, Edge) */
+.scroll-hover::-webkit-scrollbar {
+  width: 6px;
 }
+
+.scroll-hover::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-hover::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover: đổi màu thumb */
+.scroll-hover:hover::-webkit-scrollbar-thumb {
+  background-color: #999;
+}
+
 
 :root {
   --radius: 0.625rem;

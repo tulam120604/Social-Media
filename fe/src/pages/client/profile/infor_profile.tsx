@@ -6,6 +6,7 @@ import {
   useCountFriendQuery,
   useViewUserByIdQuery,
 } from "../../../redux/sliceApis/auth";
+import { matchEmail } from "../../../utils/mathEmail";
 
 function Profile_desktop({
   data,
@@ -14,14 +15,6 @@ function Profile_desktop({
   data: any;
   countFriend: any;
 }) {
-  const matchEmail = (text: string | undefined) => {
-    const match = text?.match(/(@[^.]+)\./);
-    if (match) {
-      const result = match[1];
-      return result;
-    }
-    return undefined;
-  };
   return (
     <div
       className={`hidden lg:flex w-full items-center space-x-10 px-10 py-5`}

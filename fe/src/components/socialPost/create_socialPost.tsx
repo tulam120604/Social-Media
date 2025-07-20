@@ -17,11 +17,11 @@ import { useToast } from "../../lib/ui/use-toast";
 
 export default function Post_status() {
   const isDarkMode = useDarkMode();
+  const [showImage, setShowImage] = useState<string[] | null>(null);
+  const [images, setImages] = useState<any[] | null>(null);
+  const [status, setStatus] = useState<string>("public");
   const { data } = useViewProfileQuery(undefined, {});
   const { toast } = useToast();
-
-  // create post status
-  const [createPost, { isLoading }] = useCreatePostMutation();
   const {
     register,
     handleSubmit,
@@ -30,10 +30,8 @@ export default function Post_status() {
     clearErrors,
     reset,
   } = useForm<any>();
-
-  const [showImage, setShowImage] = useState<string[] | null>(null);
-  const [images, setImages] = useState<any[] | null>(null);
-  const [status, setStatus] = useState<string>("public");
+  // create post status
+  const [createPost, { isLoading }] = useCreatePostMutation();
 
   // render img upload
   function uploadImage(e: ChangeEvent<HTMLInputElement>) {
@@ -79,7 +77,13 @@ export default function Post_status() {
     }
   }
   return (
-    <div className="flex gap-x-4 items-start">
+    <div
+      className={`${
+        isDarkMode
+          ? "bg-[#0B1117] text-gray-100"
+          : "bg-[#fff] text-gray-900 "
+      } flex gap-x-4 items-start p-4 rounded-lg`}
+    >
       <img
         src={
           data?.data?.data?.picture
@@ -94,13 +98,9 @@ export default function Post_status() {
         <textarea
           {...register("content")}
           placeholder="What's on your mind?"
-          className={`${
-            isDarkMode
-              ? "bg-[#333334] text-gray-100"
-              : "bg-[#F0F2F5] text-gray-900 "
-          } 
+          className={` 
           ${errors.content && "border border-red-500"}
-           w-full px-2 pt-3 pb-10 rounded opacity-80`}
+           w-full px-2 pt-3 pb-10 rounded opacity-80 border bg-transparent`}
         />
 
         {/* show image & video upload */}
